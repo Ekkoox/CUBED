@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/12 16:36:14 by enschnei         ###   ########.fr       */
+/*   Created: 2025/05/12 16:15:46 by enschnei          #+#    #+#             */
+/*   Updated: 2025/05/12 16:29:30 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int main(int ac, char **av, char **ev)
+int garbage_collector(t_garbage *garbage)
 {
-    t_cubed cubed;
-    (void) av;
-    (void) ev;
-
-    if (ac != 2)
-        return (ft_printf(2, "Error arguments\n"), EXIT_FAILURE);
-    cubed.map = split_map(av[1]);
-    if (!cubed.map)
-        return (EXIT_FAILURE);
-    // garbage_collector(cubed.garbage);
-    ft_printf(1, "Bienvenue dans CUB3D\n");
-    return(EXIT_SUCCESS);
+    free(garbage->cubed->map);
+    printf("DU PAPIER\n");
+    return (EXIT_SUCCESS);
 }
