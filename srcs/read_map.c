@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:05:25 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 16:59:24 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:56:01 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*read_maps(char *path)
 	char	*tmp;
 
 	if (extension_invalid(path))
-		return (ft_printf(2, "Error wrong file\n"), NULL);
+		return (ft_printf(2, "Error: wrong format file\n"), NULL);
 	i = 1;
 	fd = open(path, O_RDONLY);
 	s = ft_calloc(10001, sizeof(char));
@@ -74,13 +74,13 @@ char	**split_map(char *path)
 		return (NULL);
 	if (check_newline(stack) == 1)
 	{
-		ft_printf(2, "Error empty line detected\n");
+		ft_printf(2, "Error: empty line detected\n");
 		free(stack);
 		return (NULL);
 	}
 	split = ft_split(stack, '\n');
 	if (!split)
-		return (ft_printf(2, "Error split\n"), NULL);
+		return (ft_printf(2, "Error: split map\n"), NULL);
 	free(stack);
 	return (split);
 }

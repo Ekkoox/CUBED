@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 18:48:23 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:55:00 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,23 @@ static int	error_size(t_cubed *cubed)
 
 	if (check_line(cubed, 0) == 0 || check_line(cubed,
 			1) == 0)
-		return (ft_printf(2, "Error the map is not closed\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error: map is not closed\n"), EXIT_FAILURE);
 	if (check_column(cubed, 0) == EXIT_FAILURE || check_column(cubed,
 			1) == EXIT_FAILURE)
-		return (ft_printf(2, "Error the map is not closed\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error: map is not closed\n"), EXIT_FAILURE);
 	i = 0;
 	len = ft_strlen(cubed->map[i]);
 	i++;
 	while (cubed->map[i])
 	{
 		if (ft_strlen(cubed->map[i]) != len)
-			return (ft_printf(2, "Error size map\n"), EXIT_FAILURE);
+			return (ft_printf(2, "Error: size map wrong\n"), EXIT_FAILURE);
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
 
-static int	error_value(t_cubed *cubed)
+static int	error_character(t_cubed *cubed)
 {
 	int	i;
 	int	y;
@@ -94,7 +94,7 @@ static int	error_value(t_cubed *cubed)
 			if (cubed->map[i][y] != '1' && cubed->map[i][y] != '0'
 				&& cubed->map[i][y] != 'N' && cubed->map[i][y] != 'S'
 				&& cubed->map[i][y] != 'E' && cubed->map[i][y] != 'W')
-				return (ft_printf(2, "Error set map\n"), EXIT_FAILURE);
+				return (ft_printf(2, "Error: invalid character in map\n"), EXIT_FAILURE);
 			y++;
 		}
 		i++;
@@ -104,7 +104,7 @@ static int	error_value(t_cubed *cubed)
 
 int	error_parsing(t_cubed *cubed)
 {
-	if (error_value(cubed) == EXIT_FAILURE)
+	if (error_character(cubed) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (error_size(cubed) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
