@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/12 16:35:33 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:29:57 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-enum			e_keys
+enum						e_keys
 {
 	KEY_ESC = 65307,
 	KEY_W = 119,
@@ -38,24 +38,42 @@ enum			e_keys
 	KEY_RIGHT = 65363,
 };
 
-typedef struct s_cubed t_cubed;
-typedef struct s_garbage t_garbage;
+typedef struct s_cubed		t_cubed;
+typedef struct s_imgs		t_imgs;
+typedef struct s_garbage	t_garbage;
+
+typedef struct s_imgs
+{
+	void					*imgs;
+}							t_imgs;
 
 typedef struct s_garbage
 {
-	int			tqt;
-	t_cubed		*cubed;
-}				t_garbage;
+	int						tqt;
+	t_cubed					*cubed;
+}							t_garbage;
 
 typedef struct s_cubed
 {
-	char		**map;
-	t_garbage	*garbage;
-}				t_cubed;
+	char					**map;
+	void					*mlx;
+	void					*win;
+	t_imgs					*imgs;
+	t_garbage				*garbage;
+}							t_cubed;
 
 // Map
-char			**split_map(char *path);
+char						**split_map(char *path);
+
+// Init
+int							init_mlx(t_cubed *cubed);
+
+// Input
+int							esc_close(int keycode, t_cubed *cubed);
 
 // Garbadge
-int				garbage_collector(t_garbage *garbage);
+int							garbage_collector(t_garbage *garbage);
+
+// Parthing
+int							error_parsing(t_cubed *cubed);
 #endif

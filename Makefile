@@ -1,8 +1,11 @@
 NAME = cub3D
 
 C_FILES = main.c\
-			read_map.c\
+			init.c\
+			input.c\
+			parsing.c\
 			garbage.c\
+			read_map.c\
 
 
 SRCS = $(addprefix srcs/,$(C_FILES))

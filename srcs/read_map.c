@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:05:25 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/12 16:31:41 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:05:15 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ char	**split_map(char *path)
 
 	stack = read_maps(path);
 	if (!stack)
-		exit(0);
+		return (NULL);
 	if (check_newline(stack) == 1)
 	{
 		ft_printf(2, "Error empty line detected\n");
 		free(stack);
-		exit(0);
+		return (NULL);
 	}
 	split = ft_split(stack, '\n');
 	if (!split)
@@ -84,4 +84,3 @@ char	**split_map(char *path)
 	free(stack);
 	return (split);
 }
-
