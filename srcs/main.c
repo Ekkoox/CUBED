@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 15:32:46 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:46:34 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE); // rajouter les free
 	// garbage_collector(cubed.garbage);
 	ft_printf(1, "Bienvenue dans CUB3D\n");
-	mlx_hook(cubed.win, 33, 131072, 0, &cubed); // rajouter la fonction de destruction a la place de 0
-	mlx_hook(cubed.mlx, 2, 1L, esc_close, &cubed);
+	// mlx_hook(cubed.win, 33, 131072, 0, &cubed); // rajouter la fonction de destruction a la place de 0
+	mlx_hook(cubed.win, 2, 1L, esc_close, &cubed);
+    mlx_key_hook(cubed.win, 0, &cubed);
 	mlx_loop(cubed.mlx);
 }

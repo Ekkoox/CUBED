@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 15:35:01 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:46:58 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int init_mlx(t_cubed *cubed)
     cubed->mlx = mlx_init();
     if (!cubed->mlx)
         return (ft_printf(2, "Error: mlx_init failed\n"), EXIT_FAILURE);
-    printf("mlx = %p\n", cubed->mlx);
     cubed->win = mlx_new_window(cubed->mlx, 800, 600, "Cub3D");
     if (!cubed->win)
     {
