@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 15:29:57 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:54:17 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int							esc_close(int keycode, t_cubed *cubed);
 
 // Garbadge
 int							garbage_collector(t_garbage *garbage);
+int 						free_tmp(t_cubed *cubed);
 
 // Parthing
 int							error_parsing(t_cubed *cubed);
