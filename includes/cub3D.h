@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 15:54:17 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:56:31 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ enum						e_keys
 {
 	KEY_ESC = 65307,
 	KEY_W = 119,
-	KEY_UP = 65362,
+	// KEY_UP = 65362,
 	KEY_S = 115,
-	KEY_DOWN = 65364,
+	// KEY_DOWN = 65364,
 	KEY_A = 97,
 	KEY_LEFT = 65361,
 	KEY_D = 100,

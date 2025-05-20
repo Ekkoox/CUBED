@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:05:25 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 15:05:15 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:59:24 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*read_maps(char *path)
 	char	*tmp;
 
 	if (extension_invalid(path))
-		return (NULL);
+		return (ft_printf(2, "Error wrong file\n"), NULL);
 	i = 1;
 	fd = open(path, O_RDONLY);
 	s = ft_calloc(10001, sizeof(char));
