@@ -6,12 +6,12 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/21 11:44:23 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:14:33 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
+	
 int	main(int ac, char **av)
 {
 	t_cubed	cubed;
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	if (init_mlx(&cubed) == EXIT_FAILURE)
 		return (ft_freetab(cubed.map), EXIT_FAILURE); // rajouter les free
 	// garbage_collector(cubed.garbage);
-	ft_printf(1, "Welcolme in CUBED\n");
+	ft_printf(1, "Welcome in CUBED\n");
 	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed); // changer free_tmp
 	mlx_hook(cubed.win, 2, 1L, esc_close, &cubed);
     mlx_key_hook(cubed.win, 0, &cubed);

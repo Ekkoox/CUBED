@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 16:56:31 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:20:56 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_garbage
 
 typedef struct s_cubed
 {
+	int 					start_map;
 	char					**map;
 	void					*mlx;
 	void					*win;
