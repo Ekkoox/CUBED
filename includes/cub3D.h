@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/18 14:42:53 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:04:34 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char						**split_map(char *path);
 
 // Init
 int							init_mlx(t_cubed *cubed);
+int 						init_string_textures(t_imgs *imgs);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);

@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/05/20 18:52:23 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:04:11 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,14 @@ int	init_mlx(t_cubed *cubed)
 		return (ft_printf(2, "Error: mlx_new_window failed\n"), EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int init_string_textures(t_imgs *imgs)
+{
+    imgs->east_texture = NULL;
+    imgs->west_texture = NULL;
+    imgs->north_texture = NULL;
+    imgs->south_texture = NULL;
+    imgs->imgs = NULL;
+    return (EXIT_SUCCESS);
 }

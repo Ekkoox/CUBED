@@ -6,21 +6,11 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/17 19:08:09 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:40:22 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-static int init_string_textures(t_imgs *imgs)
-{
-    imgs->east_texture = NULL;
-    imgs->west_texture = NULL;
-    imgs->north_texture = NULL;
-    imgs->south_texture = NULL;
-    imgs->imgs = NULL;
-    return (EXIT_SUCCESS);
-}
 
 static int check_double_txt(t_imgs *imgs)
 {
@@ -44,7 +34,12 @@ int parsing_textures(t_cubed *cubed)
     if (!cubed->imgs)
         return (ft_printf(2, "Error: malloc imgs failed\n"), EXIT_FAILURE);
     init_string_textures(cubed->imgs);
-    stack_name_txt(cubed);
+    if (stack_name_txt(cubed) == EXIT_FAILURE)
+    {
+        free_textures(cubed->imgs);
+        ft_printf(2, "Error: stack name texture failed\n");
+        return (EXIT_FAILURE);
+    }
     if (cubed->imgs->east_texture == NULL || cubed->imgs->west_texture == NULL
         || cubed->imgs->north_texture == NULL || cubed->imgs->south_texture == NULL)
     {
@@ -60,3 +55,17 @@ int parsing_textures(t_cubed *cubed)
     }
     return (EXIT_SUCCESS);
 }
+
+// int parsing_colors(t_cubed *cubed)
+// {
+//     int i;
+    
+//     i = 0;
+//     while (cubed->map[i])
+//     {
+//         if (ft_strcmp(cubed->map[i], "F ") == 0) 
+            
+//         i++;
+//     }
+//     return (EXIT_SUCCESS);
+// }
