@@ -3,13 +3,13 @@ NAME = cub3D
 C_FILES = main.c\
 			init.c\
 			input.c\
-			garbage.c\
-			parsing.c\
 			read_map.c\
-			parsing_bis.c\
-			name_texture.c\
-			garbage_utils.c\
-			utils_parsing.c\
+			garbage/garbage.c\
+			parsing/parsing.c\
+			parsing/parsing_bis.c\
+			parsing/name_texture.c\
+			garbage/garbage_utils.c\
+			parsing/utils_parsing.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 
