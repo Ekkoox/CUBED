@@ -1,7 +1,11 @@
-EA texture_est.xpm
-WE texture_west.xpm
-NO texture_north.xpm
-SO texture_south.xpm
+EA ../sprites/wall/texture_est.xpm
+WE ../sprites/wall/texture_west.xpm
+NO ../sprites/wall/texture_north.xpm
+SO ../sprites/wall/texture_south.xpm
+
+F 220,100,0
+C 225,30,0
+
 111111111111111111111111
 100000000000000000000001
 100000000000000000000001
