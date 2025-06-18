@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/17 15:20:56 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:42:53 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_imgs
 {
 	void					*imgs;
+	char					*east_texture;
+	char					*west_texture;
+	char					*north_texture;
+	char					*south_texture;
 }							t_imgs;
 
 typedef struct s_garbage
@@ -55,13 +59,16 @@ typedef struct s_garbage
 
 typedef struct s_cubed
 {
-	int 					start_map;
+	int						start_map;
 	char					**map;
 	void					*mlx;
 	void					*win;
 	t_imgs					*imgs;
 	t_garbage				*garbage;
 }							t_cubed;
+
+// Name Texture
+int							stack_name_txt(t_cubed *cubed);
 
 // Map
 char						**split_map(char *path);
@@ -73,9 +80,15 @@ int							init_mlx(t_cubed *cubed);
 int							esc_close(int keycode, t_cubed *cubed);
 
 // Garbadge
+int							free_tmp(t_cubed *cubed);
 int							garbage_collector(t_garbage *garbage);
-int 						free_tmp(t_cubed *cubed);
+void						free_textures(t_imgs *imgs);
 
-// Parthing
+// Parsing
 int							error_parsing(t_cubed *cubed);
+int 						parsing_textures(t_cubed *cubed);
+
+// Utils Parsing
+int							is_map_line(const char *line);
+
 #endif
