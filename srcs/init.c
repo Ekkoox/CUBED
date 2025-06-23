@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/18 15:04:11 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:23:43 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	init_mlx(t_cubed *cubed)
 	cubed->mlx = mlx_init();
 	if (!cubed->mlx)
 		return (ft_printf(2, "Error: mlx_init failed\n"), EXIT_FAILURE);
-	cubed->win = mlx_new_window(cubed->mlx, ft_strlen(cubed->map[0]) * 64,
-			ft_count_line_split(cubed->map) * 64, "Cub3D");
+	// cubed->win = mlx_new_window(cubed->mlx, ft_strlen(cubed->map[0]) * 64,
+	// 		ft_count_line_split(cubed->map) * 64, "Cub3D");
+	cubed->win = mlx_new_window(cubed->mlx, 1920,
+		1080, "Cub3D");
 	if (!cubed->win)
 	{
 		mlx_destroy_display(cubed->mlx);
