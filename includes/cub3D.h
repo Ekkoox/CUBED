@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/18 15:04:34 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:48:10 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ typedef struct s_garbage
 	t_cubed					*cubed;
 }							t_garbage;
 
+typedef struct s_pixel_data
+{
+	void	*img;
+	char	*addr;
+	int		bit_pixels;
+	int		line_len;
+	int		endian;
+}							t_pixel_data;
+
+
 typedef struct s_cubed
 {
 	int						start_map;
@@ -65,6 +75,7 @@ typedef struct s_cubed
 	void					*win;
 	t_imgs					*imgs;
 	t_garbage				*garbage;
+	t_pixel_data			*pix_data;
 }							t_cubed;
 
 // Name Texture
@@ -92,4 +103,6 @@ int 						parsing_textures(t_cubed *cubed);
 // Utils Parsing
 int							is_map_line(const char *line);
 
+// Display
+void						display_floor_celling(t_cubed cube);
 #endif
