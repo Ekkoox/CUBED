@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/24 15:48:10 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/06/25 18:06:16 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+
+enum						e_colour
+{
+	RED = 0,
+	GREEN = 1,
+	BLUE = 2,
+};
+
+enum						e_data
+{
+	WIDTH = 1920,
+	HEIGHT = 1080,
+	BPP = 32,
+};
 
 enum						e_keys
 {
@@ -104,5 +118,5 @@ int 						parsing_textures(t_cubed *cubed);
 int							is_map_line(const char *line);
 
 // Display
-void						display_floor_celling(t_cubed cube);
+int						display_floor_ceiling(t_cubed cube);
 #endif
