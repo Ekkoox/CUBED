@@ -10,7 +10,7 @@ C_FILES = main.c\
 			parsing/name_texture.c\
 			garbage/garbage_utils.c\
 			parsing/utils_parsing.c\
-			display/floor_celling.c\
+			display/floor_ceiling.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 
