@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/27 16:25:29 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/06/27 18:12:09 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,8 @@ int 						parsing_textures(t_cubed *cubed);
 int							is_map_line(const char *line);
 
 // Display
-int						display_floor_ceiling(t_cubed cube);
+int							display_floor_ceiling(t_cubed cube);
+
+// Minimap
+int							minimap(t_cubed cube);
 #endif
