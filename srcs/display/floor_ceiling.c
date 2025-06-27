@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/06/25 18:52:38 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/06/27 15:24:26 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,19 @@ int	display_floor_ceiling(t_cubed cube)
 	
 	x = 0;
 	y = 0;
-	// sky
-	void *img_ptr = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
-	if (img_ptr == NULL)
+	cube.imgs->img_ptr_sky = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
+	if (cube.imgs->img_ptr_sky == NULL)
 		return (ft_printf(2, "ca na pas marche\n"), EXIT_FAILURE);
-	// mlx_pixel_put(cube.mlx, cube.win, x, y, 4282009);
-	char *my_img_data = mlx_get_data_addr(img_ptr, &bpp, &width, &endian);
+	char *my_img_data = mlx_get_data_addr(cube.imgs->img_ptr_sky, &bpp, &width, &endian);
 	fill_image_color(my_img_data, 4282009, WIDTH, HEIGHT / 2);
-	mlx_put_image_to_window(cube.mlx, cube.win, img_ptr, x, y);
-	// floor
+	mlx_put_image_to_window(cube.mlx, cube.win, cube.imgs->img_ptr_sky, x, y);
 	y = HEIGHT / 2;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			mlx_pixel_put(cube.mlx, cube.win, x, y, 7030076);
-			x++;
-		}
-		y++;
-	}
+	cube.imgs->img_ptr_floor = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
+	if (cube.imgs->img_ptr_floor == NULL)
+		return (ft_printf(2, "ca na pas marche\n"), EXIT_FAILURE);
+	char *my_img2_data = mlx_get_data_addr(cube.imgs->img_ptr_floor, &bpp, &width, &endian);
+	fill_image_color(my_img2_data, 7030076, WIDTH, HEIGHT / 2);
+	mlx_put_image_to_window(cube.mlx, cube.win, cube.imgs->img_ptr_floor, x, y);
 	return (0);
 }
 

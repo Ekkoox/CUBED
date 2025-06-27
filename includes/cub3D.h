@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/25 18:06:16 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/06/27 15:19:13 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_imgs
 {
 	void					*imgs;
+	void					*img_ptr_sky;
+	void					*img_ptr_floor;
 	char					*east_texture;
 	char					*west_texture;
 	char					*north_texture;
