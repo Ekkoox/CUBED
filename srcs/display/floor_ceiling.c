@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/06/25 18:52:38 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/06/27 16:42:47 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,59 @@ static void	fill_image_color(char *pix_char, int colour, int width, int height)
 	}
 }
 
-int	display_floor_ceiling(t_cubed cube)
+static int	gener_sky(t_cubed cube, int x, int y)
 {
-	int	x;
-	int	y;
-	int	bpp = 32;
-	int width = (WIDTH * 4);
-	int	endian = 0;
-	
-	x = 0;
-	y = 0;
-	// sky
-	void *img_ptr = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
-	if (img_ptr == NULL)
-		return (ft_printf(2, "ca na pas marche\n"), EXIT_FAILURE);
-	// mlx_pixel_put(cube.mlx, cube.win, x, y, 4282009);
-	char *my_img_data = mlx_get_data_addr(img_ptr, &bpp, &width, &endian);
-	fill_image_color(my_img_data, 4282009, WIDTH, HEIGHT / 2);
-	mlx_put_image_to_window(cube.mlx, cube.win, img_ptr, x, y);
-	// floor
-	y = HEIGHT / 2;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			mlx_pixel_put(cube.mlx, cube.win, x, y, 7030076);
-			x++;
-		}
-		y++;
-	}
-	return (0);
+	int		bpp;
+	int		width;
+	int		endian;
+	char	*sky;
+	void	*ptr_sky;
+
+	bpp = 32;
+	width = WIDTH * 4;
+	endian = 0;
+	ptr_sky = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
+	if (ptr_sky == NULL)
+		return (ft_printf(2, "Error: mlx failure\n"), EXIT_FAILURE);
+	sky = mlx_get_data_addr(ptr_sky, &bpp, &width, &endian);
+	fill_image_color(sky, 4282009, WIDTH, HEIGHT / 2);
+	mlx_put_image_to_window(cube.mlx, cube.win, ptr_sky, x, y);
+	mlx_destroy_image(cube.mlx, ptr_sky);
+	return (EXIT_SUCCESS);
 }
 
+static int	gener_floor(t_cubed cube, int x, int y)
+{
+	int		bpp;
+	int		width;
+	int		endian;
+	char	*floor;
+	void	*ptr_floor;
 
+	bpp = 32;
+	width = WIDTH * 4;
+	endian = 0;
+	ptr_floor = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
+	if (ptr_floor == NULL)
+		return (ft_printf(2, "Error: mlx failure\n"), EXIT_FAILURE);
+	floor = mlx_get_data_addr(ptr_floor, &bpp, &width, &endian);
+	fill_image_color(floor, 7030076, WIDTH, HEIGHT / 2);
+	mlx_put_image_to_window(cube.mlx, cube.win, ptr_floor, x, y);
+	mlx_destroy_image(cube.mlx, ptr_floor);
+	return (EXIT_SUCCESS);
+}
 
+int	display_floor_ceiling(t_cubed cube)
+{
+	int	x;	
+	int	y;
+
+	x = 0;
+	y = 0;
+	if (gener_sky(cube, x, y) == 1)
+		return (EXIT_FAILURE);
+	y = HEIGHT / 2;
+	if (gener_floor(cube, x, y) == 1)
+		return (EXIT_FAILURE);
+	return (0);
+}
