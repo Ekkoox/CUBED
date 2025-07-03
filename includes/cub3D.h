@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/27 16:25:29 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/03 16:33:26 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,27 @@ typedef struct s_imgs
 	char					*south_texture;
 }							t_imgs;
 
-typedef struct s_garbage
-{
-	int						tqt;
-	t_cubed					*cubed;
-}							t_garbage;
-
 typedef struct s_pixel_data
 {
-	void	*img;
-	char	*addr;
-	int		bit_pixels;
-	int		line_len;
-	int		endian;
+	void					*img;
+	char					*addr;
+	int						bit_pixels;
+	int						line_len;
+	int						endian;
 }							t_pixel_data;
 
+// typedef struct s_gc_node
+// {
+// 	void					*ptr;
+// 	struct s_gc_node		*next;
+// }							t_gc_node;
+
+// typedef struct s_garbage
+// {
+// 	int						count;
+// 	t_gc_node				*allocations;
+// 	t_cubed					*cubed;
+// }							t_garbage;
 
 typedef struct s_cubed
 {
@@ -100,23 +106,22 @@ char						**split_map(char *path);
 
 // Init
 int							init_mlx(t_cubed *cubed);
-int 						init_string_textures(t_imgs *imgs);
+int							init_string_textures(t_imgs *imgs);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);
 
 // Garbadge
 int							free_tmp(t_cubed *cubed);
-int							garbage_collector(t_garbage *garbage);
 void						free_textures(t_imgs *imgs);
 
 // Parsing
 int							error_parsing(t_cubed *cubed);
-int 						parsing_textures(t_cubed *cubed);
+int							parsing_textures(t_cubed *cubed);
 
 // Utils Parsing
 int							is_map_line(const char *line);
 
 // Display
-int						display_floor_ceiling(t_cubed cube);
+int							display_floor_ceiling(t_cubed cube);
 #endif
