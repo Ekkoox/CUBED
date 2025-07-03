@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/03 16:42:03 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:14:22 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,3 @@ void free_textures(t_imgs *imgs)
 		free(imgs->imgs);
 	free(imgs);
 }
-
-// t_garbage *garbage_init(t_cubed *cubed)
-// {
-// 	t_garbage *garbage;
-
-// 	garbage = malloc(sizeof(t_garbage));
-// 	if (!garbage)
-// 	{
-// 		ft_printf(2, "Error: malloc garbage failed\n");
-// 		return (NULL);
-// 	}
-// 	garbage->count = 0;
-// 	garbage->allocations = NULL;
-// 	garbage->cubed = cubed;
-// 	return (garbage);
-// }
