@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/27 18:12:09 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/01 18:48:25 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ typedef struct s_cubed
 {
 	int						start_map;
 	char					**map;
+	char					**map_formated;
+	int						max_wid;
+	int						max_hei;
 	void					*mlx;
 	void					*win;
 	t_imgs					*imgs;
@@ -121,5 +124,12 @@ int							is_map_line(const char *line);
 int							display_floor_ceiling(t_cubed cube);
 
 // Minimap
-int							minimap(t_cubed cube);
+int							minimap(t_cubed *cube);
+
+// Map_formated
+int							format_map(t_cubed *cube);
+
+// Utils
+int							is_whitespace(char c);
+int							is_white_line(char *str);
 #endif
