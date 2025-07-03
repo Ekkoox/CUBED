@@ -14,6 +14,7 @@ C_FILES = main.c\
 			display/floor_ceiling.c\
 			display/minimap.c\
 			display/map_formated.c\
+			display/colours.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 

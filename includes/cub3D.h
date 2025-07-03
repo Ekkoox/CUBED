@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/01 18:48:25 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/03 20:07:27 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,10 @@ int							format_map(t_cubed *cube);
 // Utils
 int							is_whitespace(char c);
 int							is_white_line(char *str);
+
+// Colours
+int							color_convert(int colour, int name_colour);
+void						wall_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
+void						walk_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
+void						player_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
 #endif
