@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/01 11:19:40 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/09 17:39:35 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,23 @@ int init_string_textures(t_imgs *imgs)
     imgs->south_texture = NULL;
     imgs->imgs = NULL;
     return (EXIT_SUCCESS);
+}
+
+void	check_max(int i, t_cubed *cube)
+{
+	int	x;
+	int	y;
+
+	y = i;
+	x = 0;
+	cube->max_wid = 0;
+	cube->max_hei = 0;
+	while (cube->map[y])
+	{
+		x = ft_strlen(cube->map[y]);
+		if (x > cube->max_wid)
+			cube->max_wid = x;
+		y++;
+	}
+	cube->max_hei = y - i;
 }

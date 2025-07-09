@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/09 16:05:12 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/09 17:39:50 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_cubed
 {
 	int						start_map;
 	char					**map;
+	char					**cpy_map;
 	char					**map_formated;
 	int						max_wid;
 	int						max_hei;
@@ -112,6 +113,7 @@ char						**split_map(char *path);
 // Init
 int							init_mlx(t_cubed *cubed);
 int							init_string_textures(t_imgs *imgs);
+void						check_max(int i, t_cubed *cube);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);
@@ -146,6 +148,7 @@ int							format_map(t_cubed *cube);
 
 // Utils
 int							is_whitespace(char c);
+int							is_map(t_cubed *cube, int i);
 int							is_white_line(char *str);
 
 // Colours
