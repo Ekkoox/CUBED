@@ -7,16 +7,17 @@ C_FILES = main.c\
 			read_map.c\
 			garbage/garbage.c\
 			parsing/parsing.c\
+			parsing/flood_fill.c\
 			parsing/parsing_bis.c\
 			parsing/name_texture.c\
 			parsing/utils_parsing.c\
 			garbage/garbage_utils.c\
+			parsing/parsing_colors_utils.c\
 			display/floor_ceiling.c\
 			display/minimap.c\
 			display/map_formated.c\
 			display/colours.c\
 			display/click.c\
-			parsing/parsing_colors_utils.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 

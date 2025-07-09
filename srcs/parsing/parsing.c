@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/03 19:24:14 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:09:11 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ int	error_parsing(t_cubed *cubed)
 		return (EXIT_FAILURE);
 	if (parsing_colors(cubed) == EXIT_FAILURE)
 		return (free_textures(cubed->imgs), EXIT_FAILURE);
-	// if (flood_file)
-	// 	return (ft_printf(2, "Error: flood fill failed\n"),
-			// free_textures(cubed->imgs), EXIT_FAILURE);
+	// if (flood_file(cubed) == EXIT_FAILURE)
+	// 	return (free_textures(cubed->imgs), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
