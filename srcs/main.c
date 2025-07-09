@@ -34,10 +34,15 @@ int	main(int ac, char **av)
 	if (init_mlx(&cubed) == EXIT_FAILURE)
 		return (ft_freetab(cubed.map), EXIT_FAILURE);
 	ft_printf(1, "Welcome in CUBED\n");
-	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed);
+	if (format_map(&cubed) == 1)
+		return (free_tmp(&cubed), EXIT_FAILURE);
+	// mlx_hook(cubed.win, 2, 1L, click, &cubed);
+	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed); // changer free_tmp
 	mlx_hook(cubed.win, 2, 1L, esc_close, &cubed);
 	// mlx_key_hook(cubed.win, 0, &cubed);
 	if (display_floor_ceiling(cubed) == 1)
+		return (free_tmp(&cubed), EXIT_FAILURE);
+	if (minimap(&cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
 	mlx_loop(cubed.mlx);
 	return (EXIT_SUCCESS);

@@ -93,6 +93,9 @@ typedef struct s_cubed
 {
 	int						start_map;
 	char					**map;
+	char					**map_formated;
+	int						max_wid;
+	int						max_hei;
 	void					*mlx;
 	void					*win;
 	t_imgs					*imgs;
@@ -134,4 +137,19 @@ void						init_colors(t_pixel_data *pixel_data);
 
 // Display
 int							display_floor_ceiling(t_cubed cube);
+// Minimap
+int							minimap(t_cubed *cube);
+
+// Map_formated
+int							format_map(t_cubed *cube);
+
+// Utils
+int							is_whitespace(char c);
+int							is_white_line(char *str);
+
+// Colours
+int							color_convert(int colour, int name_colour);
+void						wall_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
+void						walk_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
+void						player_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
 #endif

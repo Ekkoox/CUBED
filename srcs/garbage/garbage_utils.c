@@ -14,15 +14,16 @@
 
 void free_textures(t_imgs *imgs)
 {
-	if (imgs->east_texture)
-		free(imgs->east_texture);
-	if (imgs->west_texture)
-		free(imgs->west_texture);
-	if (imgs->north_texture)
-		free(imgs->north_texture);
-	if (imgs->south_texture)
-		free(imgs->south_texture);
-	if (imgs->imgs)
-		free(imgs->imgs);
-	free(imgs);
+	(void)imgs;
+	// if (imgs->east_texture)
+	// 	free(imgs->east_texture);
+	// if (imgs->west_texture)
+	// 	free(imgs->west_texture);
+	// if (imgs->north_texture)
+	// 	free(imgs->north_texture);
+	// if (imgs->south_texture)
+	// 	free(imgs->south_texture);
+	// if (imgs->imgs)
+	// 	free(imgs->imgs);
+	// free(imgs);
 }

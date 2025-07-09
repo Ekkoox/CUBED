@@ -6,24 +6,11 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/06/27 16:42:47 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/03 17:29:36 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-static int	color_convert(int colour, int name_colour)
-{
-	int	res;
-
-	if (name_colour == RED)
-		res = colour >> 16 & 0xFF;
-	if (name_colour == GREEN)
-		res = colour >> 8 & 0xFF;
-	if (name_colour == BLUE)
-		res = colour & 0xFF;
-	return (res);
-}
 
 static void	fill_image_color(char *pix_char, int colour, int width, int height)
 {
