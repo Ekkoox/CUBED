@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:43:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/18 15:00:04 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:38:54 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int stack_name_txt_west(t_cubed *cubed)
         y = 0;
         while (cubed->map[i][y])
         {
-            if (ft_strncmp(cubed->map[i] + y, "WE ", 3) == 0)
+            if (ft_strncmp(cubed->map[i] + y, "WE", 2) == 0)
             {
                 cubed->imgs->west_texture = ft_strdup(cubed->map[i] + y + 3);
                 if (!cubed->imgs->west_texture)
@@ -48,7 +48,7 @@ int	stack_name_txt_south(t_cubed *cubed)
         y = 0;
         while (cubed->map[i][y])
         {
-            if (ft_strncmp(cubed->map[i] + y, "SO ", 3) == 0)
+            if (ft_strncmp(cubed->map[i] + y, "SO", 2) == 0)
             {
                 cubed->imgs->south_texture = ft_strdup(cubed->map[i] + y + 3);
                 if (!cubed->imgs->south_texture)
@@ -73,7 +73,7 @@ int	stack_name_txt_east(t_cubed *cubed)
 		y = 0;
 		while (cubed->map[i][y])
 		{
-			if (ft_strncmp(cubed->map[i] + y, "EA ", 3) == 0)
+			if (ft_strncmp(cubed->map[i] + y, "EA", 2) == 0)
 			{
 				cubed->imgs->east_texture = ft_strdup(cubed->map[i] + y + 3);
 				if (!cubed->imgs->east_texture)
@@ -98,7 +98,7 @@ int	stack_name_txt_north(t_cubed *cubed)
 		y = 0;
 		while (cubed->map[i][y])
 		{
-			if (ft_strncmp(cubed->map[i] + y, "NO ", 3) == 0)
+			if (ft_strncmp(cubed->map[i] + y, "NO", 2) == 0)
 			{
 				cubed->imgs->north_texture = ft_strdup(cubed->map[i] + y + 3);
 				if (!cubed->imgs->north_texture)

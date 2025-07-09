@@ -11,6 +11,7 @@ C_FILES = main.c\
 			garbage/garbage_utils.c\
 			parsing/utils_parsing.c\
 			display/floor_ceiling.c\
+			parsing/parsing_colors_utils.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 

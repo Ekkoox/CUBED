@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:23:48 by enschnei          #+#    #+#             */
-/*   Updated: 2025/06/18 14:42:37 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:09:28 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,50 @@ int is_map_line(const char *line)
 		line++;
 	}
 	return (0);
+}
+
+void	start_map(t_cubed *cubed)
+{
+	int	i;
+
+	i = 0;
+	while (cubed->map[i])
+	{
+		if (is_map_line(cubed->map[i]))
+		{
+			cubed->start_map = i;
+			return ;
+		}
+		i++;
+	}
+}
+
+int	parsing_floor_color(t_pixel_data *pixel_data, char *line)
+{
+	int	red;
+	int green;
+	int blue;
+
+	if (parse_rgb(line, &red, &green, &blue) == EXIT_FAILURE)
+	{
+		ft_printf(2, "Error: Invalid floor RGB values\n");
+		return (EXIT_FAILURE);
+	}
+	pixel_data->floor_color = (red << 16) | (green << 8) | blue;
+	return (EXIT_SUCCESS);
+}
+
+int	parsing_ceiling_color(t_pixel_data *pixel_data, char *line)
+{
+	int	red;
+	int green;
+	int blue;
+
+	if (parse_rgb(line, &red, &green, &blue) == EXIT_FAILURE)
+	{
+		ft_printf(2, "Error: Invalid floor RGB values\n");
+		return (EXIT_FAILURE);
+	}
+	pixel_data->ceiling_color = (red << 16) | (green << 8) | blue;
+	return (EXIT_SUCCESS);
 }
