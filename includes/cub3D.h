@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/03 20:07:27 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/03 19:22:13 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,29 @@ typedef struct s_imgs
 	char					*south_texture;
 }							t_imgs;
 
-typedef struct s_garbage
-{
-	int						tqt;
-	t_cubed					*cubed;
-}							t_garbage;
-
 typedef struct s_pixel_data
 {
-	void	*img;
-	char	*addr;
-	int		bit_pixels;
-	int		line_len;
-	int		endian;
+	void					*img;
+	char					*addr;
+	int						floor_color;
+	int						ceiling_color;
+	int						endian;
+	int						line_len;
+	int						bit_pixels;
 }							t_pixel_data;
 
+// typedef struct s_gc_node
+// {
+// 	void					*ptr;
+// 	struct s_gc_node		*next;
+// }							t_gc_node;
+
+// typedef struct s_garbage
+// {
+// 	int						count;
+// 	t_gc_node				*allocations;
+// 	t_cubed					*cubed;
+// }							t_garbage;
 
 typedef struct s_cubed
 {
@@ -92,7 +100,7 @@ typedef struct s_cubed
 	void					*win;
 	t_imgs					*imgs;
 	t_garbage				*garbage;
-	t_pixel_data			*pix_data;
+	t_pixel_data			*pixel_data;
 }							t_cubed;
 
 // Name Texture
@@ -103,26 +111,32 @@ char						**split_map(char *path);
 
 // Init
 int							init_mlx(t_cubed *cubed);
-int 						init_string_textures(t_imgs *imgs);
+int							init_string_textures(t_imgs *imgs);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);
 
 // Garbadge
 int							free_tmp(t_cubed *cubed);
-int							garbage_collector(t_garbage *garbage);
 void						free_textures(t_imgs *imgs);
 
 // Parsing
 int							error_parsing(t_cubed *cubed);
-int 						parsing_textures(t_cubed *cubed);
+int							parsing_textures(t_cubed *cubed);
 
 // Utils Parsing
 int							is_map_line(const char *line);
+int							validate_rgb_value(int value);
+int							parsing_floor_color(t_pixel_data *pixel_data,
+								char *line);
+int							parsing_ceiling_color(t_pixel_data *pixel_data,
+								char *line);
+int							parse_rgb(char *line, int *r, int *g, int *b);
+void						start_map(t_cubed *cubed);
+void						init_colors(t_pixel_data *pixel_data);
 
 // Display
 int							display_floor_ceiling(t_cubed cube);
-
 // Minimap
 int							minimap(t_cubed *cube);
 

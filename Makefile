@@ -16,6 +16,7 @@ C_FILES = main.c\
 			display/map_formated.c\
 			display/colours.c\
 			display/click.c\
+			parsing/parsing_colors_utils.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 
