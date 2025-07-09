@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_utils.c                                    :+:      :+:    :+:   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/09 16:08:46 by enschnei         ###   ########.fr       */
+/*   Created: 2025/07/09 16:00:13 by enschnei          #+#    #+#             */
+/*   Updated: 2025/07/09 16:09:01 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void free_textures(t_imgs *imgs)
-{
-	(void)imgs;
-	if (imgs->east_texture)
-		free(imgs->east_texture);
-	if (imgs->west_texture)
-		free(imgs->west_texture);
-	if (imgs->north_texture)
-		free(imgs->north_texture);
-	if (imgs->south_texture)
-		free(imgs->south_texture);
-	if (imgs->imgs)
-		free(imgs->imgs);
-	free(imgs);
-}
+// static int flood_fill(t_cubed *cubed, int x, int y)
+// {
+//     return (EXIT_SUCCESS);
+// }
+
+// int check_flood_fill(t_cubed *cubed)
+// {
+//     return (EXIT_SUCCESS);
+// }

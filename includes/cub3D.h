@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/03 19:22:13 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:05:12 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void						free_textures(t_imgs *imgs);
 // Parsing
 int							error_parsing(t_cubed *cubed);
 int							parsing_textures(t_cubed *cubed);
+int							check_flood_fill(t_cubed *cubed); 
 
 // Utils Parsing
 int							is_map_line(const char *line);
@@ -149,7 +150,10 @@ int							is_white_line(char *str);
 
 // Colours
 int							color_convert(int colour, int name_colour);
-void						wall_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
-void						walk_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
-void						player_colour(char *pix_char, int x, int y, t_cubed *cube, int bpp, int size_len);
+void						wall_colour(char *pix_char, int x, int y,
+								t_cubed *cube, int bpp, int size_len);
+void						walk_colour(char *pix_char, int x, int y,
+								t_cubed *cube, int bpp, int size_len);
+void						player_colour(char *pix_char, int x, int y,
+								t_cubed *cube, int bpp, int size_len);
 #endif
