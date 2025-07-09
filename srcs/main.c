@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/03 16:47:12 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:41:26 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 	ft_printf(1, "Welcome in CUBED\n");
 	if (format_map(&cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
+	// mlx_hook(cubed.win, 2, 1L, click, &cubed);
 	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed); // changer free_tmp
 	mlx_hook(cubed.win, 2, 1L, esc_close, &cubed);
     // mlx_key_hook(cubed.win, 0, &cubed);

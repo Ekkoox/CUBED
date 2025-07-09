@@ -15,6 +15,7 @@ C_FILES = main.c\
 			display/minimap.c\
 			display/map_formated.c\
 			display/colours.c\
+			display/click.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 
