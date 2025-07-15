@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/09 15:55:23 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/15 19:52:52 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	gener_floor(t_cubed cube, int x, int y)
 	floor = mlx_get_data_addr(ptr_floor, &bpp, &width, &endian);
 	fill_image_color(floor, cube.pixel_data->floor_color, WIDTH, HEIGHT / 2);
 	mlx_put_image_to_window(cube.mlx, cube.win, ptr_floor, x, y);
-	mlx_destroy_image(cube.mlx, ptr_floor);
+	// mlx_destroy_image(cube.mlx, ptr_floor);
 	return (EXIT_SUCCESS);
 }
 
