@@ -6,13 +6,13 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/09 17:19:34 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/09 18:01:31 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void free_textures(t_imgs *imgs)
+void	free_textures(t_imgs *imgs)
 {
 	(void)imgs;
 	if (imgs->east_texture)

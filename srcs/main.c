@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/18 13:51:20 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 13:16:10 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,3 @@ int	main(int ac, char **av)
 	mlx_loop(cubed.mlx);
 	return (EXIT_SUCCESS);
 }
-
-
-// error quand on met un fichier qui n'existe pas

@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/18 15:15:56 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/10 15:08:50 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,6 @@ typedef struct s_pixel_data
 	int						bit_pixels;
 }							t_pixel_data;
 
-// typedef struct s_gc_node
-// {
-// 	void					*ptr;
-// 	struct s_gc_node		*next;
-// }							t_gc_node;
-
-// typedef struct s_garbage
-// {
-// 	int						count;
-// 	t_gc_node				*allocations;
-// 	t_cubed					*cubed;
-// }							t_garbage;
-
 typedef struct s_player
 {
 	int						x_pos;
@@ -115,11 +102,14 @@ typedef struct s_player
 
 typedef struct s_cubed
 {
-	int						start_map;
 	char					**map;
+	char					**cpy_map;
 	char					**map_formated;
+	int						spwn_x;
+	int						spwn_y;
 	int						max_wid;
 	int						max_hei;
+	int						start_map;
 	void					*mlx;
 	void					*win;
 	t_imgs					*imgs;
@@ -137,6 +127,7 @@ char						**split_map(char *path);
 // Init
 int							init_mlx(t_cubed *cubed);
 int							init_string_textures(t_imgs *imgs);
+void						check_max(int i, t_cubed *cube);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);
@@ -171,6 +162,7 @@ int							format_map(t_cubed *cube);
 int							is_player_pos(char c);
 // Utils
 int							is_whitespace(char c);
+int							is_map(t_cubed *cube, int i);
 int							is_white_line(char *str);
 
 // Colours

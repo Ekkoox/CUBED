@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:09:44 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/18 15:15:38 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/09 17:40:24 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <cub3D.h>
+# include "cub3D.h"
 
 static void	fill_map_colour(t_cubed *cube)
 {
