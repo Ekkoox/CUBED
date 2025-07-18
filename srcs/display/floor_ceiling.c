@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/09 15:55:23 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 13:49:39 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,16 @@ static int	gener_floor(t_cubed cube, int x, int y)
 	int		width;
 	int		endian;
 	char	*floor;
-	void	*ptr_floor;
 
 	bpp = 32;
 	width = WIDTH * 4;
 	endian = 0;
-	ptr_floor = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
-	if (ptr_floor == NULL)
+	cube.pixel_data->ptr_floor = mlx_new_image(cube.mlx, WIDTH, HEIGHT / 2);
+	if (cube.pixel_data->ptr_floor == NULL)
 		return (ft_printf(2, "Error: mlx failure\n"), EXIT_FAILURE);
-	floor = mlx_get_data_addr(ptr_floor, &bpp, &width, &endian);
+	floor = mlx_get_data_addr(cube.pixel_data->ptr_floor, &bpp, &width, &endian);
 	fill_image_color(floor, cube.pixel_data->floor_color, WIDTH, HEIGHT / 2);
-	mlx_put_image_to_window(cube.mlx, cube.win, ptr_floor, x, y);
-	mlx_destroy_image(cube.mlx, ptr_floor);
+	mlx_put_image_to_window(cube.mlx, cube.win, cube.pixel_data->ptr_floor, x, y);
 	return (EXIT_SUCCESS);
 }
 
