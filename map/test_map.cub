@@ -1,6 +1,6 @@
-F 1,69,60
+F 1,25,60
 C 65,86,153
-EA texture_est.xpm
+EA texture_east.xpm
 WE texture_west.xpm
 NO texture_north.xpm
 SO texture_south.xpm

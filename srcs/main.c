@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/15 18:23:01 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/18 13:16:10 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ int	main(int ac, char **av)
 	mlx_hook(cubed.win, 2, 1L, esc_close, &cubed);
 	if (display_floor_ceiling(cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
-	if (minimap(&cubed) == 1) // deplacer
-		return (free_tmp(&cubed), EXIT_FAILURE); // deplacer
+	if (minimap(&cubed) == 1)
+		return (free_tmp(&cubed), EXIT_FAILURE);	
 	mlx_loop(cubed.mlx);
 	return (EXIT_SUCCESS);
 }
-
-
-// error quand on met un fichier qui n'existe pas
