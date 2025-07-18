@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/15 22:57:21 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 15:15:56 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ enum						e_colour
 	RED = 0,
 	GREEN = 1,
 	BLUE = 2,
+	PLAYER_C = 14176079,
+	WALL_MAP_C = 9076325,
+	FLOOR_MAP_C = 11183506,
 };
 
 enum						e_data
@@ -37,6 +40,7 @@ enum						e_data
 	WIDTH = 1920,
 	HEIGHT = 1080,
 	BPP = 32,
+	STEP_LEN = 5,
 };
 
 enum						e_direction
@@ -76,6 +80,8 @@ typedef struct s_pixel_data
 	void					*img;
 	char					*addr;
 	unsigned char			*minimap;
+	void					*ptr_minimap;
+	void					*ptr_floor;
 	int						play_pix_x;
 	int						play_pix_y;
 	int						size_len;
@@ -162,19 +168,16 @@ int							minimap(t_cubed *cube);
 
 // Map_formated
 int							format_map(t_cubed *cube);
-
+int							is_player_pos(char c);
 // Utils
 int							is_whitespace(char c);
 int							is_white_line(char *str);
 
 // Colours
 int							color_convert(int colour, int name_colour);
-void						wall_colour(int x, int y,
-								t_cubed *cube, int bpp, int size_len);
-void						walk_colour(int x, int y,
-								t_cubed *cube, int bpp, int size_len);
-void						player_colour(int x, int y,
-								t_cubed *cube, int bpp, int size_len);
+void						wall_colour(int x, int y, t_cubed *cube);
+void						walk_colour(int x, int y, t_cubed *cube);
+void						player_colour(int x, int y, t_cubed *cube);
 // Clicks
 int							click(int keycode, t_cubed *cube);
 #endif

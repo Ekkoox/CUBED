@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/15 19:54:03 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 13:51:20 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	main(int ac, char **av)
 	ft_printf(1, "Welcome in CUBED\n"); 
 	if (format_map(&cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
-	// if (minimap(&cubed) == 1) // deplacer
-	// 	return (free_tmp(&cubed), EXIT_FAILURE); // deplacer
 	if (display_floor_ceiling(cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
 	if (minimap(&cubed) == 1) // deplacer
