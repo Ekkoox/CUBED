@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:38:18 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/18 13:15:23 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 20:19:03 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ static int	next_move_check(t_cubed *cube, int dir, int step)
 	int	next_position;
 	
 	next_position = 0;
-	if (dir == UP)
+	if (dir == KEY_W)
 	{
 	next_position = (cube->pixel_data->play_pix_y - (step)) * cube->pixel_data->size_len
 		+ cube->pixel_data->play_pix_x * (cube->pixel_data->bpp / 8);
 	}
-	else if (dir == DOWN)
+	else if (dir == KEY_S)
 	{
 	next_position = (cube->pixel_data->play_pix_y + (step * 2)) * cube->pixel_data->size_len
 		+ cube->pixel_data->play_pix_x * (cube->pixel_data->bpp / 8);
 	}
-	else if (dir == LEFT)
+	else if (dir == KEY_A)
 	{
 	next_position = cube->pixel_data->play_pix_y * cube->pixel_data->size_len
 		+ (cube->pixel_data->play_pix_x - (step)) * (cube->pixel_data->bpp / 8);
 	}
-	else if (dir == RIGHT)
+	else if (dir == KEY_D)
 	{
 	next_position = cube->pixel_data->play_pix_y * cube->pixel_data->size_len
 		+ (cube->pixel_data->play_pix_x + (step * 2)) * (cube->pixel_data->bpp / 8);
@@ -46,13 +46,13 @@ static int	colour_check(t_cubed *cube, int next_pos, int dir)
 	int	next_pos_aligned;
 
 	status = 0;
-	if (dir == UP)
+	if (dir == KEY_W)
 		next_pos_aligned = next_pos + STEP_LEN * (cube->pixel_data->bpp / 8);
-	if (dir == DOWN)
+	if (dir == KEY_S)
 		next_pos_aligned = next_pos + STEP_LEN * (cube->pixel_data->bpp / 8);
-	if (dir == LEFT)
+	if (dir == KEY_A)
 		next_pos_aligned = next_pos + STEP_LEN * cube->pixel_data->size_len;
-	if (dir == RIGHT)
+	if (dir == KEY_D)
 		next_pos_aligned = next_pos + STEP_LEN * cube->pixel_data->size_len;
 	if (cube->pixel_data->minimap[next_pos + 0] != color_convert(FLOOR_MAP_C, BLUE) ||
 			cube->pixel_data->minimap[next_pos_aligned + 0] != color_convert(FLOOR_MAP_C, BLUE))
@@ -94,31 +94,53 @@ void	change_pix(t_cubed *cube, int colour)
 
 static int	check_path(int dir, t_cubed *cube)
 {
-	if (dir == UP && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
+	if (dir == KEY_W && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
 	{
 		change_pix(cube, FLOOR_MAP_C);
 		cube->pixel_data->play_pix_y = cube->pixel_data->play_pix_y - STEP_LEN;
 		change_pix(cube, PLAYER_C);
 	}
-	if (dir == DOWN && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
+	if (dir == KEY_S && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
 	{
 		change_pix(cube, FLOOR_MAP_C);
 		cube->pixel_data->play_pix_y = cube->pixel_data->play_pix_y + STEP_LEN;
 		change_pix(cube, PLAYER_C);
 	}
-	if (dir == LEFT && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
+	if (dir == KEY_A && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
 	{
 		change_pix(cube, FLOOR_MAP_C);
 		cube->pixel_data->play_pix_x = cube->pixel_data->play_pix_x - STEP_LEN;
 		change_pix(cube, PLAYER_C);
 	}
-	if (dir == RIGHT && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
+	if (dir == KEY_D && colour_check(cube, next_move_check(cube, dir, STEP_LEN), dir) == 0)
 	{	
 		change_pix(cube, FLOOR_MAP_C);
 		cube->pixel_data->play_pix_x = cube->pixel_data->play_pix_x + STEP_LEN;
 		change_pix(cube, PLAYER_C);
 	}
 	return (0);
+}
+
+void	angle(int dir, t_cubed *cube)
+{
+	int	angle_max;
+
+	angle_max = 0;
+	if (dir == KEY_LEFT)
+	{
+		cube->player->facing_pos -= ROTATE_SPEED;
+		if (cube->player->facing_pos < 0)
+			angle_max = cube->player->facing_pos;
+			cube->player->facing_pos = 360 - angle_max;
+	}
+	if (dir == KEY_RIGHT)
+	{
+		cube->player->facing_pos += ROTATE_SPEED;
+		if (cube->player->facing_pos > 360)
+			angle_max = cube->player->facing_pos;
+			cube->player->facing_pos = 0 + angle_max;
+	}
+	printf("rotation angle = %i", cube->player->facing_pos);
 }
 
 int	click(int keycode, t_cubed *cube)
@@ -129,21 +151,17 @@ int	click(int keycode, t_cubed *cube)
 		exit(0);
 	}
 	if (keycode == KEY_W)
-	{
-		check_path(UP, cube);
-	}
+		check_path(KEY_W, cube);
 	if (keycode == KEY_S)
-	{
-		check_path(DOWN, cube);
-	}
+		check_path(KEY_S, cube);
 	if (keycode == KEY_A)
-	{
-		check_path(LEFT, cube);
-	}
+		check_path(KEY_A, cube);
 	if (keycode == KEY_D)
-	{
-		check_path(RIGHT, cube);
-	}
+		check_path(KEY_D, cube);
+	if (keycode == KEY_LEFT)
+		angle(KEY_LEFT, cube);
+	if (keycode == KEY_RIGHT)
+		angle(KEY_RIGHT, cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_minimap, 5, 5);
 	return (EXIT_SUCCESS);
 }

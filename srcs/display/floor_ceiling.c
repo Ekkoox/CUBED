@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/18 13:49:39 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 20:14:12 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	gener_floor(t_cubed cube, int x, int y)
 
 int	display_floor_ceiling(t_cubed cube)
 {
-	int	x;	
+	int	x;
 	int	y;
 
 	x = 0;

@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/10 15:08:50 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/18 20:11:46 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,7 @@ enum						e_data
 	HEIGHT = 1080,
 	BPP = 32,
 	STEP_LEN = 5,
-};
-
-enum						e_direction
-{
-	UP = 0,
-	DOWN = 1,
-	LEFT = 2,
-	RIGHT = 3,
+	ROTATE_SPEED = 20,
 };
 
 enum						e_keys

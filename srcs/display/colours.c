@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/18 15:06:07 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 18:11:38 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,18 @@ void	walk_colour(int x, int y, t_cubed *cube)
 	}
 }
 
+static void	init_orientation(t_cubed *cube, int x, int y)
+{
+	if (cube->map_formated[y / 10][x / 10] == 'E')
+		cube->player->facing_pos = 0;
+	if (cube->map_formated[y / 10][x / 10] == 'S')
+		cube->player->facing_pos = 90;
+	if (cube->map_formated[y / 10][x / 10] == 'W')
+		cube->player->facing_pos = 180;
+	if (cube->map_formated[y / 10][x / 10] == 'N')
+		cube->player->facing_pos = 270;
+}
+
 void	player_colour(int x, int y, t_cubed *cube)
 {
 	int	i;
@@ -81,6 +93,7 @@ void	player_colour(int x, int y, t_cubed *cube)
 
 	cube->pixel_data->play_pix_x = x;
 	cube->pixel_data->play_pix_y = y;
+	init_orientation(cube, x, y);
 	tmp_y = y;
 	tmp_x = x;
 	while (tmp_y < y + 10)
