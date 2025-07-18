@@ -19,6 +19,13 @@ int	is_valid_char(char c)
 	return (false);
 }
 
+int	is_player_pos(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (true);
+	return (false);
+}
+
 void	fill_end_1(t_cubed *cube, int y, int *x, int max_width)
 {
 	while (*x < max_width)
@@ -67,6 +74,33 @@ int	fill_gap(int i, t_cubed *cube)
 	return (0);
 }
 
+int	id_player_position(t_cubed *cube)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	cube->player = ft_calloc(sizeof(t_player), sizeof(t_player));
+	if (!cube->player)
+		return (EXIT_FAILURE);
+	while (cube->map_formated[y])
+	{
+		x = 0;
+		while (cube->map_formated[y][x])
+		{
+			if (is_player_pos(cube->map_formated[y][x]) == true)
+			{
+				cube->player->x_pos = x;
+				cube->player->y_pos = y;
+			}
+			x++;
+		}
+		y++;
+	}////// AJOUTER FACING POSITION ICI TEL QUE SI NORTH + 0DEG, 180DEG, 90DEG OU 360DEG
+	return (EXIT_SUCCESS);
+}
+
 int	format_map(t_cubed *cube)
 {
 	int	i;
@@ -76,6 +110,8 @@ int	format_map(t_cubed *cube)
 		i++;
 	check_max(i, cube);
 	if (fill_gap(i, cube) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (id_player_position(cube) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
