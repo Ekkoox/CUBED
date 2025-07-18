@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/18 15:43:36 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:44:49 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ int	main(int ac, char **av)
 	ft_printf(1, "Welcome in CUBED\n"); 
 	if (format_map(&cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
-	// mlx_hook(cubed.win, 2, 1L, click, &cubed);
-	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed);
-	mlx_hook(cubed.win, 2, 1L, esc_close, &cubed);
 	if (display_floor_ceiling(cubed) == 1)
-		return (free_tmp(&cubed), EXIT_FAILURE);	
-	if (minimap(&cubed) == 1)
 		return (free_tmp(&cubed), EXIT_FAILURE);
+	if (minimap(&cubed) == 1) // deplacer
+		return (free_tmp(&cubed), EXIT_FAILURE); // deplacer
+	mlx_hook(cubed.win, 2, 1L<<0, click, &cubed);
+	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed); // changer free_tmp
 	mlx_loop(cubed.mlx);
 	return (EXIT_SUCCESS);
 }

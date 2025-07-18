@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
 /*   Updated: 2025/07/09 18:01:31 by enschnei         ###   ########.fr       */

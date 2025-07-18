@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:15:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/09 16:06:18 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/18 13:49:34 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	free_tmp(t_cubed *cubed)
 {
+	mlx_destroy_image(cubed->mlx, cubed->pixel_data->ptr_minimap);
+	mlx_destroy_image(cubed->mlx, cubed->pixel_data->ptr_floor);
 	mlx_destroy_window(cubed->mlx, cubed->win);
 	mlx_destroy_display(cubed->mlx);
 	free(cubed->mlx);
@@ -21,6 +23,7 @@ int	free_tmp(t_cubed *cubed)
 	free(cubed->pixel_data);
 	ft_freetab(cubed->map);
 	ft_freetab(cubed->map_formated);
+	free(cubed->player);
 	exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
