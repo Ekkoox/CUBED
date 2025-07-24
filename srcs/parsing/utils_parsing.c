@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:23:48 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/03 19:09:28 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:23:42 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	parsing_floor_color(t_pixel_data *pixel_data, char *line)
 	int green;
 	int blue;
 
+	if (check_looong(line) == 1)
+		return (ft_printf(2, "Error: RGB values too long\n"), EXIT_FAILURE);
 	if (parse_rgb(line, &red, &green, &blue) == EXIT_FAILURE)
 	{
 		ft_printf(2, "Error: Invalid floor RGB values\n");
@@ -72,6 +74,8 @@ int	parsing_ceiling_color(t_pixel_data *pixel_data, char *line)
 	int green;
 	int blue;
 
+	if (check_looong(line) == 1)
+		return (ft_printf(2, "Error: RGB values too long\n"), EXIT_FAILURE);
 	if (parse_rgb(line, &red, &green, &blue) == EXIT_FAILURE)
 	{
 		ft_printf(2, "Error: Invalid floor RGB values\n");
@@ -79,4 +83,13 @@ int	parsing_ceiling_color(t_pixel_data *pixel_data, char *line)
 	}
 	pixel_data->ceiling_color = (red << 16) | (green << 8) | blue;
 	return (EXIT_SUCCESS);
+}
+
+int ends_with_xpm(const char *filename)
+{
+    size_t len;
+    len = ft_strlen(filename);
+    if (len < 4)
+        return 0;
+    return (strcmp(filename + len - 4, ".xpm") == 0);
 }
