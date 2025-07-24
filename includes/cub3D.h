@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/18 20:11:46 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/24 20:13:31 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+# include <math.h>
+
+# ifndef M_PI
+# define M_PI 3.14159265358979323846
+# endif
 
 enum						e_colour
 {
@@ -33,16 +38,26 @@ enum						e_colour
 	PLAYER_C = 14176079,
 	WALL_MAP_C = 9076325,
 	FLOOR_MAP_C = 11183506,
+	NEXT_P_C = 15113737,
 };
 
 enum						e_data
 {
-	WIDTH = 1920,
-	HEIGHT = 1080,
+	WIDTH = 1240,
+	HEIGHT = 720,
 	BPP = 32,
 	STEP_LEN = 5,
 	ROTATE_SPEED = 20,
 };
+
+enum						e_zones
+{
+	NE = 0,
+	NW = 1,
+	SW = 2,
+	SE = 3,
+};
+
 
 enum						e_keys
 {
