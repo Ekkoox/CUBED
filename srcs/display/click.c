@@ -6,28 +6,39 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:38:18 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/25 19:17:53 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/25 20:13:13 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 
-static int	colour_check(t_cubed *cube, int next_pos, int dir)
+static int	colour_check(t_cubed *cube, int pix_x, int pix_y)
 {
-	int	status;
+	double	rad;
+	double	ray_x;
+	double	ray_y;
+	int		ray;
 
-	status = 0;
-	(void) dir;
-	(void) next_pos;
-	(void) cube;
-	// if (cube->pixel_data->minimap[next_pos + 0] != color_convert(FLOOR_MAP_C, BLUE))
-	// 	status++;
-	// if (cube->pixel_data->minimap[next_pos + 1] != color_convert(FLOOR_MAP_C, GREEN))
-	// 	status++;
-	// if (cube->pixel_data->minimap[next_pos + 2] != color_convert(FLOOR_MAP_C, RED))
-	// 	status++;
-	// if (status != 0)
-	// 	return (1);
+	rad = 0;
+	ray_x = 0;
+	ray_y = 0;
+	ray = 0;
+	while (rad < (360 * (M_PI / 180)))
+	{
+		ray_x = (cos(rad) * 5);
+		ray_y = (sin(rad) * 5);
+		ray = ((int)(cube->player->y_pos + pix_y + ray_y) * cube->pixel_data->size_len)
+		+ ((int)(cube->player->x_pos + pix_x + ray_x) * (cube->pixel_data->bpp / 8));
+		printf("pix_x = %d pix_y = %d ray = %d colour check = %x colour floor = %x\n", (int)(pix_x + cube->player->x_pos), (int)(pix_y + cube->player->y_pos), ray, cube->pixel_data->minimap[ray + 2], color_convert(FLOOR_MAP_C, GREEN));
+		cube->pixel_data->minimap[ray + 2] = color_convert(90909090, RED);
+		if (cube->pixel_data->minimap[ray + 0] == color_convert(WALL_MAP_C, BLUE))
+			return (1);
+		if (cube->pixel_data->minimap[ray + 1] == color_convert(WALL_MAP_C, GREEN))
+			return (1);
+		if (cube->pixel_data->minimap[ray + 2] == color_convert(WALL_MAP_C, RED))
+			return (1);
+		rad = rad + 1 * (M_PI / 180);
+	}
 	return (0);
 }
 
@@ -60,14 +71,11 @@ void move_player_forward(t_cubed *cube)
 	double		rad;
 	double		pix_x;
 	double		pix_y;
-	int		next_position;
 	
 	rad = cube->player->facing_pos * (M_PI / 180.0);
 	pix_x = (cos(rad) * STEP_LEN);
 	pix_y = (sin(rad) * STEP_LEN);
-	next_position = ((int)(cube->player->y_pos + pix_y) * cube->pixel_data->size_len)
-		+ ((int)(cube->player->x_pos + pix_x) * (cube->pixel_data->bpp / 8));
-	if (colour_check(cube, next_position, KEY_W) == 0)
+	if (colour_check(cube, pix_x, pix_y) == 0)
 	{
 		change_pix(cube, FLOOR_MAP_C);
 		cube->player->x_pos += pix_x;
@@ -80,7 +88,6 @@ void move_player_backward(t_cubed *cube)
 {
 	double		rad;
 	double		angle;
-	int			next_position;
 	double		pix_x;
 	double		pix_y;
 
@@ -92,9 +99,7 @@ void move_player_backward(t_cubed *cube)
 	rad = angle * (M_PI / 180.0);
 	pix_x = (cos(rad) * STEP_LEN);
 	pix_y = (sin(rad) * STEP_LEN);
-	next_position = ((int)(cube->player->y_pos + pix_y) * cube->pixel_data->size_len)
-		+ ((int)(cube->player->x_pos + pix_x) * (cube->pixel_data->bpp / 8));
-	if (colour_check(cube, next_position, KEY_S) == 0)
+	if (colour_check(cube, pix_x, pix_y) == 0)
 	{
 		change_pix(cube, FLOOR_MAP_C);
 		cube->player->x_pos += pix_x;
@@ -109,7 +114,6 @@ void move_player_side(t_cubed *cube, int dir)
 	double		angle;
 	double		pix_y;
 	double		pix_x;
-	int			next_position;
 	
 	if (dir == KEY_A)
 		angle = cube->player->facing_pos - 90;
@@ -122,9 +126,7 @@ void move_player_side(t_cubed *cube, int dir)
 	rad = angle * (M_PI / 180.0);
 	pix_x = (cos(rad) * STEP_LEN);
 	pix_y = (sin(rad) * STEP_LEN);
-	next_position = ((int)(cube->player->y_pos + pix_y) * cube->pixel_data->size_len)
-		+ ((int)(cube->player->x_pos + pix_x) * (cube->pixel_data->bpp / 8));
-	if (colour_check(cube, next_position, dir) == 0)
+	if (colour_check(cube, pix_x, pix_y) == 0)
 	{
 		change_pix(cube, FLOOR_MAP_C);
 		cube->player->x_pos += pix_x;
