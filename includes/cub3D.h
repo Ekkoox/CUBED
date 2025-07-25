@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/24 20:13:31 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/25 17:23:34 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ enum						e_data
 	WIDTH = 1240,
 	HEIGHT = 720,
 	BPP = 32,
-	STEP_LEN = 5,
+	STEP_LEN = 10,
 	ROTATE_SPEED = 20,
 };
 
@@ -68,6 +68,7 @@ enum						e_keys
 	KEY_LEFT = 65361,
 	KEY_D = 100,
 	KEY_RIGHT = 65363,
+	ON_KEYDOWN = 2,
 };
 
 typedef struct s_cubed		t_cubed;
@@ -103,8 +104,8 @@ typedef struct s_pixel_data
 
 typedef struct s_player
 {
-	int						x_pos;
-	int						y_pos;
+	double					x_pos;
+	double					y_pos;
 	int						facing_pos;
 }							t_player;
 

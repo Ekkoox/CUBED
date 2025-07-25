@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/18 18:11:38 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/25 17:24:49 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	player_colour(int x, int y, t_cubed *cube)
 
 	cube->pixel_data->play_pix_x = x;
 	cube->pixel_data->play_pix_y = y;
+	cube->player->x_pos = (double)x;
+	cube->player->y_pos = (double)y;
 	init_orientation(cube, x, y);
 	tmp_y = y;
 	tmp_x = x;
