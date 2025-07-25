@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 19:09:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/24 18:22:27 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:43:29 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ int	parse_rgb(char *line, int *r, int *g, int *b)
 	ft_freetab(components);
 	return (EXIT_SUCCESS);
 }
-

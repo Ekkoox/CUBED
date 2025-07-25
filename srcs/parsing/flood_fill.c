@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:00:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/15 15:51:12 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:57:24 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	cpy_map(t_cubed *cubed)
 {
 	int	i;
 	int	y;
-	int	j;
 
 	i = 0;
 	while (is_map(cubed, i) == false)
@@ -27,19 +26,8 @@ static int	cpy_map(t_cubed *cubed)
 	y = 0;
 	while (cubed->map[i])
 	{
-		cubed->cpy_map[y] = ft_calloc(cubed->max_wid + 1, sizeof(char));
-		if (!cubed->cpy_map[y])
+		if (copy_line(&cubed->cpy_map[y], cubed->map[i], cubed->max_wid) != 0)
 			return (ft_freetab(cubed->cpy_map), EXIT_FAILURE);
-		j = 0;
-		while (j < cubed->max_wid)
-		{
-			if (j < (int)ft_strlen(cubed->map[i]))
-				cubed->cpy_map[y][j] = cubed->map[i][j];
-			else
-				cubed->cpy_map[y][j] = ' ';
-			j++;
-		}
-		cubed->cpy_map[y][cubed->max_wid] = '\0';
 		i++;
 		y++;
 	}
