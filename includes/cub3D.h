@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/25 17:23:34 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/29 20:24:38 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ enum						e_colour
 	PLAYER_C = 14176079,
 	WALL_MAP_C = 9076325,
 	FLOOR_MAP_C = 11183506,
-	NEXT_P_C = 15113737,
+	RAY_C = 15113737,
 };
 
 enum						e_data
 {
-	WIDTH = 1240,
+	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
-	STEP_LEN = 10,
-	ROTATE_SPEED = 20,
+	STEP_LEN = 2,
+	ROTATE_SPEED = 10,
+	PLAYER_SIZE = 2,
 };
 
 enum						e_zones
@@ -91,6 +92,7 @@ typedef struct s_pixel_data
 	unsigned char			*minimap;
 	void					*ptr_minimap;
 	void					*ptr_floor;
+	void					*ptr_background;
 	int						play_pix_x;
 	int						play_pix_y;
 	int						size_len;
@@ -109,6 +111,11 @@ typedef struct s_player
 	int						facing_pos;
 }							t_player;
 
+typedef struct s_ray
+{
+	int						dist;
+}							t_ray;
+
 typedef struct s_cubed
 {
 	char					**map;
@@ -125,6 +132,7 @@ typedef struct s_cubed
 	t_garbage				*garbage;
 	t_pixel_data			*pixel_data;
 	t_player				*player;
+	t_ray					*ray;
 }							t_cubed;
 
 // Name Texture
@@ -181,4 +189,7 @@ void						walk_colour(int x, int y, t_cubed *cube);
 void						player_colour(int x, int y, t_cubed *cube);
 // Clicks
 int							click(int keycode, t_cubed *cube);
+void						change_pix(t_cubed *cube, int colour);
+void						pix_colour(double ray_x, double ray_y, int colour, t_cubed *cube);
+void						ray_vision(t_cubed *cube, int colour);
 #endif

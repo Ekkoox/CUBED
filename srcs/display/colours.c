@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/25 17:24:49 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/29 19:03:13 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,29 +87,30 @@ static void	init_orientation(t_cubed *cube, int x, int y)
 
 void	player_colour(int x, int y, t_cubed *cube)
 {
-	int	i;
-	int tmp_y;
-	int tmp_x;
+	double ray_y;
+	double ray_x;
+	double	player_size;
+	double	rad;
 
+	player_size = (sqrt(PLAYER_SIZE));
+	rad = 0;
+	walk_colour(x, y, cube);
 	cube->pixel_data->play_pix_x = x;
 	cube->pixel_data->play_pix_y = y;
 	cube->player->x_pos = (double)x;
 	cube->player->y_pos = (double)y;
 	init_orientation(cube, x, y);
-	tmp_y = y;
-	tmp_x = x;
-	while (tmp_y < y + 10)
+	ray_vision(cube, RAY_C);
+	while (player_size >= 0)
 	{
-		tmp_x = x;
-		while (tmp_x < x + 10)
+		rad = 0;
+		while (rad < (360 * (M_PI / 180)))
 		{
-			i = tmp_y * cube->pixel_data->size_len + tmp_x * (cube->pixel_data->bpp / 8);
-			cube->pixel_data->minimap[i + 0] = color_convert(PLAYER_C, BLUE);
-			cube->pixel_data->minimap[i + 1] = color_convert(PLAYER_C, GREEN);
-			cube->pixel_data->minimap[i + 2] = color_convert(PLAYER_C, RED);
-			cube->pixel_data->minimap[i + 3] = 0;
-			tmp_x++;
+			ray_x = (cos(rad) * player_size);
+			ray_y = (sin(rad) * player_size);
+			pix_colour(ray_x, ray_y, PLAYER_C, cube);
+			rad = rad + 1 * (M_PI / 180);
 		}
-		tmp_y++;
+		player_size--;
 	}
 }
