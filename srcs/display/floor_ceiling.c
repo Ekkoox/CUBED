@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/30 18:52:41 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/30 19:19:41 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ int	display_floor_ceiling(t_cubed cube)
 	cube.pixel_data->size_len_background = width;
 	fill_image_color(cube.pixel_data->background, cube.pixel_data->floor_color, WIDTH, HEIGHT);
 	fill_image_color(cube.pixel_data->background, cube.pixel_data->ceiling_color, WIDTH, HEIGHT / 2);
+	cube.pixel_data->backgr_empty = malloc(HEIGHT * cube.pixel_data->size_len_background);
+	if (!cube.pixel_data->backgr_empty)
+		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+	ft_memcpy(cube.pixel_data->backgr_empty, cube.pixel_data->background, HEIGHT * cube.pixel_data->size_len_background);
 	mlx_put_image_to_window(cube.mlx, cube.win, cube.pixel_data->ptr_background, 0, 0);
 	return (0);
 }

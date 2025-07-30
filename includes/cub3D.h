@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/30 18:01:00 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/30 19:03:29 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_pixel_data
 	void					*ptr_floor;
 	void					*ptr_background;
 	char					*background;
+	char					*backgr_empty;
 	int						play_pix_x;
 	int						play_pix_y;
 	int						size_len;

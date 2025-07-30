@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/30 18:45:33 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/30 19:17:40 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ray_vision(t_cubed *cube, int colour)
 			break ;
 		dist += 1;
 	}
+	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty, HEIGHT * cube->pixel_data->size_len_background);
 	projection(dist, rad, cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_background, 0, 0);
 }
