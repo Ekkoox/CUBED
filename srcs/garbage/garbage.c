@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:15:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/18 13:49:34 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/30 15:36:00 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	free_tmp(t_cubed *cubed)
 {
 	mlx_destroy_image(cubed->mlx, cubed->pixel_data->ptr_minimap);
-	mlx_destroy_image(cubed->mlx, cubed->pixel_data->ptr_floor);
+	mlx_destroy_image(cubed->mlx, cubed->pixel_data->ptr_background);
 	mlx_destroy_window(cubed->mlx, cubed->win);
 	mlx_destroy_display(cubed->mlx);
 	free(cubed->mlx);
