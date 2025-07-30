@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/29 20:26:29 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/30 18:45:33 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,37 @@ int	ray_check(double pix_x, double pix_y, t_cubed *cube)
 	return (0);
 }
 
-// void	projection(int dist, double rad, t_cubed *cube)
-// {
+void	pix_projection(int x, int y, int colour, t_cubed *cube)
+{
+	int	i;
 	
-// }
+	i = (y * cube->pixel_data->size_len_background) + (x * (cube->pixel_data->bpp_background / 8));
+	cube->pixel_data->background[i + 0] = color_convert(colour, BLUE);
+	cube->pixel_data->background[i + 1] = color_convert(colour, GREEN);
+	cube->pixel_data->background[i + 2] = color_convert(colour, RED);
+	cube->pixel_data->background[i + 3] = (char) 0;
+}
+
+
+void	projection(int dist, double rad, t_cubed *cube)
+{
+	int	x;
+	int	y;
+	
+	x = (WIDTH / 2) - 20;
+	y = (dist);
+	(void) rad;
+	while (y <= (HEIGHT - dist))
+	{
+		x = (WIDTH / 2) - 20;
+		while (x < (WIDTH / 2) + 20)
+		{
+			pix_projection(x, y, TEST_C, cube);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	ray_vision(t_cubed *cube, int colour)
 {
@@ -54,5 +81,6 @@ void	ray_vision(t_cubed *cube, int colour)
 			break ;
 		dist += 1;
 	}
-	// projection(dist, rad, cube);
+	projection(dist, rad, cube);
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_background, 0, 0);
 }

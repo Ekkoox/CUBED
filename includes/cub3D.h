@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/30 15:07:45 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/07/30 18:01:00 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum						e_colour
 	PLAYER_C = 14176079,
 	WALL_MAP_C = 9076325,
 	FLOOR_MAP_C = 11183506,
+	TEST_C = 1291684,
 	RAY_C = 15113737,
 };
 
@@ -97,7 +98,9 @@ typedef struct s_pixel_data
 	int						play_pix_x;
 	int						play_pix_y;
 	int						size_len;
+	int						size_len_background;
 	int						bpp;
+	int						bpp_background;
 	int						floor_color;
 	int						ceiling_color;
 	int						endian;
