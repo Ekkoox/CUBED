@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/30 19:03:29 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/05 14:57:17 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ enum						e_colour
 	PLAYER_C = 14176079,
 	WALL_MAP_C = 9076325,
 	FLOOR_MAP_C = 11183506,
-	TEST_C = 1291684,
+	TEST_N_C = 612669,
+	TEST_S_C = 1219765,
+	TEST_E_C = 6033031,
+	TEST_W_C = 11866916,
+	SPARE_C = 15917052,
 	RAY_C = 15113737,
 };
 
@@ -50,14 +54,18 @@ enum						e_data
 	STEP_LEN = 2,
 	ROTATE_SPEED = 10,
 	PLAYER_SIZE = 2,
+	RESOLUTION = 10,
+	VISION_WIDE = 60,
 };
 
 enum						e_zones
 {
-	NE = 0,
-	NW = 1,
-	SW = 2,
-	SE = 3,
+	NORTH = 0,
+	SOUTH = 1,
+	WEST = 2,
+	EAST = 3,
+	ANGLE = 4,
+	INSIDE = 5,
 };
 
 
@@ -116,10 +124,11 @@ typedef struct s_player
 	int						facing_pos;
 }							t_player;
 
-typedef struct s_ray
-{
-	int						dist;
-}							t_ray;
+// typedef struct s_ray
+// {
+// 	int						dist;
+// 	int						wall_orientation;
+// }							t_ray;
 
 typedef struct s_cubed
 {
@@ -131,13 +140,14 @@ typedef struct s_cubed
 	int						max_wid;
 	int						max_hei;
 	int						start_map;
+	int						wall_orientation;
+	int						prev_color;
 	void					*mlx;
 	void					*win;
 	t_imgs					*imgs;
 	t_garbage				*garbage;
 	t_pixel_data			*pixel_data;
 	t_player				*player;
-	t_ray					*ray;
 }							t_cubed;
 
 // Name Texture

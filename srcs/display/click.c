@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:38:18 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/29 18:55:23 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/04 18:41:41 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	pix_colour(double ray_x, double ray_y, int colour, t_cubed *cube)
 	cube->pixel_data->minimap[i + 0] = color_convert(colour, BLUE);
 	cube->pixel_data->minimap[i + 1] = color_convert(colour, GREEN);
 	cube->pixel_data->minimap[i + 2] = color_convert(colour, RED);
-	cube->pixel_data->minimap[i + 3] = (char) 0;
 }
 
 void	change_pix(t_cubed *cube, int colour)

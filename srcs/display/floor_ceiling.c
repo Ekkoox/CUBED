@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/30 19:19:41 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/04 18:36:12 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	fill_image_color(char *pix_char, int colour, int width, int height)
 			pix_char[i + 0] = color_convert(colour, BLUE);
 			pix_char[i + 1] = color_convert(colour, GREEN);
 			pix_char[i + 2] = color_convert(colour, RED);
-			pix_char[i + 3] = 0;
+			// pix_char[i + 3] = 0;
 			x++;
 		}
 		y++;

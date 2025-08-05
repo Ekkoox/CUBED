@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/29 19:03:13 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/05 15:30:13 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,32 @@ int	color_convert(int colour, int name_colour)
 	if (name_colour == BLUE)
 		res = colour & 0xFF;
 	return (res);
+}
+
+int	wall_orient(int tmp_y, int y, int tmp_x, int x)
+{
+	int	bloc_y;
+	int	bloc_x;
+
+	bloc_y = tmp_y - y;
+	bloc_x = tmp_x - x;
+	if (bloc_x == 0 && bloc_y == 0)
+		return (ANGLE);
+	if (bloc_x == 0 && bloc_y == 9)
+		return (ANGLE);
+	if (bloc_x == 9 && bloc_y == 9)
+		return (ANGLE);
+	if (bloc_x == 9 && bloc_y == 0)
+		return (ANGLE);
+	if (bloc_y == 0)
+		return (SOUTH);
+	if (bloc_x == 0)
+		return (WEST);
+	if (bloc_y == 9)
+		return (NORTH);
+	if (bloc_x == 9)
+		return (EAST);
+	return (INSIDE);
 }
 
 void	wall_colour(int x, int y, t_cubed *cube)
@@ -42,7 +68,7 @@ void	wall_colour(int x, int y, t_cubed *cube)
 			cube->pixel_data->minimap[i + 0] = color_convert(WALL_MAP_C, BLUE);
 			cube->pixel_data->minimap[i + 1] = color_convert(WALL_MAP_C, GREEN);
 			cube->pixel_data->minimap[i + 2] = color_convert(WALL_MAP_C, RED);
-			cube->pixel_data->minimap[i + 3] = (char) 0;
+			cube->pixel_data->minimap[i + 3] = wall_orient(tmp_y, y, tmp_x, x);
 			tmp_x++;
 		}
 		tmp_y++;
@@ -66,7 +92,7 @@ void	walk_colour(int x, int y, t_cubed *cube)
 			cube->pixel_data->minimap[i + 0] = color_convert(FLOOR_MAP_C, BLUE);
 			cube->pixel_data->minimap[i + 1] = color_convert(FLOOR_MAP_C, GREEN);
 			cube->pixel_data->minimap[i + 2] = color_convert(FLOOR_MAP_C, RED);
-			cube->pixel_data->minimap[i + 3] = 0;
+			// cube->pixel_data->minimap[i + 3] = 0;
 			tmp_x++;
 		}
 		tmp_y++;
