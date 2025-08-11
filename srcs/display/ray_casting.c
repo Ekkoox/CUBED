@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/05 15:30:30 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/11 15:42:28 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,28 @@ void	projection(int dist, double rad, t_cubed *cube, int range)
 	double	x_init;
 	int	y;
 	double	resolution;
+	
+	(void) rad;
 
 	resolution = (WIDTH / (double)VISION_WIDE);
 	x_init = resolution + (resolution * range);
 	x = x_init;
-	y = (dist);
-	(void) rad;
+	y = dist;
+	// y = cos(rad) * (dist);
+	// (void) rad;
 	pix_projection(x_init, resolution, y, cube);
 }
 
-void	ray_cast(t_cubed *cube, int colour, double rad, int range)
+void	ray_cast(t_cubed *cube, int colour, double rad, int range, double play_angle)
 {
 	double	pix_x;
 	double	pix_y;
+	// double	corrected_dist;
 	int		dist;
 
-	(void) colour;
-	dist = PLAYER_SIZE;
+	// dist = PLAYER_SIZE;
+	dist = PLAYER_SIZE * cos(rad - play_angle);
+	// corrected_dist = dist * cos(rad - play_angle);
 	while ((cube->player->y_pos + dist) < WIDTH && (cube->player->x_pos + dist) < HEIGHT)
 	{
 		pix_x = (cos(rad) * (dist));
@@ -127,17 +132,19 @@ int	angle_correction(int angle)
 void	ray_vision(t_cubed *cube, int colour)
 {
 	double	rad;
+	double	player_angle_rad;
 	int		angle;
 	int		range;
 
 	range = 0;
 	rad = 0;
+	player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI / 180.0);
 	angle = cube->player->facing_pos - 30;
 	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty, HEIGHT * cube->pixel_data->size_len_background);
 	while (angle < cube->player->facing_pos + 30)
 	{
 		rad = angle_correction(angle) * (M_PI / 180.0);
-		ray_cast(cube, colour, rad, range);
+		ray_cast(cube, colour, rad, range, player_angle_rad);
 		angle++;
 		range++;
 	}

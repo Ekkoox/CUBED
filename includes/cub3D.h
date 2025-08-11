@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/05 14:57:17 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/05 16:43:50 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,4 +207,5 @@ int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
 void						pix_colour(double ray_x, double ray_y, int colour, t_cubed *cube);
 void						ray_vision(t_cubed *cube, int colour);
+int							angle_correction(int angle);
 #endif
