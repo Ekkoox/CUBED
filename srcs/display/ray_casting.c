@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/11 15:42:28 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/11 16:16:34 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ int	read_orientation(int orientation, t_cubed *cube)
 
 int	ray_check(double pix_x, double pix_y, t_cubed *cube)
 {
-	int		ray;
-	int		status;
+	unsigned long		ray;
+	int					status;
+	unsigned long 		minimap_size;
 
 	status = 0;
 	ray = 0;
+	minimap_size = HEIGHT * cube->pixel_data->size_len;
 	ray = ((int)(cube->player->y_pos + (PLAYER_SIZE / 2) + (int)pix_y) * cube->pixel_data->size_len)
 		+ ((int)(cube->player->x_pos + (PLAYER_SIZE / 2) + (int)pix_x) * (cube->pixel_data->bpp / 8));
-	if (cube->pixel_data->minimap[ray + 0] == color_convert(WALL_MAP_C, BLUE))
+	if (ray < 0 || ray >= minimap_size || !cube->pixel_data->minimap[ray])
+		return (1);
+	if (cube->pixel_data->minimap[ray] == color_convert(WALL_MAP_C, BLUE))
 		status++;
 	if (cube->pixel_data->minimap[ray + 1] == color_convert(WALL_MAP_C, GREEN))
 		status++;
