@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",                   // utilisé dans launch.json
+      "type": "shell",
+      "command": "make re",
+      "args": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile le projet avec make"
+    }
+  ]
+}

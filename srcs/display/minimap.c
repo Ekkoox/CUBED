@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:09:44 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/09 17:40:24 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:47:18 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	minimap(t_cubed *cube)
 		return (EXIT_FAILURE);
 	cube->pixel_data->bpp = bpp;
 	cube->pixel_data->size_len = size_line;
+	printf("cube->pixel_data->size_len = %i\n", cube->pixel_data->size_len);
 	fill_map_colour(cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_minimap, 5, 5);
 	return (EXIT_SUCCESS);
