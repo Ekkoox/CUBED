@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
 /*   Updated: 2025/08/05 16:43:50 by dsatge           ###   ########.fr       */
@@ -171,16 +171,19 @@ void						free_textures(t_imgs *imgs);
 // Parsing
 int							error_parsing(t_cubed *cubed);
 int							parsing_textures(t_cubed *cubed);
-int							check_flood_fill(t_cubed *cubed); 
+int							check_flood_fill(t_cubed *cubed);
 
 // Utils Parsing
+int							check_looong(char *str);
 int							is_map_line(const char *line);
 int							validate_rgb_value(int value);
+int							ends_with_xpm(const char *filename);
 int							parsing_floor_color(t_pixel_data *pixel_data,
 								char *line);
 int							parsing_ceiling_color(t_pixel_data *pixel_data,
 								char *line);
 int							parse_rgb(char *line, int *r, int *g, int *b);
+int							copy_line(char **dest, char *src, int max_wid);
 void						start_map(t_cubed *cubed);
 void						init_colors(t_pixel_data *pixel_data);
 
@@ -197,7 +200,7 @@ int							is_whitespace(char c);
 int							is_map(t_cubed *cube, int i);
 int							is_white_line(char *str);
 
-// Colours
+// Colors
 int							color_convert(int colour, int name_colour);
 void						wall_colour(int x, int y, t_cubed *cube);
 void						walk_colour(int x, int y, t_cubed *cube);

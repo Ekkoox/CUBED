@@ -11,6 +11,7 @@ C_FILES = main.c\
 			parsing/parsing_bis.c\
 			parsing/name_texture.c\
 			parsing/utils_parsing.c\
+			parsing/flood_fill_utils.c\
 			garbage/garbage_utils.c\
 			parsing/parsing_colors_utils.c\
 			display/floor_ceiling.c\

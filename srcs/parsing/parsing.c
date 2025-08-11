@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/17 15:27:52 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:28:26 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,33 @@ static int	error_character(t_cubed *cubed)
 	return (EXIT_SUCCESS);
 }
 
-static int  error_format(t_cubed *cubed)
+static int	error_format(t_cubed *cubed)
 {
-    int i;
-	char c;
+	int		i;
+	char	c;
 
-    i = 0;
-    while (cubed->map[i])
-    {
-        c = cubed->map[i][0];
-        if (c == '1' || c == '0' || c == ' ')
-            break;
-        if (!(ft_strncmp(cubed->map[i], "NO ", 3) == 0
-              || ft_strncmp(cubed->map[i], "SO ", 3) == 0
-              || ft_strncmp(cubed->map[i], "WE ", 3) == 0
-              || ft_strncmp(cubed->map[i], "EA ", 3) == 0
-              || ft_strncmp(cubed->map[i], "F ", 2)  == 0
-              || ft_strncmp(cubed->map[i], "C ", 2)  == 0))
-        {
-            ft_printf(2, "Error: invalid format before map\n");
-            return (EXIT_FAILURE);
-        }
-        i++;
-    }
-    return (EXIT_SUCCESS);
+	i = 0;
+	while (cubed->map[i])
+	{
+		c = cubed->map[i][0];
+		if (c == '1' || c == '0' || c == ' ')
+			break ;
+		if (!(ft_strncmp(cubed->map[i], "NO ", 3) == 0
+				|| ft_strncmp(cubed->map[i], "SO ", 3) == 0
+				|| ft_strncmp(cubed->map[i], "WE ", 3) == 0
+				|| ft_strncmp(cubed->map[i], "EA ", 3) == 0
+				|| ft_strncmp(cubed->map[i], "F ", 2) == 0
+				|| ft_strncmp(cubed->map[i], "C ", 2) == 0))
+		{
+			ft_printf(2, "Error: invalid format before map\n");
+			return (EXIT_FAILURE);
+		}
+		i++;
+	}
+	if (i != 6)
+		return (ft_printf(2, "Error: identifiers must appear exactly once\n"),
+			EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	parsing_colors(t_cubed *cubed)
@@ -114,7 +117,7 @@ static int	parsing_colors(t_cubed *cubed)
 		{
 			if (parsing_ceiling_color(cubed->pixel_data,
 					cubed->map[i]) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+				return (free(cubed->pixel_data), EXIT_FAILURE);
 		}
 		i++;
 	}
