@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/11 16:16:34 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/12 15:14:14 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,63 +55,64 @@ int	ray_check(double pix_x, double pix_y, t_cubed *cube)
 	return (0);
 }
 
-void	pix_projection(double x_init, double resolution, int y, t_cubed *cube)
+void	pix_projection(int x_init, double resolution, int y, t_cubed *cube)
 {
-	int	i;
+	unsigned long	i;
 	int	y_max;
-	int	x;
-	int color;
+	double	x;
+	double color;
+	unsigned long	screen_size;
 
 	y_max = HEIGHT - y;
+	screen_size = HEIGHT * cube->pixel_data->size_len_background;
 	while (y < y_max)
 	{
-		x = x_init;
-		while (x < x_init + resolution)
+		x = ceil(x_init);
+		while (x <= floor(x_init + resolution))
 		{
 			i = (y * cube->pixel_data->size_len_background) + (x * (cube->pixel_data->bpp_background / 8));
+			if (i < 0 || i > screen_size || !cube->pixel_data->background[i])
+			{
+				x++;
+				break ;
+			}	
 			color = cube->wall_orientation;
 			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
 			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
 			cube->pixel_data->background[i + 2] = color_convert(color, RED);
 			x++;
 		}
-		y++;
+		y ++;
 	}
 }
 
 
-void	projection(int dist, double rad, t_cubed *cube, int range)
+void	projection(int dist, double ray_angle, t_cubed *cube, int range)
 {
 	int	x;
 	double	x_init;
-	int	y;
+	double	y;
 	double	resolution;
 	
-	(void) rad;
-
-	resolution = (WIDTH / (double)VISION_WIDE);
-	x_init = resolution + (resolution * range);
+	resolution = ((double)WIDTH / (double)VISION_WIDE);
+	x_init = (int)round(resolution * range);
 	x = x_init;
 	y = dist;
-	// y = cos(rad) * (dist);
-	// (void) rad;
+	y = cos(ray_angle * (M_PI / 180.0)) * (dist);
 	pix_projection(x_init, resolution, y, cube);
 }
 
-void	ray_cast(t_cubed *cube, int colour, double rad, int range, double play_angle)
+void	ray_cast(t_cubed *cube, int colour, double angle, int range)
 {
 	double	pix_x;
 	double	pix_y;
-	// double	corrected_dist;
 	int		dist;
 
-	// dist = PLAYER_SIZE;
-	dist = PLAYER_SIZE * cos(rad - play_angle);
-	// corrected_dist = dist * cos(rad - play_angle);
+	dist = PLAYER_SIZE;
 	while ((cube->player->y_pos + dist) < WIDTH && (cube->player->x_pos + dist) < HEIGHT)
 	{
-		pix_x = (cos(rad) * (dist));
-		pix_y = (sin(rad) * (dist));
+		pix_x = (cos(angle  * (M_PI / 180.0))) * (dist);
+		pix_y = (sin(angle * (M_PI / 180.0))) * (dist);
 		if (ray_check(pix_x, pix_y, cube) == 0)
 		{			
 			pix_colour((int)pix_x, (int)pix_y, colour, cube);
@@ -120,7 +121,7 @@ void	ray_cast(t_cubed *cube, int colour, double rad, int range, double play_angl
 			break ;
 		dist += 1;
 	}
-	projection(dist, rad, cube, range);
+	projection(dist, angle, cube, range);
 }
 
 int	angle_correction(int angle)
@@ -135,20 +136,16 @@ int	angle_correction(int angle)
 
 void	ray_vision(t_cubed *cube, int colour)
 {
-	double	rad;
-	double	player_angle_rad;
 	int		angle;
 	int		range;
 
 	range = 0;
-	rad = 0;
-	player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI / 180.0);
-	angle = cube->player->facing_pos - 30;
+	// player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI / 180.0);
+	angle = angle_correction(cube->player->facing_pos - 30);
 	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty, HEIGHT * cube->pixel_data->size_len_background);
-	while (angle < cube->player->facing_pos + 30)
+	while (range < VISION_WIDE)
 	{
-		rad = angle_correction(angle) * (M_PI / 180.0);
-		ray_cast(cube, colour, rad, range, player_angle_rad);
+		ray_cast(cube, colour, angle, range);
 		angle++;
 		range++;
 	}
