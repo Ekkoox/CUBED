@@ -6,11 +6,31 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/25 15:38:20 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/25 18:53:41 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+int	check_angle(t_cubed *cube, int orientation)
+{
+	if (orientation == NORTH_WEST && (cube->prev_color == TEST_N_C || cube->prev_color == TEST_W_C))
+		return (cube->prev_color);
+	if (orientation == NORTH_EAST && (cube->prev_color == TEST_N_C || cube->prev_color == TEST_E_C))
+		return (cube->prev_color);
+	if (orientation == SOUTH_WEST && (cube->prev_color == TEST_S_C || cube->prev_color == TEST_W_C))
+		return (cube->prev_color);
+	if (orientation == SOUTH_EAST && (cube->prev_color == TEST_S_C || cube->prev_color == TEST_E_C))
+		return (cube->prev_color);
+	if (orientation == NORTH_WEST)
+		return (TEST_N_C);
+	if (orientation == NORTH_EAST)
+		return (TEST_E_C);
+	if (orientation == SOUTH_WEST)
+		return (TEST_S_C);
+	if (orientation == SOUTH_EAST)
+		return (TEST_W_C);
+	return (cube->prev_color);
+}
 
 int	read_orientation(int orientation, t_cubed *cube)
 {
@@ -22,8 +42,9 @@ int	read_orientation(int orientation, t_cubed *cube)
 		return (TEST_W_C);
 	if (orientation == EAST)
 		return (TEST_E_C);
-	if (orientation == ANGLE)
-		return (cube->prev_color);
+	if (orientation == 	NORTH_WEST || orientation == NORTH_EAST 
+		|| orientation == SOUTH_WEST || orientation == SOUTH_EAST)
+		return (check_angle(cube, orientation));
 	return (cube->prev_color);
 }
 
