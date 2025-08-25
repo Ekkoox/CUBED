@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/22 19:02:59 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:14:51 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	read_orientation(int orientation, t_cubed *cube)
 
 int	ray_check(double pix_x, double pix_y, t_cubed *cube)
 {
-	unsigned long	ray;
-	int				status;
-	unsigned long	minimap_size;
+	unsigned long		ray;
+	int					status;
+	unsigned long 		minimap_size;
 
 	status = 0;
 	ray = 0;
@@ -58,7 +58,7 @@ int	ray_check(double pix_x, double pix_y, t_cubed *cube)
 	return (0);
 }
 
-void	pix_projection(double x_init, double resolution, int y, t_cubed *cube)
+void draw_column(int x_start, int width, int wall_height, int color, t_cubed *cube)
 {
 	int	i;
 	int	y_max;
@@ -78,9 +78,9 @@ void	pix_projection(double x_init, double resolution, int y, t_cubed *cube)
 			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
 			cube->pixel_data->background[i + 2] = color_convert(color, RED);
 			x++;
-		}
-		y++;
-	}
+        }
+		++y;
+    }
 }
 
 // void	projection(int dist, double rad, t_cubed *cube, int range)
@@ -171,7 +171,7 @@ void ray_cast(t_cubed *cube, int colour, double rad, int range, double play_angl
     }
 }
 
-int	angle_correction(int angle)
+int	angle_correction(float angle)
 {
 	if (angle < 0)
 		angle = 360 + angle;
