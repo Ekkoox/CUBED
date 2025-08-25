@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:38:18 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/12 15:14:37 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/25 16:21:18 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,32 +206,29 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-static int	colour_check(t_cubed *cube, int pix_x, int pix_y)
+static int colour_check(t_cubed *cube, double pix_x, double pix_y)
 {
-	double	rad;
-	double	ray_x;
-	double	ray_y;
-	int		ray;
+    double rad;
+    double ray_x;
+    double ray_y;
+    int    ray;
 
-	rad = 0;
-	ray_x = 0;
-	ray_y = 0;
-	ray = 0;
-	while (rad < (360 * (M_PI / 180)))
-	{
-		ray_x = (cos(rad) * (sqrt(PLAYER_SIZE) + 1));
-		ray_y = (sin(rad) * (sqrt(PLAYER_SIZE) + 1));
-		ray = ((int)(cube->player->y_pos + (PLAYER_SIZE / 2) + pix_y  + ray_y) * cube->pixel_data->size_len)
-		+ ((int)(cube->player->x_pos + (PLAYER_SIZE / 2) + pix_x + ray_x) * (cube->pixel_data->bpp / 8));
-		if (cube->pixel_data->minimap[ray + 0] == color_convert(WALL_MAP_C, BLUE))
-			return (1);
-		if (cube->pixel_data->minimap[ray + 1] == color_convert(WALL_MAP_C, GREEN))
-			return (1);
-		if (cube->pixel_data->minimap[ray + 2] == color_convert(WALL_MAP_C, RED))
-			return (1);
-		rad = rad + 1 * (M_PI / 180);
-	}
-	return (0);
+    rad = 0;
+    while (rad < 2 * M_PI)
+    {
+        ray_x = cos(rad) * (sqrt(PLAYER_SIZE) + 1);
+        ray_y = sin(rad) * (sqrt(PLAYER_SIZE) + 1);
+
+        ray = ((int)(cube->player->y_pos + (PLAYER_SIZE / 2) + ray_y + pix_y) * cube->pixel_data->size_len)
+            + ((int)(cube->player->x_pos + (PLAYER_SIZE / 2) + ray_x + pix_x) * (cube->pixel_data->bpp / 8));
+
+        if (cube->pixel_data->minimap[ray + 0] == color_convert(WALL_MAP_C, BLUE)
+         && cube->pixel_data->minimap[ray + 1] == color_convert(WALL_MAP_C, GREEN)
+         && cube->pixel_data->minimap[ray + 2] == color_convert(WALL_MAP_C, RED))
+            return (1);
+        rad += (M_PI / 180);
+    }
+    return (0);
 }
 
 void	pix_colour(double ray_x, double ray_y, int colour, t_cubed *cube)
