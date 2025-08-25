@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/05 15:30:13 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/25 18:07:28 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	wall_orient(int tmp_y, int y, int tmp_x, int x)
 	bloc_y = tmp_y - y;
 	bloc_x = tmp_x - x;
 	if (bloc_x == 0 && bloc_y == 0)
-		return (ANGLE);
+		return (SOUTH_WEST);
 	if (bloc_x == 0 && bloc_y == 9)
-		return (ANGLE);
+		return (SOUTH_EAST);
 	if (bloc_x == 9 && bloc_y == 9)
-		return (ANGLE);
+		return (NORTH_EAST);
 	if (bloc_x == 9 && bloc_y == 0)
-		return (ANGLE);
+		return (NORTH_WEST);
 	if (bloc_y == 0)
 		return (SOUTH);
 	if (bloc_x == 0)

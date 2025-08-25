@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/13 18:09:23 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/25 18:07:37 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ enum						e_zones
 	SOUTH = 1,
 	WEST = 2,
 	EAST = 3,
-	ANGLE = 4,
-	INSIDE = 5,
+	NORTH_WEST = 4,
+	NORTH_EAST = 5,
+	SOUTH_WEST = 6,
+	SOUTH_EAST = 7,
+	INSIDE = 8,
 };
 
 enum						e_keys
