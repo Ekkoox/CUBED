@@ -14,7 +14,45 @@
 
 
 
-void		*mlx_int_xpm_f_image(t_xvar *xvar,int *width,int *height,
+void		*==309050== Memcheck, a memory error detector
+==309050== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==309050== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==309050== Command: ./cub3D map/test_map.cub
+==309050== 
+==309050== Invalid read of size 4
+==309050==    at 0x408354: mlx_get_data_addr (in /home/enschnei/42/CUBED/cub3D)
+==309050==    by 0x4028E0: init_mlx (init.c:30)
+==309050==    by 0x40266B: main (main.c:34)
+==309050==  Address 0x1c is not stack'd, malloc'd or (recently) free'd
+==309050== 
+==309050== 
+==309050== Process terminating with default action of signal 11 (SIGSEGV)
+==309050==  Access not within mapped region at address 0x1C
+==309050==    at 0x408354: mlx_get_data_addr (in /home/enschnei/42/CUBED/cub3D)
+==309050==    by 0x4028E0: init_mlx (init.c:30)
+==309050==    by 0x40266B: main (main.c:34)
+==309050==  If you believe this happened as a result of a stack
+==309050==  overflow in your program's main thread (unlikely but
+==309050==  possible), you can try to increase the size of the
+==309050==  main thread stack using the --main-stacksize= flag.
+==309050==  The main thread stack size used in this run was 8388608.
+==309050== 
+==309050== HEAP SUMMARY:
+==309050==     in use at exit: 112,553 bytes in 90 blocks
+==309050==   total heap usage: 217 allocs, 127 frees, 131,324 bytes allocated
+==309050== 
+==309050== LEAK SUMMARY:
+==309050==    definitely lost: 0 bytes in 0 blocks
+==309050==    indirectly lost: 0 bytes in 0 blocks
+==309050==      possibly lost: 0 bytes in 0 blocks
+==309050==    still reachable: 112,553 bytes in 90 blocks
+==309050==         suppressed: 0 bytes in 0 blocks
+==309050== Rerun with --leak-check=full to see details of leaked memory
+==309050== 
+==309050== For lists of detected and suppressed errors, rerun with: -s
+==309050== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+[1]    309050 segmentation fault (core dumped)  valgrind ./cub3D map/test_map.cub
+mlx_int_xpm_f_image(t_xvar *xvar,int *width,int *height,
 				     int (*xpm_func)(),void *param)
 {
   XImage	*img1;
