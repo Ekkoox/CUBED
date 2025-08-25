@@ -6,42 +6,41 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/18 15:44:49 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:51:27 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	my_mlx_pixel_put(t_pixel_data *data, int x, int y, int color)
+int main(int ac, char **av)
 {
-	char	*dst;
+	int i;
+    t_cubed cubed;
 
-	dst = data->addr + (y * data->line_len + x * (data->bit_pixels / 8));
-	*(unsigned int *)dst = color;
-}
-
-int	main(int ac, char **av)
-{
-	t_cubed	cubed;
-
-	if (ac != 2)
-		return (ft_printf(2, "Error: number of arguments\n"), EXIT_FAILURE);
-	cubed.map = split_map(av[1]);
-	if (!cubed.map)
-		return (EXIT_FAILURE);
-	if (error_parsing(&cubed) == EXIT_FAILURE)
-		return (ft_freetab(cubed.map), EXIT_FAILURE);
-	if (init_mlx(&cubed) == EXIT_FAILURE)
-		return (ft_freetab(cubed.map), EXIT_FAILURE);
-	ft_printf(1, "Welcome in CUBED\n"); 
-	if (format_map(&cubed) == 1)
-		return (free_tmp(&cubed), EXIT_FAILURE);
-	if (display_floor_ceiling(cubed) == 1)
-		return (free_tmp(&cubed), EXIT_FAILURE);
-	if (minimap(&cubed) == 1) // deplacer
-		return (free_tmp(&cubed), EXIT_FAILURE); // deplacer
-	mlx_hook(cubed.win, ON_KEYDOWN, 1L<<0, click, &cubed);
-	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed); // changer free_tmp
-	mlx_loop(cubed.mlx);
-	return (EXIT_SUCCESS);
+	i = 0;
+    if (ac != 2)
+        return (ft_printf(2, "Error: number of arguments\n"), EXIT_FAILURE);
+    cubed.map = split_map(av[1]);
+    if (!cubed.map)
+        return (EXIT_FAILURE);
+    if (error_parsing(&cubed) == EXIT_FAILURE)
+        return (ft_freetab(cubed.map), EXIT_FAILURE);
+    if (init_mlx(&cubed) == EXIT_FAILURE)
+        return (ft_freetab(cubed.map), EXIT_FAILURE);
+    ft_printf(1, "Welcome in CUBED\n");
+    if (format_map(&cubed) == 1)
+        return (free_tmp(&cubed), EXIT_FAILURE);
+    if (display_floor_ceiling(cubed) == 1)
+        return (free_tmp(&cubed), EXIT_FAILURE);
+    if (minimap(&cubed) == 1)
+        return (free_tmp(&cubed), EXIT_FAILURE);
+    ft_bzero(cubed.keys, sizeof(cubed.keys));
+    while (i < 512)
+        cubed.keys[i++] = 0;
+    mlx_hook(cubed.win, 2, 1L << 0, key_press, &cubed);
+    mlx_hook(cubed.win, 3, 1L << 1, key_release, &cubed);
+    mlx_loop_hook(cubed.mlx, loop_handler, &cubed);
+    mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed);
+    mlx_loop(cubed.mlx);
+    return (EXIT_SUCCESS);
 }

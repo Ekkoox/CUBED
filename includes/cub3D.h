@@ -18,16 +18,16 @@
 # include "../lib/mlx/mlx.h"
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
-# include <math.h>
 
 # ifndef M_PI
-# define M_PI 3.14159265358979323846
+#  define M_PI 3.14159265358979323846
 # endif
 
 enum						e_colour
@@ -51,12 +51,12 @@ enum						e_data
 	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
-	STEP_LEN = 2,
-	ROTATE_SPEED = 10,
+	STEP_LEN = 1,
+	ROTATE_SPEED = 1,
 	PLAYER_SIZE = 2,
-	RESOLUTION = 1280,
-	VISION_WIDE = 60,
-	WALL_SCALE = 1,
+	RESOLUTION = 10,
+	// VISION_WIDE = 60,
+	VISION_WIDE = 90,//siuuuu
 };
 
 enum						e_zones
@@ -68,7 +68,6 @@ enum						e_zones
 	ANGLE = 4,
 	INSIDE = 5,
 };
-
 
 enum						e_keys
 {
@@ -89,6 +88,10 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_imgs
 {
 	void					*imgs;
+	char 					*ptr_east;
+	char					*ptr_west;
+	char					*ptr_north;
+	char					*ptr_south;
 	char					*east_texture;
 	char					*west_texture;
 	char					*north_texture;
@@ -143,6 +146,7 @@ typedef struct s_cubed
 	int						start_map;
 	int						wall_orientation;
 	int						prev_color;
+	long					keys[70000];
 	void					*mlx;
 	void					*win;
 	t_imgs					*imgs;
@@ -164,6 +168,9 @@ void						check_max(int i, t_cubed *cube);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);
+int							loop_handler(t_cubed *cubed);
+int							key_press(int keycode, t_cubed *cubed);
+int							key_release(int keycode, t_cubed *cubed);
 
 // Garbadge
 int							free_tmp(t_cubed *cubed);
@@ -209,7 +216,8 @@ void						player_colour(int x, int y, t_cubed *cube);
 // Clicks
 int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
-void						pix_colour(double ray_x, double ray_y, int colour, t_cubed *cube);
+void						pix_colour(double ray_x, double ray_y, int colour,
+								t_cubed *cube);
 void						ray_vision(t_cubed *cube, int colour);
 int							angle_correction(float angle);
 #endif
