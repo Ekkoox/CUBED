@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/13 18:14:51 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/25 15:38:20 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,55 @@ int	ray_check(double pix_x, double pix_y, t_cubed *cube)
 	return (0);
 }
 
-void draw_column(int x_start, int width, int wall_height, int color, t_cubed *cube)
+void    pix_projection(double x_init, double resolution, int y, t_cubed *cube)
 {
-	int	i;
-	int	y_max;
-	int	x;
-	int	color;
+    int    i;
+    int    y_max;
+    int    x;
+    int    color;
 
-	y_max = HEIGHT - y;
-	while (y < y_max)
-	{
-		x = x_init;
-		while (x < x_init + resolution)
-		{
-			i = (y * cube->pixel_data->size_len_background) + (x
-					* (cube->pixel_data->bpp_background / 8));
-			color = cube->wall_orientation;
-			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
-			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
-			cube->pixel_data->background[i + 2] = color_convert(color, RED);
-			x++;
+    y_max = HEIGHT - y;
+    while (y < y_max)
+    {
+        x = x_init;
+        while (x < x_init + resolution)
+        {
+            i = (y * cube->pixel_data->size_len_background) + (x
+                    * (cube->pixel_data->bpp_background / 8));
+            color = cube->wall_orientation;
+            cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
+            cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
+            cube->pixel_data->background[i + 2] = color_convert(color, RED);
+            x++;
         }
-		++y;
+        y++;
     }
 }
+
+// void draw_column(int x_start, int width, int wall_height, int color, t_cubed *cube)
+// {
+// 	int	i;
+// 	int	y_max;
+// 	int	x;
+// 	int	color;
+
+// 	y_max = HEIGHT - y;
+// 	while (y < y_max)
+// 	{
+// 		x = x_init;
+// 		while (x < x_init + resolution)
+// 		{
+// 			i = (y * cube->pixel_data->size_len_background) + (x
+// 					* (cube->pixel_data->bpp_background / 8));
+// 			color = cube->wall_orientation;
+// 			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
+// 			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
+// 			cube->pixel_data->background[i + 2] = color_convert(color, RED);
+// 			x++;
+//         }
+// 		++y;
+//     }
+// }
 
 // void	projection(int dist, double rad, t_cubed *cube, int range)
 // {
