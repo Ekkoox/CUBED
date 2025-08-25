@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/13 15:22:32 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/13 18:09:23 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ enum						e_data
 	STEP_LEN = 2,
 	ROTATE_SPEED = 10,
 	PLAYER_SIZE = 2,
-	RESOLUTION = 50,
+	RESOLUTION = 1280,
 	VISION_WIDE = 60,
 	WALL_SCALE = 1,
 };
@@ -211,5 +211,5 @@ int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
 void						pix_colour(double ray_x, double ray_y, int colour, t_cubed *cube);
 void						ray_vision(t_cubed *cube, int colour);
-int							angle_correction(int angle);
+int							angle_correction(float angle);
 #endif
