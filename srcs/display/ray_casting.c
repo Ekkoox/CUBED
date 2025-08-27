@@ -6,42 +6,27 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/25 18:53:41 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/27 19:30:44 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 int	check_angle(t_cubed *cube, int orientation)
 {
-	if (orientation == NORTH_WEST && (cube->prev_color == TEST_N_C || cube->prev_color == TEST_W_C))
-		return (cube->prev_color);
-	if (orientation == NORTH_EAST && (cube->prev_color == TEST_N_C || cube->prev_color == TEST_E_C))
-		return (cube->prev_color);
-	if (orientation == SOUTH_WEST && (cube->prev_color == TEST_S_C || cube->prev_color == TEST_W_C))
-		return (cube->prev_color);
-	if (orientation == SOUTH_EAST && (cube->prev_color == TEST_S_C || cube->prev_color == TEST_E_C))
-		return (cube->prev_color);
-	if (orientation == NORTH_WEST)
-		return (TEST_N_C);
-	if (orientation == NORTH_EAST)
-		return (TEST_E_C);
-	if (orientation == SOUTH_WEST)
-		return (TEST_S_C);
-	if (orientation == SOUTH_EAST)
-		return (TEST_W_C);
+	(void) orientation;
 	return (cube->prev_color);
 }
 
 int	read_orientation(int orientation, t_cubed *cube)
 {
 	if (orientation == NORTH)
-		return (TEST_N_C);
+		return (NORTH_C);
 	if (orientation == SOUTH)
-		return (TEST_S_C);
+		return (SOUTH_C);
 	if (orientation == WEST)
-		return (TEST_W_C);
+		return (WEST_C);
 	if (orientation == EAST)
-		return (TEST_E_C);
+		return (EAST_C);
 	if (orientation == 	NORTH_WEST || orientation == NORTH_EAST 
 		|| orientation == SOUTH_WEST || orientation == SOUTH_EAST)
 		return (check_angle(cube, orientation));
@@ -252,29 +237,31 @@ int	angle_correction(float angle)
 // }
 
 // siuuuuuu test ITERER sur la taille de la fenetre au lieu de la fov
-void ray_vision(t_cubed *cube, int colour)
+int	ray_vision(t_cubed *cube, int colour)
 {
-    double  rad;
-    double  player_angle_rad;
-    double  ray_angle;
-    int     x;
-    double  fov_rad;
-    
-    player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI / 180.0);
-    fov_rad = (VISION_WIDE * M_PI) / 180.0;  // Conversion FOV en radians
-    
-    ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
-        HEIGHT * cube->pixel_data->size_len_background);
-    
-    for (x = 0; x < WIDTH; x++)
-    {
-        // Calcul uniforme de l'angle pour chaque rayon
-        ray_angle = player_angle_rad - (fov_rad / 2) + (x * fov_rad) / (WIDTH - 1);
-        rad = ray_angle;
-        ray_cast(cube, colour, rad, x, player_angle_rad);
-    }
-    
-    mlx_put_image_to_window(cube->mlx, cube->win,
-        cube->pixel_data->ptr_background, 0, 0);
+	double	rad;
+	double	player_angle_rad;
+	double	ray_angle;
+	int		x;
+	double	fov_rad;
+		
+	player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI / 180.0);
+	fov_rad = (VISION_WIDE * M_PI) / 180.0;  // Conversion FOV en radians
+	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
+		HEIGHT * cube->pixel_data->size_len_background);
+	cube->ray = ft_calloc(sizeof(t_ray), sizeof(t_ray));
+	if (!cube->ray)
+		return (EXIT_FAILURE);
+	x = -1;
+	while (x++ < WIDTH)
+	{
+		// Calcul uniforme de l'angle pour chaque rayon
+		ray_angle = player_angle_rad - (fov_rad / 2) + (x * fov_rad) / (WIDTH - 1);
+		rad = ray_angle;
+		ray_cast(cube, colour, rad, x, player_angle_rad);
+	}
+	mlx_put_image_to_window(cube->mlx, cube->win,
+		cube->pixel_data->ptr_background, 0, 0);
+	return (0);
 }
 

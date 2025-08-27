@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:09:44 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/11 16:25:09 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:33:55 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	fill_map_colour(t_cubed *cube)
 		map_x = -1;
 		while (map_x++ < cube->max_wid) ///// mettre val de width depuis struct
 		{
-			pix_x = map_x * 10;
-			pix_y = map_y * 10;
+			pix_x = map_x * BLOC_LEN;
+			pix_y = map_y * BLOC_LEN;
 			if (cube->map_formated[map_y][map_x] == '1')
 				wall_colour(pix_x, pix_y, cube);
 			else if (cube->map_formated[map_y][map_x] == '0')

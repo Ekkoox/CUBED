@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/25 18:07:37 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/27 19:24:22 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ enum						e_colour
 	PLAYER_C = 14176079,
 	WALL_MAP_C = 9076325,
 	FLOOR_MAP_C = 11183506,
-	TEST_N_C = 612669,
-	TEST_S_C = 1219765,
-	TEST_E_C = 6033031,
-	TEST_W_C = 11866916,
+	NORTH_C = 612669,
+	SOUTH_C = 1219765,
+	EAST_C = 6033031,
+	WEST_C = 11866916,
 	SPARE_C = 15917052,
 	RAY_C = 15113737,
 };
 
 enum						e_data
 {
+	BLOC_LEN = 10,
 	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
@@ -131,11 +132,11 @@ typedef struct s_player
 	int						facing_pos;
 }							t_player;
 
-// typedef struct s_ray
-// {
-// 	int						dist;
-// 	int						wall_orientation;
-// }							t_ray;
+typedef struct s_ray
+{
+	double						x_hit;
+	double						y_hit;
+}							t_ray;
 
 typedef struct s_cubed
 {
@@ -156,6 +157,7 @@ typedef struct s_cubed
 	t_garbage				*garbage;
 	t_pixel_data			*pixel_data;
 	t_player				*player;
+	t_ray					*ray;
 }							t_cubed;
 
 // Name Texture
@@ -221,6 +223,6 @@ int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
 void						pix_colour(double ray_x, double ray_y, int colour,
 								t_cubed *cube);
-void						ray_vision(t_cubed *cube, int colour);
+int						ray_vision(t_cubed *cube, int colour);
 int							angle_correction(float angle);
 #endif
