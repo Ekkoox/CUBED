@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/07/24 18:28:26 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:27:31 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,9 @@ int	error_parsing(t_cubed *cubed)
 	if (parsing_colors(cubed) == EXIT_FAILURE)
 		return (free_textures(cubed->imgs), EXIT_FAILURE);
 	if (check_flood_fill(cubed) == EXIT_FAILURE)
+		return (free_textures(cubed->imgs), free(cubed->pixel_data),
+			EXIT_FAILURE);
+	if (check_size_map(cubed) == EXIT_FAILURE)
 		return (free_textures(cubed->imgs), free(cubed->pixel_data),
 			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
