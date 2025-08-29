@@ -6,200 +6,94 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/27 19:30:44 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/29 22:04:48 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-int	check_angle(t_cubed *cube, int orientation)
-{
-	(void) orientation;
-	return (cube->prev_color);
-}
 
-int	read_orientation(int orientation, t_cubed *cube)
+int	orientation_color(t_cubed *cube)
 {
-	if (orientation == NORTH)
-		return (NORTH_C);
-	if (orientation == SOUTH)
-		return (SOUTH_C);
-	if (orientation == WEST)
-		return (WEST_C);
-	if (orientation == EAST)
+	if (cube->ray->dda == VERTICAL && cube->ray->step_x == 1)
 		return (EAST_C);
-	if (orientation == 	NORTH_WEST || orientation == NORTH_EAST 
-		|| orientation == SOUTH_WEST || orientation == SOUTH_EAST)
-		return (check_angle(cube, orientation));
-	return (cube->prev_color);
-}
-
-int	ray_check(double pix_x, double pix_y, t_cubed *cube)
-{
-	unsigned long		ray;
-	int					status;
-	unsigned long 		minimap_size;
-
-	status = 0;
-	ray = 0;
-	minimap_size = HEIGHT * cube->pixel_data->size_len;
-	ray = ((int)(cube->player->y_pos + (PLAYER_SIZE / 2) + (int)pix_y)
-			* cube->pixel_data->size_len) + ((int)(cube->player->x_pos
-				+ (PLAYER_SIZE / 2) + (int)pix_x) * (cube->pixel_data->bpp
-				/ 8));
-	if (ray < 0 || ray >= minimap_size || !cube->pixel_data->minimap[ray])
-		return (1);
-	if (cube->pixel_data->minimap[ray] == color_convert(WALL_MAP_C, BLUE))
-		status++;
-	if (cube->pixel_data->minimap[ray + 1] == color_convert(WALL_MAP_C, GREEN))
-		status++;
-	if (cube->pixel_data->minimap[ray + 2] == color_convert(WALL_MAP_C, RED))
-		status++;
-	if (status == 3)
-	{
-		cube->wall_orientation = read_orientation(cube->pixel_data->minimap[ray
-				+ 3], cube);
-		cube->prev_color = cube->wall_orientation;
-		return (1);
-	}
+	else if (cube->ray->dda == VERTICAL && cube->ray->step_x == -1)
+		return (WEST_C);
+	else if (cube->ray->dda == HORIZONTAL && cube->ray->step_y == 1)
+		return (SOUTH_C);
+	else if (cube->ray->dda == HORIZONTAL && cube->ray->step_y == -1)
+		return (NORTH_C);
 	return (0);
 }
 
-void    pix_projection(double x_init, double resolution, int y, t_cubed *cube)
+void    pix_projection(double x_init, double resolution, double y, t_cubed *cube)
 {
     int    i;
-    int    y_max;
     int    x;
     int    color;
 
-    y_max = HEIGHT - y;
-    while (y < y_max)
+	if (y < 1e-6)
+		y = 1e-6;
+	int line_height = (int)(HEIGHT / y);
+	int draw_start = -line_height / 2 + HEIGHT / 2;
+	int draw_end   =  line_height / 2 + HEIGHT / 2;
+
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+    while (draw_start < draw_end)
     {
         x = x_init;
         while (x < x_init + resolution)
         {
-            i = (y * cube->pixel_data->size_len_background) + (x
+            i = (draw_start * cube->pixel_data->size_len_background) + (x
                     * (cube->pixel_data->bpp_background / 8));
-            color = cube->wall_orientation;
+			color = orientation_color(cube);
             cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
             cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
             cube->pixel_data->background[i + 2] = color_convert(color, RED);
             x++;
         }
-        y++;
+        // y++;
+		draw_start++;
     }
 }
 
-// void draw_column(int x_start, int width, int wall_height, int color, t_cubed *cube)
-// {
-// 	int	i;
-// 	int	y_max;
-// 	int	x;
-// 	int	color;
-
-// 	y_max = HEIGHT - y;
-// 	while (y < y_max)
-// 	{
-// 		x = x_init;
-// 		while (x < x_init + resolution)
-// 		{
-// 			i = (y * cube->pixel_data->size_len_background) + (x
-// 					* (cube->pixel_data->bpp_background / 8));
-// 			color = cube->wall_orientation;
-// 			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
-// 			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
-// 			cube->pixel_data->background[i + 2] = color_convert(color, RED);
-// 			x++;
-//         }
-// 		++y;
-//     }
-// }
-
-// void	projection(int dist, double rad, t_cubed *cube, int range)
-// {
-// 	int		x;
-// 	double	x_init;
-// 	int		y;
-// 	double	resolution;
-
-// 	(void)rad;
-// 	resolution = (WIDTH / (double)VISION_WIDE);
-// 	// x_init = resolution + (resolution * range);
-// 	x_init =(resolution * range);//siuuu
-// 	x = x_init;
-// 	y = dist;
-// 	// y = cos(rad) * (dist);
-// 	// (void) rad;
-// 	pix_projection(x_init, resolution, y, cube);
-// }
-
-// siuuuuuu test ITERER sur la taille de la fenetre au lieu de la fov
-void    projection(int dist, double rad, t_cubed *cube, int x_pos)
+void    projection(double dist, double rad, t_cubed *cube, int x_pos)
 {
     int     x;
     int     y;
     double  resolution;
 
-    (void)rad;
+	(void) rad;
     resolution = 1; // Chaque rayon correspond à 1 pixel de large
     x = x_pos;     // Position x directe dans la fenêtre
     y = dist;
     pix_projection(x, resolution, y, cube);
 }
 
-// void	ray_cast(t_cubed *cube, int colour, double rad, int range,
-// 		double play_angle)
-// {
-// 	double	pix_x;
-// 	double	pix_y;
-// 	int		dist;
-
-// 	// double	corrected_dist;
-// 	// dist = PLAYER_SIZE;
-// 	dist = PLAYER_SIZE * cos(rad - play_angle);
-// 	// corrected_dist = dist * cos(rad - play_angle);
-// 	while ((cube->player->y_pos + dist) < WIDTH && (cube->player->x_pos
-// 			+ dist) < HEIGHT)
-// 	{
-// 		pix_x = (cos(rad) * (dist));
-// 		pix_y = (sin(rad) * (dist));
-// 		if (ray_check(pix_x, pix_y, cube) == 0)
-// 		{
-// 			pix_colour((int)pix_x, (int)pix_y, colour, cube);
-// 		}
-// 		else
-// 			break ;
-// 		dist += 1;
-// 	}
-// 	projection(dist, rad, cube, range);
-// }
-
-
-// siuuuu test regler le fish eye
-void ray_cast(t_cubed *cube, int colour, double rad, int range, double play_angle)
+void ray_cast(t_cubed *cube, double rad, int range, double play_angle)
 {
-    double  pix_x;
-    double  pix_y;
-    int     dist;
-    double  corrected_dist;
+	// int	 	dist;
+	double	corr_dist_x;
+	double	corr_dist_y;
+	// double	corr_dist;
+	double	perp_dist;
 
-    dist = PLAYER_SIZE;
-    while ((cube->player->y_pos + dist) < WIDTH && (cube->player->x_pos + dist) < HEIGHT)
-    {
-        pix_x = (cos(rad) * (dist));
-        pix_y = (sin(rad) * (dist));
-        if (ray_check(pix_x, pix_y, cube) == 0)
-        {
-            pix_colour((int)pix_x, (int)pix_y, colour, cube);
-        }
-        else
-        {
-            // Correction fish-eye en utilisant la distance perpendiculaire au plan de la caméra
-            corrected_dist = dist * cos(rad - play_angle);
-            projection(corrected_dist, rad, cube, range);
-            break;
-        }
-        dist += 1;
-    }
+	(void)play_angle;
+	cube->ray->rad = rad;
+	dda(cube);
+	corr_dist_x = cube->ray->x_hit - cube->ray->player_pos_x;
+	corr_dist_y = cube->ray->y_hit - cube->ray->player_pos_y;
+	if (cube->ray->dda == VERTICAL)
+		perp_dist = (cube->ray->move_spot_x - cube->ray->player_pos_x
+					+ (1.0 - cube->ray->step_x) * 0.5) / cube->ray->ray_rad_x;
+	else
+		perp_dist = (cube->ray->move_spot_y - cube->ray->player_pos_y
+					+ (1.0 - cube->ray->step_y) * 0.5) / cube->ray->ray_rad_y;
+	// dist = sqrt((corr_dist_x * corr_dist_x) + (corr_dist_y * corr_dist_y));
+	// corr_dist = dist * cos(rad - play_angle);
+	projection(perp_dist, rad, cube, range);
 }
 
 int	angle_correction(float angle)
@@ -211,35 +105,8 @@ int	angle_correction(float angle)
 	return (angle);
 }
 
-// void	ray_vision(t_cubed *cube, int colour)
-// {
-// 	double	rad;
-// 	double	player_angle_rad;
-// 	int		angle;
-// 	int		range;
-
-// 	range = 0;
-// 	rad = 0;
-// 	player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI
-// 			/ 180.0);
-// 	angle = cube->player->facing_pos - 45;//siuuu avant 30
-// 	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
-// 		HEIGHT * cube->pixel_data->size_len_background);
-// 	while (angle < cube->player->facing_pos + 45)//siuuu avant 30
-// 	{
-// 		rad = angle_correction(angle) * (M_PI / 180.0);
-// 		ray_cast(cube, colour, rad, range, player_angle_rad);
-// 		angle++;
-// 		range++;
-// 	}
-// 	mlx_put_image_to_window(cube->mlx, cube->win,
-// 		cube->pixel_data->ptr_background, 0, 0);
-// }
-
-// siuuuuuu test ITERER sur la taille de la fenetre au lieu de la fov
-int	ray_vision(t_cubed *cube, int colour)
+int	ray_vision(t_cubed *cube)
 {
-	double	rad;
 	double	player_angle_rad;
 	double	ray_angle;
 	int		x;
@@ -255,10 +122,8 @@ int	ray_vision(t_cubed *cube, int colour)
 	x = -1;
 	while (x++ < WIDTH)
 	{
-		// Calcul uniforme de l'angle pour chaque rayon
 		ray_angle = player_angle_rad - (fov_rad / 2) + (x * fov_rad) / (WIDTH - 1);
-		rad = ray_angle;
-		ray_cast(cube, colour, rad, x, player_angle_rad);
+		ray_cast(cube, ray_angle, x, player_angle_rad);
 	}
 	mlx_put_image_to_window(cube->mlx, cube->win,
 		cube->pixel_data->ptr_background, 0, 0);

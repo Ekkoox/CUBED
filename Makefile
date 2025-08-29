@@ -20,6 +20,7 @@ C_FILES = main.c\
 			display/colours.c\
 			display/click.c\
 			display/ray_casting.c\
+			display/dda.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 

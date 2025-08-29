@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/25 18:07:28 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/29 16:32:14 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	player_colour(int x, int y, t_cubed *cube)
 	cube->player->x_pos = (double)x;
 	cube->player->y_pos = (double)y;
 	init_orientation(cube, x, y);
-	ray_vision(cube, RAY_C);
+	ray_vision(cube);
 	while (player_size >= 0)
 	{
 		rad = 0;

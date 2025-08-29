@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/27 19:24:22 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/29 17:00:26 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ enum						e_zones
 	SOUTH_WEST = 6,
 	SOUTH_EAST = 7,
 	INSIDE = 8,
+	VERTICAL = 9,
+	HORIZONTAL = 10,
 };
 
 enum						e_keys
@@ -136,6 +138,21 @@ typedef struct s_ray
 {
 	double						x_hit;
 	double						y_hit;
+	int							dda;
+	double						rad;
+	double						player_pos_x;
+	double						player_pos_y;
+	double						ray_rad_x;
+	double						ray_rad_y;
+	int							move_spot_x;
+	int							move_spot_y;
+	double						delta_x;
+	double						delta_y;
+	double						dist_line_x;
+	double						dist_line_y;
+	int							step_x;
+	int							step_y;
+
 }							t_ray;
 
 typedef struct s_cubed
@@ -223,6 +240,7 @@ int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
 void						pix_colour(double ray_x, double ray_y, int colour,
 								t_cubed *cube);
-int						ray_vision(t_cubed *cube, int colour);
+int							ray_vision(t_cubed *cube);
 int							angle_correction(float angle);
+void						dda(t_cubed *cube);
 #endif
