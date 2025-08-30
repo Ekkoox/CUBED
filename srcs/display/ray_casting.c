@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/29 22:04:48 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/30 18:30:57 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,77 +25,6 @@ int	orientation_color(t_cubed *cube)
 	return (0);
 }
 
-void    pix_projection(double x_init, double resolution, double y, t_cubed *cube)
-{
-    int    i;
-    int    x;
-    int    color;
-
-	if (y < 1e-6)
-		y = 1e-6;
-	int line_height = (int)(HEIGHT / y);
-	int draw_start = -line_height / 2 + HEIGHT / 2;
-	int draw_end   =  line_height / 2 + HEIGHT / 2;
-
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-    while (draw_start < draw_end)
-    {
-        x = x_init;
-        while (x < x_init + resolution)
-        {
-            i = (draw_start * cube->pixel_data->size_len_background) + (x
-                    * (cube->pixel_data->bpp_background / 8));
-			color = orientation_color(cube);
-            cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
-            cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
-            cube->pixel_data->background[i + 2] = color_convert(color, RED);
-            x++;
-        }
-        // y++;
-		draw_start++;
-    }
-}
-
-void    projection(double dist, double rad, t_cubed *cube, int x_pos)
-{
-    int     x;
-    int     y;
-    double  resolution;
-
-	(void) rad;
-    resolution = 1; // Chaque rayon correspond à 1 pixel de large
-    x = x_pos;     // Position x directe dans la fenêtre
-    y = dist;
-    pix_projection(x, resolution, y, cube);
-}
-
-void ray_cast(t_cubed *cube, double rad, int range, double play_angle)
-{
-	// int	 	dist;
-	double	corr_dist_x;
-	double	corr_dist_y;
-	// double	corr_dist;
-	double	perp_dist;
-
-	(void)play_angle;
-	cube->ray->rad = rad;
-	dda(cube);
-	corr_dist_x = cube->ray->x_hit - cube->ray->player_pos_x;
-	corr_dist_y = cube->ray->y_hit - cube->ray->player_pos_y;
-	if (cube->ray->dda == VERTICAL)
-		perp_dist = (cube->ray->move_spot_x - cube->ray->player_pos_x
-					+ (1.0 - cube->ray->step_x) * 0.5) / cube->ray->ray_rad_x;
-	else
-		perp_dist = (cube->ray->move_spot_y - cube->ray->player_pos_y
-					+ (1.0 - cube->ray->step_y) * 0.5) / cube->ray->ray_rad_y;
-	// dist = sqrt((corr_dist_x * corr_dist_x) + (corr_dist_y * corr_dist_y));
-	// corr_dist = dist * cos(rad - play_angle);
-	projection(perp_dist, rad, cube, range);
-}
-
 int	angle_correction(float angle)
 {
 	if (angle < 0)
@@ -105,28 +34,91 @@ int	angle_correction(float angle)
 	return (angle);
 }
 
+void	draw_projection(t_cubed *cube, double perp_dist, int x_start, int x_end)
+{
+	int	i;
+	int	x;
+	int	color;
+	int	draw_start;
+	int	draw_end;
+
+	draw_start = -((int)(HEIGHT / perp_dist)) / 1 + HEIGHT / 2;
+	draw_end = ((int)(HEIGHT / perp_dist)) / 1 + HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+	while (draw_start++ <= draw_end)
+	{
+		x = x_start;
+		while (x++ <= x_end)
+		{
+			i = (draw_start * cube->pixel_data->size_len_background)
+				+ (x * (cube->pixel_data->bpp_background / 8));
+			color = orientation_color(cube);
+			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
+			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
+			cube->pixel_data->background[i + 2] = color_convert(color, RED);
+		}
+	}
+}
+
+void	pix_projection_column(int screen_x, int ray_width, double perp_dist,
+	t_cubed *cube)
+{
+	int	x_start;
+	int	x_end;
+
+	if (perp_dist < 1e-6)
+		perp_dist = 1e-6;
+	x_start = screen_x * ray_width;
+	x_end = x_start + ray_width - 1;
+	if (x_start < 0)
+		x_start = 0;
+	if (x_end >= WIDTH)
+		x_end = WIDTH - 1;
+	draw_projection(cube, perp_dist, x_start, x_end);
+}
+
+void	ray_cast(t_cubed *cube, int screen_x)
+{
+	double	perp_dist;
+
+	dda(cube);
+	if (cube->ray->dda == VERTICAL)
+		perp_dist = (cube->ray->move_spot_x - cube->ray->player_pos_x
+				+ (1.0 - cube->ray->step_x) * 0.5) / cube->ray->ray_rad_x;
+	else
+		perp_dist = (cube->ray->move_spot_y - cube->ray->player_pos_y
+				+ (1.0 - cube->ray->step_y) * 0.5) / cube->ray->ray_rad_y;
+	if (perp_dist < 1e-6)
+		perp_dist = 1e-6;
+	pix_projection_column(screen_x, RAY_PER_PIX, perp_dist, cube);
+}
+
 int	ray_vision(t_cubed *cube)
 {
-	double	player_angle_rad;
-	double	ray_angle;
-	int		x;
 	double	fov_rad;
-		
-	player_angle_rad = angle_correction(cube->player->facing_pos) * (M_PI / 180.0);
-	fov_rad = (VISION_WIDE * M_PI) / 180.0;  // Conversion FOV en radians
+	int		total_rays;
+	int		ray;
+
+	fov_rad = (VISION_WIDE * M_PI) / 180.0;
+	total_rays = WIDTH * RAY_PER_PIX;
 	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
 		HEIGHT * cube->pixel_data->size_len_background);
-	cube->ray = ft_calloc(sizeof(t_ray), sizeof(t_ray));
+	cube->ray = ft_calloc(1, sizeof(t_ray));
 	if (!cube->ray)
 		return (EXIT_FAILURE);
-	x = -1;
-	while (x++ < WIDTH)
+	ray = -1;
+	while (++ray < total_rays)
 	{
-		ray_angle = player_angle_rad - (fov_rad / 2) + (x * fov_rad) / (WIDTH - 1);
-		ray_cast(cube, ray_angle, x, player_angle_rad);
+		cube->ray->rad = (angle_correction(cube->player->facing_pos)
+				* (M_PI / 180.0))
+			- (fov_rad / 2.0) + (ray * fov_rad) / (double)(total_rays - 1);
+		if (ray % RAY_PER_PIX == 0)
+			ray_cast(cube, ray / RAY_PER_PIX);
 	}
 	mlx_put_image_to_window(cube->mlx, cube->win,
 		cube->pixel_data->ptr_background, 0, 0);
 	return (0);
 }
-

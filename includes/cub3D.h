@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/29 17:00:26 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/30 17:06:57 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
+#define STEP_LEN 0.3
+#define ROTATE_SPEED 0.3
+
 enum						e_colour
 {
 	RED = 0,
@@ -52,12 +55,12 @@ enum						e_data
 	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
-	STEP_LEN = 1,
-	ROTATE_SPEED = 1,
+	// STEP_LEN = 1,
+	// ROTATE_SPEED = 1,
 	PLAYER_SIZE = 2,
 	RESOLUTION = 10,
-	// VISION_WIDE = 60,
-	VISION_WIDE = 90,//siuuuu
+	RAY_PER_PIX = 5,
+	VISION_WIDE = 90,
 };
 
 enum						e_zones
@@ -131,7 +134,7 @@ typedef struct s_player
 {
 	double					x_pos;
 	double					y_pos;
-	int						facing_pos;
+	float						facing_pos;
 }							t_player;
 
 typedef struct s_ray
