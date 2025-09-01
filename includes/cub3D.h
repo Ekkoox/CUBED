@@ -55,8 +55,6 @@ enum						e_data
 	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
-	// STEP_LEN = 1,
-	// ROTATE_SPEED = 1,
 	PLAYER_SIZE = 2,
 	RESOLUTION = 10,
 	RAY_PER_PIX = 5,
@@ -97,7 +95,7 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_imgs
 {
 	void					*imgs;
-	char 					*ptr_east;
+	char					*ptr_east;
 	char					*ptr_west;
 	char					*ptr_north;
 	char					*ptr_south;
@@ -219,6 +217,7 @@ int							parse_rgb(char *line, int *r, int *g, int *b);
 int							copy_line(char **dest, char *src, int max_wid);
 void						start_map(t_cubed *cubed);
 void						init_colors(t_pixel_data *pixel_data);
+int							check_size_map(t_cubed *cubed);
 
 // Display
 int							display_floor_ceiling(t_cubed cube);

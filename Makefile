@@ -12,6 +12,7 @@ C_FILES = main.c\
 			parsing/name_texture.c\
 			parsing/utils_parsing.c\
 			parsing/flood_fill_utils.c\
+			parsing/parsing_size_map.c\
 			garbage/garbage_utils.c\
 			parsing/parsing_colors_utils.c\
 			display/floor_ceiling.c\
@@ -19,6 +20,7 @@ C_FILES = main.c\
 			display/map_formated.c\
 			display/colours.c\
 			display/click.c\
+			display/ray_casting_copy.c\
 			display/ray_casting.c\
 			display/dda.c\
 
