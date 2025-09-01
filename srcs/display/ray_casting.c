@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/01 17:05:41 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/01 18:06:58 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ int	ray_vision(t_cubed *cube)
 	int		ray;
 
 	fov_rad = (VISION_WIDE * M_PI) / 180.0;
-	total_rays = WIDTH * RAY_PER_PIX;
+	total_rays = WIDTH;
 	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
 		HEIGHT * cube->pixel_data->size_len_background);
 	cube->ray = ft_calloc(1, sizeof(t_ray));
@@ -207,7 +207,7 @@ int	ray_vision(t_cubed *cube)
 	{
 		cube->ray->rad = (angle_correction(cube->player->facing_pos)
 				* (M_PI / 180.0))
-			- (fov_rad / 2.0) + (ray * fov_rad) / (double)(total_rays - 1);
+			- (fov_rad / 2.0) + (ray * fov_rad)  / (double)(total_rays - 1);
 		if (ray % RAY_PER_PIX == 0 && (ray / RAY_PER_PIX) < WIDTH)
 			ray_cast(cube, ray / RAY_PER_PIX);
 	}
