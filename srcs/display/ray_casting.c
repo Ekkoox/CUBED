@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/01 17:51:29 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:11:29 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,8 @@ void	ray_cast(t_cubed *cube, int screen_x)
 	else
 		perp_dist = (cube->ray->move_spot_y - cube->ray->player_pos_y
 				+ (1.0 - cube->ray->step_y) * 0.5) / cube->ray->ray_rad_y;
+	perp_dist = perp_dist * cos(cube->ray->rad - (angle_correction(cube->player->facing_pos)
+				* (M_PI / 180.0)));
 	if (perp_dist < 1e-6)
 		perp_dist = 1e-6;
 	pix_projection_column(screen_x, RAY_PER_PIX, perp_dist, cube);
