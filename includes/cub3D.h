@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/30 14:07:24 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/30 17:06:57 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define STEP_LEN 0.5
+#define STEP_LEN 0.3
+#define ROTATE_SPEED 0.3
 
 enum						e_colour
 {
@@ -40,25 +41,24 @@ enum						e_colour
 	PLAYER_C = 14176079,
 	WALL_MAP_C = 9076325,
 	FLOOR_MAP_C = 11183506,
-	TEST_N_C = 612669,
-	TEST_S_C = 1219765,
-	TEST_E_C = 6033031,
-	TEST_W_C = 11866916,
+	NORTH_C = 612669,
+	SOUTH_C = 1219765,
+	EAST_C = 6033031,
+	WEST_C = 11866916,
 	SPARE_C = 15917052,
 	RAY_C = 15113737,
 };
 
 enum						e_data
 {
+	BLOC_LEN = 10,
 	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
-	// STEP_LEN = 0.3,
-	ROTATE_SPEED = 1,
 	PLAYER_SIZE = 2,
 	RESOLUTION = 10,
-	// VISION_WIDE = 60,
-	VISION_WIDE = 90, // siuuuu
+	RAY_PER_PIX = 5,
+	VISION_WIDE = 90,
 };
 
 enum						e_zones
@@ -67,8 +67,13 @@ enum						e_zones
 	SOUTH = 1,
 	WEST = 2,
 	EAST = 3,
-	ANGLE = 4,
-	INSIDE = 5,
+	NORTH_WEST = 4,
+	NORTH_EAST = 5,
+	SOUTH_WEST = 6,
+	SOUTH_EAST = 7,
+	INSIDE = 8,
+	VERTICAL = 9,
+	HORIZONTAL = 10,
 };
 
 enum						e_keys
@@ -127,14 +132,29 @@ typedef struct s_player
 {
 	double					x_pos;
 	double					y_pos;
-	int						facing_pos;
+	float						facing_pos;
 }							t_player;
 
-// typedef struct s_ray
-// {
-// 	int						dist;
-// 	int						wall_orientation;
-// }							t_ray;
+typedef struct s_ray
+{
+	double						x_hit;
+	double						y_hit;
+	int							dda;
+	double						rad;
+	double						player_pos_x;
+	double						player_pos_y;
+	double						ray_rad_x;
+	double						ray_rad_y;
+	int							move_spot_x;
+	int							move_spot_y;
+	double						delta_x;
+	double						delta_y;
+	double						dist_line_x;
+	double						dist_line_y;
+	int							step_x;
+	int							step_y;
+
+}							t_ray;
 
 typedef struct s_cubed
 {
@@ -155,6 +175,7 @@ typedef struct s_cubed
 	t_garbage				*garbage;
 	t_pixel_data			*pixel_data;
 	t_player				*player;
+	t_ray					*ray;
 }							t_cubed;
 
 // Name Texture
@@ -221,6 +242,7 @@ int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
 void						pix_colour(double ray_x, double ray_y, int colour,
 								t_cubed *cube);
-void						ray_vision(t_cubed *cube, int colour);
+int							ray_vision(t_cubed *cube);
 int							angle_correction(float angle);
+void						dda(t_cubed *cube);
 #endif

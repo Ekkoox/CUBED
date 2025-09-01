@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/27 18:45:19 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:32:14 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	wall_orient(int tmp_y, int y, int tmp_x, int x)
 	bloc_y = tmp_y - y;
 	bloc_x = tmp_x - x;
 	if (bloc_x == 0 && bloc_y == 0)
-		return (ANGLE);
+		return (SOUTH_WEST);
 	if (bloc_x == 0 && bloc_y == 9)
-		return (ANGLE);
+		return (SOUTH_EAST);
 	if (bloc_x == 9 && bloc_y == 9)
-		return (ANGLE);
+		return (NORTH_EAST);
 	if (bloc_x == 9 && bloc_y == 0)
-		return (ANGLE);
+		return (NORTH_WEST);
 	if (bloc_y == 0)
 		return (SOUTH);
 	if (bloc_x == 0)
@@ -125,7 +125,7 @@ void	player_colour(int x, int y, t_cubed *cube)
 	cube->player->x_pos = (double)x;
 	cube->player->y_pos = (double)y;
 	init_orientation(cube, x, y);
-	ray_vision(cube, RAY_C);
+	ray_vision(cube);
 	while (player_size >= 0)
 	{
 		rad = 0;

@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:15:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/29 18:12:08 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:25:05 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	free_tmp(t_cubed *cubed)
 	ft_freetab(cubed->map);
 	ft_freetab(cubed->map_formated);
 	free(cubed->player);
+	free(cubed->ray);
 	exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
