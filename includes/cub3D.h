@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/30 17:06:57 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/01 17:09:24 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # endif
 
 #define STEP_LEN 0.3
-#define ROTATE_SPEED 0.3
+#define ROTATE_SPEED 0.5
 
 enum						e_colour
 {
