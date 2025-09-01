@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/30 18:30:57 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/01 16:58:37 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,124 @@ int	angle_correction(float angle)
 	return (angle);
 }
 
+// void	draw_projection(t_cubed *cube, double perp_dist, int x_start, int x_end)
+// {
+// 	int	i;
+// 	int	x;
+// 	int	color;
+// 	int	draw_start;
+// 	int	draw_end;
+
+// 	draw_start = -((int)(HEIGHT / perp_dist)) / 1 + HEIGHT / 2;
+// 	draw_end = ((int)(HEIGHT / perp_dist)) / 1 + HEIGHT / 2;
+// 	if (draw_start < 0)
+// 		draw_start = 0;
+// 	if (draw_end >= HEIGHT)
+// 		draw_end = HEIGHT - 1;
+// 	while (draw_start++ <= draw_end)
+// 	{
+// 		x = x_start;
+// 		while (x++ <= x_end)
+// 		{
+// 			i = (draw_start * cube->pixel_data->size_len_background)
+// 				+ (x * (cube->pixel_data->bpp_background / 8));
+// 			color = orientation_color(cube);
+// 			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
+// 			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
+// 			cube->pixel_data->background[i + 2] = color_convert(color, RED);
+// 		}
+// 	}
+// }
+
+int	get_texture_pixel(char *texture, int tex_x, int tex_y, int tex_width)
+{
+    int	pixel_index;
+    
+    pixel_index = (tex_y * tex_width + tex_x) * 4; // 4 bytes par pixel (BGRA)
+    return (*(int *)(texture + pixel_index));
+}
+
+char	*get_wall_texture(t_cubed *cube)
+{
+    if (cube->ray->dda == VERTICAL && cube->ray->step_x == 1)
+        return (cube->imgs->east_texture);
+    else if (cube->ray->dda == VERTICAL && cube->ray->step_x == -1)
+        return (cube->imgs->west_texture);
+    else if (cube->ray->dda == HORIZONTAL && cube->ray->step_y == 1)
+        return (cube->imgs->south_texture);
+    else if (cube->ray->dda == HORIZONTAL && cube->ray->step_y == -1)
+        return (cube->imgs->north_texture);
+    return (NULL);
+}
+
+void	draw_textured_wall(t_cubed *cube, int draw_start, int draw_end, 
+    int x_start, int x_end, double wall_hit, int wall_height)
+{
+    char	*texture;
+    int		tex_width = 64;
+    int		tex_height = 64;
+    int		tex_x;
+    int		tex_y;
+    int		x, y;
+    int		i;
+    int		color;
+    
+    // Sélectionner la texture selon l'orientation
+    texture = get_wall_texture(cube);
+    if (!texture)
+        return;
+    
+    // Calculer la coordonnée X de la texture
+    tex_x = (int)(wall_hit * tex_width);
+    if (tex_x < 0) tex_x = 0;
+    if (tex_x >= tex_width) tex_x = tex_width - 1;
+    
+    // Dessiner la colonne texturée
+    for (y = draw_start; y <= draw_end; y++)
+    {
+        // Calculer la coordonnée Y de la texture
+        tex_y = (int)(((y - draw_start) * tex_height) / wall_height);
+        if (tex_y < 0) tex_y = 0;
+        if (tex_y >= tex_height) tex_y = tex_height - 1;
+        
+        // Récupérer la couleur du pixel de la texture
+        color = get_texture_pixel(texture, tex_x, tex_y, tex_width);
+        
+        // Dessiner sur tous les pixels de la largeur
+        for (x = x_start; x <= x_end; x++)
+        {
+            i = (y * cube->pixel_data->size_len_background)
+                + (x * (cube->pixel_data->bpp_background / 8));
+            *(int *)(cube->pixel_data->background + i) = color;
+        }
+    }
+}
+
 void	draw_projection(t_cubed *cube, double perp_dist, int x_start, int x_end)
 {
-	int	i;
-	int	x;
-	int	color;
-	int	draw_start;
-	int	draw_end;
-
-	draw_start = -((int)(HEIGHT / perp_dist)) / 1 + HEIGHT / 2;
-	draw_end = ((int)(HEIGHT / perp_dist)) / 1 + HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-	while (draw_start++ <= draw_end)
-	{
-		x = x_start;
-		while (x++ <= x_end)
-		{
-			i = (draw_start * cube->pixel_data->size_len_background)
-				+ (x * (cube->pixel_data->bpp_background / 8));
-			color = orientation_color(cube);
-			cube->pixel_data->background[i + 0] = color_convert(color, BLUE);
-			cube->pixel_data->background[i + 1] = color_convert(color, GREEN);
-			cube->pixel_data->background[i + 2] = color_convert(color, RED);
-		}
-	}
+    // int		i;
+    // int		x;
+    int		draw_start;
+    int		draw_end;
+    int		wall_height;
+    double	wall_hit;
+    
+    wall_height = (int)(HEIGHT / perp_dist);
+    draw_start = -(wall_height) / 2 + HEIGHT / 2;
+    draw_end = wall_height / 2 + HEIGHT / 2;
+    if (draw_start < 0)
+        draw_start = 0;
+    if (draw_end >= HEIGHT)
+        draw_end = HEIGHT - 1;
+    
+    // Calculer le point d'impact pour les textures
+    if (cube->ray->dda == VERTICAL)
+        wall_hit = cube->ray->player_pos_y + perp_dist * cube->ray->ray_rad_y;
+    else
+        wall_hit = cube->ray->player_pos_x + perp_dist * cube->ray->ray_rad_x;
+    wall_hit -= floor(wall_hit);
+    
+    draw_textured_wall(cube, draw_start, draw_end, x_start, x_end, wall_hit, wall_height);
 }
 
 void	pix_projection_column(int screen_x, int ray_width, double perp_dist,
