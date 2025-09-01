@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:38:18 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/25 15:50:29 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/29 16:26:13 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,7 +406,8 @@ int loop_handler(t_cubed *cubed)
         angle(KEY_LEFT, cubed);
 	else if (cubed->keys[KEY_RIGHT])
 		angle(KEY_RIGHT, cubed);
-    ray_vision(cubed, FLOOR_MAP_C);
+    if (ray_vision(cubed) == EXIT_FAILURE)
+		return (free_tmp(cubed), 1);
     mlx_put_image_to_window(cubed->mlx, cubed->win,
         cubed->pixel_data->ptr_minimap, 5, 5);
     return (0);
