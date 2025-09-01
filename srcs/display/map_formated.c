@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:42:25 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/09 17:40:12 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:04:38 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	id_player_position(t_cubed *cube)
 			x++;
 		}
 		y++;
-	}////// AJOUTER FACING POSITION ICI TEL QUE SI NORTH + 0DEG, 180DEG, 90DEG OU 360DEG
+	}
 	return (EXIT_SUCCESS);
 }
 

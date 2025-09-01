@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colours.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/05 15:30:13 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/08/27 18:45:19 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	player_colour(int x, int y, t_cubed *cube)
 	double	rad;
 
 	player_size = (sqrt(PLAYER_SIZE));
-	rad = 0;
 	walk_colour(x, y, cube);
 	cube->pixel_data->play_pix_x = x;
 	cube->pixel_data->play_pix_y = y;

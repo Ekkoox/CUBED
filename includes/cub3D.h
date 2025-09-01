@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/27 18:29:38 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/08/30 14:07:24 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
+# define STEP_LEN 0.5
+
 enum						e_colour
 {
 	RED = 0,
@@ -51,12 +53,12 @@ enum						e_data
 	WIDTH = 1280,
 	HEIGHT = 720,
 	BPP = 32,
-	STEP_LEN = 1,
+	// STEP_LEN = 0.3,
 	ROTATE_SPEED = 1,
 	PLAYER_SIZE = 2,
 	RESOLUTION = 10,
 	// VISION_WIDE = 60,
-	VISION_WIDE = 90,//siuuuu
+	VISION_WIDE = 90, // siuuuu
 };
 
 enum						e_zones
@@ -88,7 +90,7 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_imgs
 {
 	void					*imgs;
-	char 					*ptr_east;
+	char					*ptr_east;
 	char					*ptr_west;
 	char					*ptr_north;
 	char					*ptr_south;
