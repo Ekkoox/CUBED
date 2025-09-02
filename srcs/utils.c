@@ -6,11 +6,11 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:45:19 by dsatge            #+#    #+#             */
-/*   Updated: 2025/07/09 17:07:10 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:16:42 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub3D.h"
+#include "../includes/cub3D.h"
 
 int	is_white_line(char *str)
 {
@@ -20,7 +20,7 @@ int	is_white_line(char *str)
 	while (str[i])
 	{
 		if (!(str[i] == ' ' || str[i] == '\t' || str[i] == '\r'
-			|| str[i] == '\n' || str[i] == '\v' || str[i] == '\f'))
+				|| str[i] == '\n' || str[i] == '\v' || str[i] == '\f'))
 			return (false);
 		i++;
 	}
@@ -31,9 +31,9 @@ int	is_whitespace(char c)
 {
 	if (!c)
 		return (false);
-	if (c ==  ' ' || c == '\t' || c == '\r'
-			|| c == '\n' || c == '\v' || c == '\f')
-			return (true);
+	if (c == ' ' || c == '\t' || c == '\r' || c == '\n' || c == '\v'
+		|| c == '\f')
+		return (true);
 	return (false);
 }
 

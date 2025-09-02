@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:09:44 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/27 18:33:55 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/02 16:15:53 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
+#include "cub3D.h"
 
 static void	fill_map_colour(t_cubed *cube)
 {
 	int	map_x;
 	int	map_y;
 	int	pix_x;
-	int pix_y;
+	int	pix_y;
 
 	map_y = -1;
 	pix_x = 0;
@@ -44,21 +44,24 @@ static void	fill_map_colour(t_cubed *cube)
 int	minimap(t_cubed *cube)
 {
 	char	*minimap;
-    int		size_line;
+	int		size_line;
 	int		bpp;
 	int		endian;
 
-	cube->pixel_data->ptr_minimap = mlx_new_image(cube->mlx, (cube->max_wid * 10), (cube->max_hei * 10)); /// changer par dimensions struct
+	cube->pixel_data->ptr_minimap = mlx_new_image(cube->mlx, (cube->max_wid
+				* 10), (cube->max_hei * 10)); /// changer par dimensions struct
 	if (cube->pixel_data->ptr_minimap == NULL)
 		return (ft_printf(2, "Error: mlx failure\n"), EXIT_FAILURE);
-	minimap = mlx_get_data_addr(cube->pixel_data->ptr_minimap, &bpp, &size_line, &endian);
-	cube->pixel_data->minimap = (unsigned char *) minimap;
+	minimap = mlx_get_data_addr(cube->pixel_data->ptr_minimap, &bpp, &size_line,
+			&endian);
+	cube->pixel_data->minimap = (unsigned char *)minimap;
 	if (!cube->pixel_data->minimap)
 		return (EXIT_FAILURE);
 	cube->pixel_data->bpp = bpp;
 	cube->pixel_data->size_len = size_line;
 	// printf("cube->pixel_data->size_len = %i\n", cube->pixel_data->size_len);
 	fill_map_colour(cube);
-	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_minimap, 5, 5);
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_minimap,
+		5, 5);
 	return (EXIT_SUCCESS);
 }

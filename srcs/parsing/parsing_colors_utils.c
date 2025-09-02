@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 19:09:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/25 17:24:56 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:16:24 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	validate_rgb_value(int value)
 
 int	check_looong(char *str)
 {
-	while(*str == 'F' || *str == 'C')
+	while (*str == 'F' || *str == 'C')
 		str++;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
