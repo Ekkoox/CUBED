@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 19:12:53 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:17:38 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,9 +177,6 @@ int	ray_vision(t_cubed *cube)
 		- (fov_rad / 2.0);
 	ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
 		HEIGHT * cube->pixel_data->size_len_background);
-	cube->ray = ft_calloc(1, sizeof(t_ray));
-	if (!cube->ray)
-		return (EXIT_FAILURE);
 	ray = -1;
 	while (++ray < WIDTH)
 	{

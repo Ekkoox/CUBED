@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 17:56:29 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/02 19:17:00 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,14 @@ int	init_mlx(t_cubed *cubed)
 		free(cubed->mlx);
 		return (ft_printf(2, "Error: mlx_new_window failed\n"), EXIT_FAILURE);
 	}
+	cubed->ray = ft_calloc(1, sizeof(t_ray));
+    if (!cubed->ray)
+    {
+        mlx_destroy_window(cubed->mlx, cubed->win);
+        mlx_destroy_display(cubed->mlx);
+        free(cubed->mlx);
+        return (ft_printf(2, "Error: ray allocation failed\n"), EXIT_FAILURE);
+    }
 	if (init_textures(cubed) == EXIT_FAILURE)
 	{
 		mlx_destroy_window(cubed->mlx, cubed->win);
