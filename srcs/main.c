@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:37 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:05:15 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+static void	mlx(t_cubed cubed)
+{
+	mlx_hook(cubed.win, 2, 1L << 0, key_press, &cubed);
+	mlx_hook(cubed.win, 3, 1L << 1, key_release, &cubed);
+	mlx_loop_hook(cubed.mlx, loop_handler, &cubed);
+	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed);
+	mlx_loop(cubed.mlx);
+}
 
 int	main(int ac, char **av)
 {
@@ -37,10 +46,6 @@ int	main(int ac, char **av)
 	ft_bzero(cubed.keys, sizeof(cubed.keys));
 	while (i < 512)
 		cubed.keys[i++] = 0;
-	mlx_hook(cubed.win, 2, 1L << 0, key_press, &cubed);
-	mlx_hook(cubed.win, 3, 1L << 1, key_release, &cubed);
-	mlx_loop_hook(cubed.mlx, loop_handler, &cubed);
-	mlx_hook(cubed.win, 33, 131072, free_tmp, &cubed);
-	mlx_loop(cubed.mlx);
+	mlx(cubed);
 	return (EXIT_SUCCESS);
 }

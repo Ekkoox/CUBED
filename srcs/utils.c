@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:45:19 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:42 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:56:34 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,23 @@ int	is_map(t_cubed *cube, int i)
 	if (is_white_line(cube->map[i]) == true)
 		return (false);
 	return (true);
+}
+
+void	check_max(int i, t_cubed *cube)
+{
+	int	x;
+	int	y;
+
+	y = i;
+	x = 0;
+	cube->max_wid = 0;
+	cube->max_hei = 0;
+	while (cube->map[y])
+	{
+		x = ft_strlen(cube->map[y]);
+		if (x > cube->max_wid)
+			cube->max_wid = x;
+		y++;
+	}
+	cube->max_hei = y - i;
 }

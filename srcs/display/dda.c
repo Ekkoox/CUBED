@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:48:57 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:00 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:33:21 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	init_dda(t_cubed *cube)
 
 void	dda(t_cubed *cube)
 {
-	int hit;
+	int	hit;
 
 	init_dda(cube);
 	hit = 0;
@@ -95,7 +95,8 @@ void	dda(t_cubed *cube)
 			cube->ray->move_spot_y += cube->ray->step_y;
 			cube->ray->dda = HORIZONTAL;
 		}
-		if (cube->map_formated[cube->ray->move_spot_y][cube->ray->move_spot_x] == '1')
+		if (cube->map_formated[cube->ray->move_spot_y][cube->ray->move_spot_x]
+			== '1')
 			hit = 1;
 	}
 	ray_hit_calc(cube);

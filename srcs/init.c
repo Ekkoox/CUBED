@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:33 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:56:29 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,8 @@ int	init_string_textures(t_imgs *imgs)
 	return (EXIT_SUCCESS);
 }
 
-void	check_max(int i, t_cubed *cube)
+void	init_null(t_cubed *cubed)
 {
-	int	x;
-	int	y;
-
-	y = i;
-	x = 0;
-	cube->max_wid = 0;
-	cube->max_hei = 0;
-	while (cube->map[y])
-	{
-		x = ft_strlen(cube->map[y]);
-		if (x > cube->max_wid)
-			cube->max_wid = x;
-		y++;
-	}
-	cube->max_hei = y - i;
-}
-
-int	init_textures(t_cubed *cubed)
-{
-	int w, h;
-	if (!cubed->imgs)
-	{
-		cubed->imgs = malloc(sizeof(t_imgs));
-		if (!cubed->imgs)
-			return (ft_printf(2, "Error: malloc imgs failed\n"), EXIT_FAILURE);
-	}
 	cubed->imgs->ptr_east = NULL;
 	cubed->imgs->ptr_west = NULL;
 	cubed->imgs->ptr_north = NULL;
@@ -58,7 +32,13 @@ int	init_textures(t_cubed *cubed)
 	cubed->imgs->west_texture = NULL;
 	cubed->imgs->north_texture = NULL;
 	cubed->imgs->south_texture = NULL;
-	// 1. Charger les images XPM
+}
+
+int	fill_ptr_texture(t_cubed *cubed)
+{
+	int	w;
+	int	h;
+
 	cubed->imgs->ptr_east = mlx_xpm_file_to_image(cubed->mlx,
 			"textures/texture_east.xpm", &w, &h);
 	cubed->imgs->ptr_west = mlx_xpm_file_to_image(cubed->mlx,
@@ -69,9 +49,25 @@ int	init_textures(t_cubed *cubed)
 			"textures/texture_south.xpm", &w, &h);
 	if (!cubed->imgs->ptr_east || !cubed->imgs->ptr_west
 		|| !cubed->imgs->ptr_north || !cubed->imgs->ptr_south)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	init_textures(t_cubed *cubed)
+{
+	int	bpp;
+	int	size_line;
+	int	endian;
+
+	if (!cubed->imgs)
+	{
+		cubed->imgs = malloc(sizeof(t_imgs));
+		if (!cubed->imgs)
+			return (ft_printf(2, "Error: malloc imgs failed\n"), EXIT_FAILURE);
+	}
+	init_null(cubed);
+	if (fill_ptr_texture(cubed) == EXIT_FAILURE)
 		return (ft_printf(2, "Error: failed to load textures\n"), EXIT_FAILURE);
-	// 2. Obtenir les données des images
-	int bpp, size_line, endian;
 	cubed->imgs->east_texture = mlx_get_data_addr(cubed->imgs->ptr_east, &bpp,
 			&size_line, &endian);
 	cubed->imgs->west_texture = mlx_get_data_addr(cubed->imgs->ptr_west, &bpp,
