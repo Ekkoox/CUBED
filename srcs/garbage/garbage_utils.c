@@ -6,24 +6,43 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/01 15:41:02 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:34:09 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	free_textures(t_imgs *imgs)
+void	free_texture_names(t_imgs *imgs)
 {
-	(void)imgs;
-	if (imgs->east_texture)
-		free(imgs->east_texture);
-	if (imgs->west_texture)
-		free(imgs->west_texture);
-	if (imgs->north_texture)
-		free(imgs->north_texture);
-	if (imgs->south_texture)
-		free(imgs->south_texture);
-	if (imgs->imgs)
-		free(imgs->imgs);
-	free(imgs);
+	free(imgs->east_texture);
+	free(imgs->west_texture);
+	free(imgs->north_texture);
+	free(imgs->south_texture);
+}
+
+void	destroy_textures(t_cubed *cubed)
+{
+    if (!cubed || !cubed->imgs || !cubed->mlx)
+        return;
+    
+    if (cubed->imgs->ptr_east)
+    {
+        mlx_destroy_image(cubed->mlx, cubed->imgs->ptr_east);
+        cubed->imgs->ptr_east = NULL;
+    }
+    if (cubed->imgs->ptr_west)
+    {
+        mlx_destroy_image(cubed->mlx, cubed->imgs->ptr_west);
+        cubed->imgs->ptr_west = NULL;
+    }
+    if (cubed->imgs->ptr_north)
+    {
+        mlx_destroy_image(cubed->mlx, cubed->imgs->ptr_north);
+        cubed->imgs->ptr_north = NULL;
+    }
+    if (cubed->imgs->ptr_south)
+    {
+        mlx_destroy_image(cubed->mlx, cubed->imgs->ptr_south);
+        cubed->imgs->ptr_south = NULL;
+    }
 }

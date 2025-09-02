@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 16:15:46 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:44:43 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	angle_correction(float angle)
 //     int	pixel_index;
 
 //     pixel_index = (tex_y * tex_width + tex_x) * 4;
-	// 4 bytes par pixel (BGRA)
+// 4 bytes par pixel (BGRA)
 //     return (*(int *)(texture + pixel_index));
 // }
 
@@ -222,14 +222,14 @@ void	draw_textured_wall(t_cubed *cube, int draw_start, int draw_end,
 //     // Calculer le point d'impact pour les textures
 //     if (cube->ray->dda == VERTICAL)
 //         wall_hit = cube->ray->player_pos_y + perp_dist
-	// * cube->ray->ray_rad_y;
+// * cube->ray->ray_rad_y;
 //     else
 //         wall_hit = cube->ray->player_pos_x + perp_dist
-	// * cube->ray->ray_rad_x;
+// * cube->ray->ray_rad_x;
 //     wall_hit -= floor(wall_hit);
 
 //     draw_textured_wall(cube, draw_start, draw_end, x_start, x_end, wall_hit,
-	// wall_height);
+// wall_height);
 // }
 
 void	draw_projection(t_cubed *cube, double perp_dist, int x_start, int x_end)
@@ -302,6 +302,7 @@ int	ray_vision(t_cubed *cube)
 	double	angle_step;
 	double	base_angle;
 
+	
 	fov_rad = (VISION_WIDE * M_PI) / 180.0;
 	angle_step = fov_rad / (double)(WIDTH - 1);
 	base_angle = (angle_correction(cube->player->facing_pos) * (M_PI / 180.0))

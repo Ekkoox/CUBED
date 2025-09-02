@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/29 18:11:57 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:47:16 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	parsing_colors(t_cubed *cubed)
 	int	i;
 
 	i = 0;
-	cubed->pixel_data = ft_calloc(sizeof(t_pixel_data), sizeof(t_pixel_data));
+	cubed->pixel_data = ft_calloc(1, sizeof(t_pixel_data));
 	if (!cubed->pixel_data)
 		return (ft_printf(2, "Error: malloc pixel_data failed\n"),
 			EXIT_FAILURE);
@@ -139,12 +139,12 @@ int	error_parsing(t_cubed *cubed)
 	if (parsing_textures(cubed) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (parsing_colors(cubed) == EXIT_FAILURE)
-		return (free_textures(cubed->imgs), EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (check_flood_fill(cubed) == EXIT_FAILURE)
-		return (free_textures(cubed->imgs), free(cubed->pixel_data),
+		return (free_texture_names(cubed->imgs), free(cubed->pixel_data),
 			EXIT_FAILURE);
 	if (check_size_map(cubed) == EXIT_FAILURE)
-		return (free_textures(cubed->imgs), free(cubed->pixel_data),
+		return (free_texture_names(cubed->imgs), free(cubed->pixel_data),
 			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

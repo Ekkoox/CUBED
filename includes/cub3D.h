@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/01 18:51:38 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/02 18:08:40 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-#define STEP_LEN 0.3
-#define ROTATE_SPEED 0.5
+# define STEP_LEN 0.3
+# define ROTATE_SPEED 0.5
 
 enum						e_colour
 {
@@ -132,27 +132,27 @@ typedef struct s_player
 {
 	double					x_pos;
 	double					y_pos;
-	float						facing_pos;
+	float					facing_pos;
 }							t_player;
 
 typedef struct s_ray
 {
-	double						x_hit;
-	double						y_hit;
-	int							dda;
-	double						rad;
-	double						player_pos_x;
-	double						player_pos_y;
-	double						ray_rad_x;
-	double						ray_rad_y;
-	int							move_spot_x;
-	int							move_spot_y;
-	double						delta_x;
-	double						delta_y;
-	double						dist_line_x;
-	double						dist_line_y;
-	int							step_x;
-	int							step_y;
+	double					x_hit;
+	double					y_hit;
+	int						dda;
+	double					rad;
+	double					player_pos_x;
+	double					player_pos_y;
+	double					ray_rad_x;
+	double					ray_rad_y;
+	int						move_spot_x;
+	int						move_spot_y;
+	double					delta_x;
+	double					delta_y;
+	double					dist_line_x;
+	double					dist_line_y;
+	int						step_x;
+	int						step_y;
 
 }							t_ray;
 
@@ -196,8 +196,10 @@ int							key_press(int keycode, t_cubed *cubed);
 int							key_release(int keycode, t_cubed *cubed);
 
 // Garbadge
-int							free_tmp(t_cubed *cubed);
+int							free_all(t_cubed *cubed);
 void						free_textures(t_imgs *imgs);
+void						destroy_textures(t_cubed *cubed);
+void						free_texture_names(t_imgs *imgs);
 
 // Parsing
 int							error_parsing(t_cubed *cubed);

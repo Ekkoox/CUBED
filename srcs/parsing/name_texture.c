@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:43:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:20 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:33:18 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ int	stack_name_txt_west(t_cubed *cubed)
 			{
 				cubed->imgs->west_texture = ft_strdup(cubed->map[i] + y + 3);
 				if (!cubed->imgs->west_texture)
+                {
+                    free(cubed->imgs->north_texture);
+                    free(cubed->imgs->south_texture);
 					return (ft_printf(2, "Error: memory allocation failed\n"),
 						EXIT_FAILURE);
+                }
 			}
 			y++;
 		}
@@ -36,6 +40,7 @@ int	stack_name_txt_west(t_cubed *cubed)
 	}
 	return (EXIT_SUCCESS);
 }
+
 
 int	stack_name_txt_south(t_cubed *cubed)
 {
@@ -52,8 +57,11 @@ int	stack_name_txt_south(t_cubed *cubed)
 			{
 				cubed->imgs->south_texture = ft_strdup(cubed->map[i] + y + 3);
 				if (!cubed->imgs->south_texture)
+                {
+                    free(cubed->imgs->north_texture);
 					return (ft_printf(2, "Error: memory allocation failed\n"),
-						EXIT_FAILURE);
+                        EXIT_FAILURE);
+                }
 			}
 			y++;
 		}
@@ -77,8 +85,13 @@ int	stack_name_txt_east(t_cubed *cubed)
 			{
 				cubed->imgs->east_texture = ft_strdup(cubed->map[i] + y + 3);
 				if (!cubed->imgs->east_texture)
-					return (ft_printf(2, "Error: memory allocation failed\n"),
-						EXIT_FAILURE);
+                {
+                    free(cubed->imgs->west_texture);
+                    free(cubed->imgs->south_texture);
+                    free(cubed->imgs->north_texture);
+                    return (ft_printf(2, "Error: memory allocation failed\n"),
+                       EXIT_FAILURE);
+                }
 			}
 			y++;
 		}
@@ -103,7 +116,7 @@ int	stack_name_txt_north(t_cubed *cubed)
 				cubed->imgs->north_texture = ft_strdup(cubed->map[i] + y + 3);
 				if (!cubed->imgs->north_texture)
 					return (ft_printf(2, "Error: memory allocation failed\n"),
-						EXIT_FAILURE);
+                        EXIT_FAILURE);
 			}
 			y++;
 		}

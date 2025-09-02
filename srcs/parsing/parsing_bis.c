@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/29 18:12:03 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:36:01 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	parsing_textures(t_cubed *cubed)
 	init_string_textures(cubed->imgs);
 	if (stack_name_txt(cubed) == EXIT_FAILURE)
 	{
-		free_textures(cubed->imgs);
+		free_texture_names(cubed->imgs);
 		return (ft_printf(2, "Error: stack name texture failed\n"),
 			EXIT_FAILURE);
 	}
@@ -80,15 +80,15 @@ int	parsing_textures(t_cubed *cubed)
 		|| cubed->imgs->north_texture == NULL
 		|| cubed->imgs->south_texture == NULL)
 	{
-		free_textures(cubed->imgs);
+		free_texture_names(cubed->imgs);
 		return (ft_printf(2, "Error: missing texture\n"), EXIT_FAILURE);
 	}
 	if (check_double_txt(cubed->imgs) == EXIT_FAILURE)
 	{
-		free_textures(cubed->imgs);
+		free_texture_names(cubed->imgs);
 		return (ft_printf(2, "Error: same texture\n"), EXIT_FAILURE);
 	}
 	if (check_open_texture(cubed->imgs) == EXIT_FAILURE)
-		return (free_textures(cubed->imgs), EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
+	return (free_texture_names(cubed->imgs), EXIT_SUCCESS);
 }
