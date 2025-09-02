@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:15:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/27 18:25:05 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/01 19:07:13 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	free_tmp(t_cubed *cubed)
 	mlx_destroy_window(cubed->mlx, cubed->win);
 	mlx_destroy_display(cubed->mlx);
 	free(cubed->mlx);
-	free_textures(cubed->imgs);
+	// free_textures(cubed->imgs);
 	free(cubed->pixel_data);
 	ft_freetab(cubed->map);
 	ft_freetab(cubed->map_formated);

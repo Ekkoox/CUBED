@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/01 17:09:24 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/01 18:51:38 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ enum						e_data
 	BPP = 32,
 	PLAYER_SIZE = 2,
 	RESOLUTION = 10,
-	RAY_PER_PIX = 5,
-	VISION_WIDE = 90,
+	RAY_PER_PIX = 1,
+	VISION_WIDE = 60,
 };
 
 enum						e_zones

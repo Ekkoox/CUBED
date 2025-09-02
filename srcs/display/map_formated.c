@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_formated.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:42:25 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/27 19:04:38 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:56:46 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	fill_gap(int i, t_cubed *cube)
 	{
 		cube->map_formated[y] = ft_calloc(cube->max_wid + 1, sizeof(char));
 		if (!cube->map_formated[y])
-		return (EXIT_FAILURE); ////// ajouter de quoi free le reste si erreur malloc
+			return (EXIT_FAILURE); ////// ajouter de quoi free le reste si erreur malloc
 		y++;
 	}
 	y = 0;
