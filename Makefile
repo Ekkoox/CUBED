@@ -18,9 +18,11 @@ C_FILES = main.c\
 			display/floor_ceiling.c\
 			display/minimap.c\
 			display/map_formated.c\
+			display/map_formated_utils.c\
 			display/colours.c\
 			display/click.c\
-			display/ray_casting_copy.c\
+			display/click_utils.c\
+			display/move_player.c\
 			display/ray_casting.c\
 			display/dda.c\
 

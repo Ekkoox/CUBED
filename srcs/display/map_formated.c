@@ -3,30 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_formated.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:42:25 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:05 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:26:58 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	is_valid_char(char c)
-{
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (true);
-	return (false);
-}
-
-int	is_player_pos(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (true);
-	return (false);
-}
-
-void	fill_end_1(t_cubed *cube, int y, int *x, int max_width)
+static void	fill_end_1(t_cubed *cube, int y, int *x, int max_width)
 {
 	while (*x < max_width)
 	{
@@ -37,24 +23,8 @@ void	fill_end_1(t_cubed *cube, int y, int *x, int max_width)
 	return ;
 }
 
-int	fill_gap(int i, t_cubed *cube)
+static void	fill_map(t_cubed *cube, int i, int x, int y)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	cube->map_formated = ft_calloc((cube->max_hei + 1), sizeof(char *));
-	if (!cube->map_formated)
-		return (EXIT_FAILURE);
-	while (y < cube->max_hei)
-	{
-		cube->map_formated[y] = ft_calloc(cube->max_wid + 1, sizeof(char));
-		if (!cube->map_formated[y])
-			return (EXIT_FAILURE);
-				////// ajouter de quoi free le reste si erreur malloc
-		y++;
-	}
-	y = 0;
 	while (cube->map[i])
 	{
 		x = 0;
@@ -72,10 +42,31 @@ int	fill_gap(int i, t_cubed *cube)
 		y++;
 		i++;
 	}
+}
+
+static int	fill_gap(int i, t_cubed *cube)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	cube->map_formated = ft_calloc((cube->max_hei + 1), sizeof(char *));
+	if (!cube->map_formated)
+		return (EXIT_FAILURE);
+	while (y < cube->max_hei)
+	{
+		cube->map_formated[y] = ft_calloc(cube->max_wid + 1, sizeof(char));
+		if (!cube->map_formated[y])
+			return (EXIT_FAILURE);
+		y++;
+	}
+	y = 0;
+	x = 0;
+	fill_map(cube, i, x, y);
 	return (0);
 }
 
-int	id_player_position(t_cubed *cube)
+static int	id_player_position(t_cubed *cube)
 {
 	int	x;
 	int	y;

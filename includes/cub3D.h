@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 18:08:40 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:10:07 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,9 @@ int							minimap(t_cubed *cube);
 
 // Map_formated
 int							format_map(t_cubed *cube);
+// Map_formated_utils
 int							is_player_pos(char c);
+int							is_valid_char(char c);
 // Utils
 int							is_whitespace(char c);
 int							is_map(t_cubed *cube, int i);
@@ -240,10 +242,15 @@ void						wall_colour(int x, int y, t_cubed *cube);
 void						walk_colour(int x, int y, t_cubed *cube);
 void						player_colour(int x, int y, t_cubed *cube);
 // Clicks
-int							click(int keycode, t_cubed *cube);
 void						change_pix(t_cubed *cube, int colour);
 void						pix_colour(double ray_x, double ray_y, int colour,
 								t_cubed *cube);
+void						move_player_forward(t_cubed *cube);
+void						move_player_side(t_cubed *cube, int dir);
+void						move_player_backward(t_cubed *cube);
+int							key_press(int keycode, t_cubed *cubed);
+int							key_release(int keycode, t_cubed *cubed);
+// OTHER
 int							ray_vision(t_cubed *cube);
 int							angle_correction(float angle);
 void						dda(t_cubed *cube);

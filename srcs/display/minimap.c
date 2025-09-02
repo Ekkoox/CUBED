@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:09:44 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 16:15:53 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:54:50 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	fill_map_colour(t_cubed *cube)
 	map_y = -1;
 	pix_x = 0;
 	pix_y = 0;
-	while (++map_y < cube->max_hei) //// mettre len de height depuis struct
+	while (++map_y < cube->max_hei)
 	{
 		map_x = -1;
-		while (map_x++ < cube->max_wid) ///// mettre val de width depuis struct
+		while (++map_x < cube->max_wid)
 		{
 			pix_x = map_x * BLOC_LEN;
 			pix_y = map_y * BLOC_LEN;
@@ -49,7 +49,7 @@ int	minimap(t_cubed *cube)
 	int		endian;
 
 	cube->pixel_data->ptr_minimap = mlx_new_image(cube->mlx, (cube->max_wid
-				* 10), (cube->max_hei * 10)); /// changer par dimensions struct
+				* 10), (cube->max_hei * 10));
 	if (cube->pixel_data->ptr_minimap == NULL)
 		return (ft_printf(2, "Error: mlx failure\n"), EXIT_FAILURE);
 	minimap = mlx_get_data_addr(cube->pixel_data->ptr_minimap, &bpp, &size_line,
@@ -59,7 +59,6 @@ int	minimap(t_cubed *cube)
 		return (EXIT_FAILURE);
 	cube->pixel_data->bpp = bpp;
 	cube->pixel_data->size_len = size_line;
-	// printf("cube->pixel_data->size_len = %i\n", cube->pixel_data->size_len);
 	fill_map_colour(cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel_data->ptr_minimap,
 		5, 5);
