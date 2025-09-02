@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:37 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/12 15:29:03 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:16:03 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,30 @@ static void	fill_image_color(char *pix_char, int colour, int width, int height)
 
 int	display_floor_ceiling(t_cubed cube)
 {
-	int		bpp;
-	int		width;
-	int		endian;
+	int	bpp;
+	int	width;
+	int	endian;
 
 	bpp = 0;
 	width = 0;
 	cube.pixel_data->ptr_background = mlx_new_image(cube.mlx, WIDTH, HEIGHT);
 	if (cube.pixel_data->ptr_background == NULL)
 		return (printf("Error: mlx failure\n"), EXIT_FAILURE);
-	cube.pixel_data->background = mlx_get_data_addr(cube.pixel_data->ptr_background, &bpp, &width, &endian);
+	cube.pixel_data->background = mlx_get_data_addr(cube.pixel_data->ptr_background,
+			&bpp, &width, &endian);
 	cube.pixel_data->bpp_background = bpp;
 	cube.pixel_data->size_len_background = width;
-	fill_image_color(cube.pixel_data->background, cube.pixel_data->floor_color, WIDTH, HEIGHT);
-	fill_image_color(cube.pixel_data->background, cube.pixel_data->ceiling_color, WIDTH, HEIGHT / 2);
-	cube.pixel_data->backgr_empty = malloc(HEIGHT * cube.pixel_data->size_len_background);
+	fill_image_color(cube.pixel_data->background, cube.pixel_data->floor_color,
+		WIDTH, HEIGHT);
+	fill_image_color(cube.pixel_data->background,
+		cube.pixel_data->ceiling_color, WIDTH, HEIGHT / 2);
+	cube.pixel_data->backgr_empty = malloc(HEIGHT
+			* cube.pixel_data->size_len_background);
 	if (!cube.pixel_data->backgr_empty)
 		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
-	ft_memcpy(cube.pixel_data->backgr_empty, cube.pixel_data->background, HEIGHT * cube.pixel_data->size_len_background);
-	mlx_put_image_to_window(cube.mlx, cube.win, cube.pixel_data->ptr_background, 0, 0);
+	ft_memcpy(cube.pixel_data->backgr_empty, cube.pixel_data->background, HEIGHT
+		* cube.pixel_data->size_len_background);
+	mlx_put_image_to_window(cube.mlx, cube.win, cube.pixel_data->ptr_background,
+		0, 0);
 	return (0);
 }

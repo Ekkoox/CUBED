@@ -6,14 +6,16 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/08/29 16:32:14 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/02 16:15:58 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <cub3D.h>
+#include <cub3D.h>
+
 int	color_convert(int colour, int name_colour)
 {
 	int	res;
+
 	if (name_colour == RED)
 	{
 		res = colour >> 16 & 0xFF;
@@ -54,9 +56,9 @@ int	wall_orient(int tmp_y, int y, int tmp_x, int x)
 void	wall_colour(int x, int y, t_cubed *cube)
 {
 	int	i;
-	int tmp_y;
-	int tmp_x;
-	
+	int	tmp_y;
+	int	tmp_x;
+
 	tmp_y = y;
 	tmp_x = x;
 	while (tmp_y < y + 10)
@@ -64,7 +66,8 @@ void	wall_colour(int x, int y, t_cubed *cube)
 		tmp_x = x;
 		while (tmp_x < x + 10)
 		{
-			i = tmp_y * cube->pixel_data->size_len + tmp_x * (cube->pixel_data->bpp / 8);
+			i = tmp_y * cube->pixel_data->size_len + tmp_x
+				* (cube->pixel_data->bpp / 8);
 			cube->pixel_data->minimap[i + 0] = color_convert(WALL_MAP_C, BLUE);
 			cube->pixel_data->minimap[i + 1] = color_convert(WALL_MAP_C, GREEN);
 			cube->pixel_data->minimap[i + 2] = color_convert(WALL_MAP_C, RED);
@@ -78,8 +81,8 @@ void	wall_colour(int x, int y, t_cubed *cube)
 void	walk_colour(int x, int y, t_cubed *cube)
 {
 	int	i;
-    int tmp_y;
-    int tmp_x;
+	int	tmp_y;
+	int	tmp_x;
 
 	tmp_y = y;
 	tmp_x = x;
@@ -88,9 +91,11 @@ void	walk_colour(int x, int y, t_cubed *cube)
 		tmp_x = x;
 		while (tmp_x < x + 10)
 		{
-			i = tmp_y * cube->pixel_data->size_len + tmp_x * (cube->pixel_data->bpp / 8);
+			i = tmp_y * cube->pixel_data->size_len + tmp_x
+				* (cube->pixel_data->bpp / 8);
 			cube->pixel_data->minimap[i + 0] = color_convert(FLOOR_MAP_C, BLUE);
-			cube->pixel_data->minimap[i + 1] = color_convert(FLOOR_MAP_C, GREEN);
+			cube->pixel_data->minimap[i + 1] = color_convert(FLOOR_MAP_C,
+					GREEN);
 			cube->pixel_data->minimap[i + 2] = color_convert(FLOOR_MAP_C, RED);
 			// cube->pixel_data->minimap[i + 3] = 0;
 			tmp_x++;
@@ -113,8 +118,8 @@ static void	init_orientation(t_cubed *cube, int x, int y)
 
 void	player_colour(int x, int y, t_cubed *cube)
 {
-	double ray_y;
-	double ray_x;
+	double	ray_y;
+	double	ray_x;
 	double	player_size;
 	double	rad;
 

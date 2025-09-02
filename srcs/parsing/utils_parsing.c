@@ -6,13 +6,13 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:23:48 by enschnei          #+#    #+#             */
-/*   Updated: 2025/08/25 17:21:18 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:16:31 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int is_map_line(const char *line)
+int	is_map_line(const char *line)
 {
 	if (!line)
 		return (0);
@@ -26,9 +26,8 @@ int is_map_line(const char *line)
 		return (0);
 	while (*line)
 	{
-		if (*line == '1' || *line == '0' || *line == 'N'
-			|| *line == 'S' || *line == 'E' || *line == 'W'
-			|| *line == ' ')
+		if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'
+			|| *line == 'E' || *line == 'W' || *line == ' ')
 			return (1);
 		line++;
 	}
@@ -54,8 +53,8 @@ void	start_map(t_cubed *cubed)
 int	parsing_floor_color(t_pixel_data *pixel_data, char *line)
 {
 	int	red;
-	int green;
-	int blue;
+	int	green;
+	int	blue;
 
 	if (check_looong(line) == 1)
 		return (ft_printf(2, "Error: RGB values too long\n"), EXIT_FAILURE);
@@ -71,8 +70,8 @@ int	parsing_floor_color(t_pixel_data *pixel_data, char *line)
 int	parsing_ceiling_color(t_pixel_data *pixel_data, char *line)
 {
 	int	red;
-	int green;
-	int blue;
+	int	green;
+	int	blue;
 
 	if (check_looong(line) == 1)
 		return (ft_printf(2, "Error: RGB values too long\n"), EXIT_FAILURE);
@@ -85,11 +84,12 @@ int	parsing_ceiling_color(t_pixel_data *pixel_data, char *line)
 	return (EXIT_SUCCESS);
 }
 
-int ends_with_xpm(const char *filename)
+int	ends_with_xpm(const char *filename)
 {
-    size_t len;
-    len = ft_strlen(filename);
-    if (len < 4)
-        return 0;
-    return (strcmp(filename + len - 4, ".xpm") == 0);
+	size_t	len;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	return (strcmp(filename + len - 4, ".xpm") == 0);
 }
