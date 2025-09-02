@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/01 19:45:24 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/02 16:07:39 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,28 +298,21 @@ void	ray_cast(t_cubed *cube, int screen_x)
 int	ray_vision(t_cubed *cube)
 {
     double	fov_rad;
-    int		total_rays;
     int		ray;
     double	angle_step;
     double	base_angle;
     
     fov_rad = (VISION_WIDE * M_PI) / 180.0;
-    total_rays = WIDTH;
-    
-    // Précalculer les valeurs constantes
-    angle_step = fov_rad / (double)(total_rays - 1);
+    angle_step = fov_rad / (double)(WIDTH - 1);
     base_angle = (angle_correction(cube->player->facing_pos) * (M_PI / 180.0)) - (fov_rad / 2.0);
-    
     ft_memcpy(cube->pixel_data->background, cube->pixel_data->backgr_empty,
         HEIGHT * cube->pixel_data->size_len_background);
     cube->ray = ft_calloc(1, sizeof(t_ray));
     if (!cube->ray)
         return (EXIT_FAILURE);
-    
     ray = -1;
-    while (++ray < total_rays)
+    while (++ray < WIDTH)
     {
-        // Calcul optimisé de l'angle
         cube->ray->rad = base_angle + (ray * angle_step);
         if (ray % RAY_PER_PIX == 0)
 			ray_cast(cube, ray  / RAY_PER_PIX);

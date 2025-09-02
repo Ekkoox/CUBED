@@ -26,6 +26,7 @@ C_FILES = main.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 
+# CFLAGS = -Wall -Werror -Wextra -fsanitize=address -I includes/ -g -pg
 CFLAGS = -Wall -Werror -Wextra -I includes/ -g -pg
 
 LIB = ft_printf/libftprintf.a libft/libft.a
