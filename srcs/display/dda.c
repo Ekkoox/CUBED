@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:48:57 by dsatge            #+#    #+#             */
 /*   Updated: 2025/09/03 17:41:45 by dsatge           ###   ########.fr       */
