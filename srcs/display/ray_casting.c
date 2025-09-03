@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/03 16:09:26 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/03 17:42:16 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	draw_textured_wall(t_cubed *cube, double wall_hit, int wall_height)
 		tex_x = 0;
 	if (tex_x >= 64)
 		tex_x = 63;
+	if ((cube->ray->dda == VERTICAL && cube->ray->step_x == -1)
+		|| (cube->ray->dda == HORIZONTAL && cube->ray->step_y == 1))
+		tex_x = 64 - tex_x - 1;
 	cube->imgs->tex_step = 64.0 / wall_height;
 	tex_pos = (cube->imgs->draw_start - (-wall_height + HEIGHT) / 2)
 		* cube->imgs->tex_step;
@@ -45,10 +48,9 @@ void	draw_projection(t_cubed *cube, double perp_dist)
 	if (cube->imgs->draw_end >= HEIGHT)
 		cube->imgs->draw_end = HEIGHT - 1;
 	if (cube->ray->dda == VERTICAL)
-		wall_hit = cube->ray->player_pos_y + perp_dist * cube->ray->ray_rad_y;
+		wall_hit = cube->ray->ray_leny_hit - floor(cube->ray->ray_leny_hit);
 	else
-		wall_hit = cube->ray->player_pos_x + perp_dist * cube->ray->ray_rad_x;
-	wall_hit -= floor(wall_hit);
+		wall_hit = cube->ray->ray_lenx_hit - floor(cube->ray->ray_lenx_hit);
 	draw_textured_wall(cube, wall_hit, wall_height);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 16:11:43 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/03 17:36:25 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	double					ray_len_hit;
+	double					ray_lenx_hit;
+	double					ray_leny_hit;
 	double					x_hit;
 	double					y_hit;
 	int						dda;
@@ -263,7 +266,9 @@ void						dda(t_cubed *cube);
 // Ray_casting
 int							orientation_color(t_cubed *cube);
 int							angle_correction(float angle);
-int							get_texture_pixel(char *texture, int tex_x, int tex_y, int tex_width);
+int							get_texture_pixel(char *texture, int tex_x,
+								int tex_y, int tex_width);
 char						*get_wall_texture(t_cubed *cube);
-void						put_texture(t_cubed *cube, char *texture, int tex_x, double tex_pos);
+void						put_texture(t_cubed *cube, char *texture,
+								int tex_x, double tex_pos);
 #endif
