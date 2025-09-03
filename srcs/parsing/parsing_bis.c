@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 18:36:01 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:17:45 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,6 @@ static int	check_format_texture(t_imgs *imgs)
 	return (EXIT_SUCCESS);
 }
 
-static int	check_open_texture(t_imgs *imgs)
-{
-	if (check_format_texture(imgs) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	// if (imgs->east_texture && open(imgs->east_texture, O_RDONLY) < 0)
-	// 	return (ft_printf(2, "Error: cannot open east texture\n"),
-	// 		EXIT_FAILURE);
-	// if (imgs->west_texture && open(imgs->west_texture, O_RDONLY) < 0)
-	// 	return (ft_printf(2, "Error: cannot open west texture\n"),
-	// 		EXIT_FAILURE);
-	// if (imgs->north_texture && open(imgs->north_texture, O_RDONLY) < 0)
-	// 	return (ft_printf(2, "Error: cannot open north texture\n"),
-	// 		EXIT_FAILURE);
-	// if (imgs->south_texture && open(imgs->south_texture, O_RDONLY) < 0)
-	// 	return (ft_printf(2, "Error: cannot open south texture\n"),
-	// 		EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
 int	parsing_textures(t_cubed *cubed)
 {
 	cubed->imgs = malloc(sizeof(t_imgs));
@@ -88,7 +69,7 @@ int	parsing_textures(t_cubed *cubed)
 		free_texture_names(cubed->imgs);
 		return (ft_printf(2, "Error: same texture\n"), EXIT_FAILURE);
 	}
-	if (check_open_texture(cubed->imgs) == EXIT_FAILURE)
+	if (check_format_texture(cubed->imgs) == EXIT_FAILURE)
 		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	return (free_texture_names(cubed->imgs), EXIT_SUCCESS);
 }
