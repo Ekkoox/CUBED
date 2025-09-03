@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 16:11:43 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/03 16:50:23 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ char						**split_map(char *path);
 int							init_mlx(t_cubed *cubed);
 int							init_string_textures(t_imgs *imgs);
 void						check_max(int i, t_cubed *cube);
+void						cleanup_textures(t_cubed *cubed);
 
 // Input
 int							esc_close(int keycode, t_cubed *cubed);

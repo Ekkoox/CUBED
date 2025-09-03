@@ -5,6 +5,7 @@ C_FILES = main.c\
 			input.c\
 			utils.c\
 			read_map.c\
+			init_utils.c\
 			garbage/garbage.c\
 			parsing/parsing.c\
 			parsing/flood_fill.c\
@@ -21,9 +22,9 @@ C_FILES = main.c\
 			display/map_formated_utils.c\
 			display/colours.c\
 			display/click.c\
+			display/ray_casting.c\
 			display/click_utils.c\
 			display/move_player.c\
-			display/ray_casting.c\
 			display/ray_casting_utils.c\
 			display/dda.c\
 
