@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 19:10:07 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:19:16 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ typedef struct s_imgs
 	char					*west_texture;
 	char					*north_texture;
 	char					*south_texture;
+	int		tex_x;
+	int		x_start;
+	int		x_end;
+	int		draw_start;
+	int		draw_end;
+	int		bytes_per_pixel;
 }							t_imgs;
 
 typedef struct s_pixel_data

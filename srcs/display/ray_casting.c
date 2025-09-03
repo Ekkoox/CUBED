@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:39:00 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 19:17:38 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/03 15:29:02 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ char	*get_wall_texture(t_cubed *cube)
 {
 	if (cube->ray->dda == VERTICAL)
 	{
-		
-		return ((cube->ray->step_x == 1) ? cube->imgs->east_texture : cube->imgs->west_texture);
+		if (cube->ray->step_x == 1)
+			return (cube->imgs->east_texture);
+		else
+			return (cube->imgs->west_texture);
 	}
 	else
 	{
-		
+		if (cube->ray->step_y == 1)
+			return (cube->imgs->south_texture);
+		else
+			return (cube->imgs->north_texture);
 	}
-	return ((cube->ray->step_y == 1) ? cube->imgs->south_texture : cube->imgs->north_texture);
 }
 
 void	draw_textured_wall(t_cubed *cube, int draw_start, int draw_end,
