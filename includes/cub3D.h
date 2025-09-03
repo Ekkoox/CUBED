@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 15:19:16 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/03 16:11:43 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ typedef struct s_imgs
 	char					*west_texture;
 	char					*north_texture;
 	char					*south_texture;
-	int		tex_x;
-	int		x_start;
-	int		x_end;
-	int		draw_start;
-	int		draw_end;
-	int		bytes_per_pixel;
+	int						tex_x;
+	int						x_start;
+	int						x_end;
+	int						draw_start;
+	int						draw_end;
+	int						bytes_per_pixel;
+	double					tex_step;
 }							t_imgs;
 
 typedef struct s_pixel_data
@@ -258,6 +259,11 @@ int							key_press(int keycode, t_cubed *cubed);
 int							key_release(int keycode, t_cubed *cubed);
 // OTHER
 int							ray_vision(t_cubed *cube);
-int							angle_correction(float angle);
 void						dda(t_cubed *cube);
+// Ray_casting
+int							orientation_color(t_cubed *cube);
+int							angle_correction(float angle);
+int							get_texture_pixel(char *texture, int tex_x, int tex_y, int tex_width);
+char						*get_wall_texture(t_cubed *cube);
+void						put_texture(t_cubed *cube, char *texture, int tex_x, double tex_pos);
 #endif
