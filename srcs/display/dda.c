@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:48:57 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/03 17:23:53 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:41:45 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,19 @@ void	ray_hit_calc(t_cubed *cube)
 		cube->ray->x_hit = cube->ray->move_spot_x;
 		cube->ray->y_hit = cube->ray->player_pos_y + (cube->ray->dist_line_x
 				* cube->ray->ray_rad_y);
+		cube->ray->ray_len_hit = cube->ray->dist_line_x - cube->ray->delta_x;
 	}
 	if (cube->ray->dda == HORIZONTAL)
 	{
 		cube->ray->y_hit = cube->ray->move_spot_y;
 		cube->ray->x_hit = cube->ray->player_pos_x + (cube->ray->dist_line_y
 				* cube->ray->ray_rad_x);
+		cube->ray->ray_len_hit = cube->ray->dist_line_y - cube->ray->delta_y;
 	}
+	cube->ray->ray_lenx_hit = cube->ray->player_pos_x + cube->ray->ray_len_hit
+		* cube->ray->ray_rad_x;
+	cube->ray->ray_leny_hit = cube->ray->player_pos_y + cube->ray->ray_len_hit
+		* cube->ray->ray_rad_y;
 }
 
 void	dist_line_calc(t_cubed *cube)
