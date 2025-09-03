@@ -24,6 +24,7 @@ C_FILES = main.c\
 			display/click_utils.c\
 			display/move_player.c\
 			display/ray_casting.c\
+			display/ray_casting_utils.c\
 			display/dda.c\
 
 SRCS = $(addprefix srcs/,$(C_FILES))
