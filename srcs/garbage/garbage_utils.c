@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 16:15:01 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:11:40 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,13 @@ void	destroy_textures(t_cubed *cubed)
 		cubed->imgs->ptr_south = NULL;
 	}
 }
+
+void	free_imgs_error_pars(t_cubed *cubed)
+{
+	if (cubed->imgs)
+	{
+		free(cubed->imgs);
+		cubed->imgs = NULL;
+	}
+}
+

@@ -1,9 +1,9 @@
 F 53,53,53
 C 1,1,1
-EA texture_est.xpm
-WE texture_west.xpm
+EA dark_texture.xpm
+WE mid_dark_texture.xpm
 NO texture_north.xpm
-SO texture_south.xpm
+SO mold_texture.xpm
 111111111111111111111111
 1W0000000000000000000001
 100000000000000000000001
