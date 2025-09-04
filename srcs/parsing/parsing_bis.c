@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 16:17:45 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:35:45 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int	parsing_textures(t_cubed *cubed)
 	}
 	if (check_format_texture(cubed->imgs) == EXIT_FAILURE)
 		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
-	return (free_texture_names(cubed->imgs), EXIT_SUCCESS);
+	// return (free_texture_names(cubed->imgs), EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
