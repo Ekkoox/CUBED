@@ -28,10 +28,6 @@ void	init_null(t_cubed *cubed)
 	cubed->imgs->ptr_west = NULL;
 	cubed->imgs->ptr_north = NULL;
 	cubed->imgs->ptr_south = NULL;
-	cubed->imgs->east_texture = NULL;
-	cubed->imgs->west_texture = NULL;
-	cubed->imgs->north_texture = NULL;
-	cubed->imgs->south_texture = NULL;
 }
 
 int	fill_ptr_texture(t_cubed *cubed)
@@ -41,13 +37,13 @@ int	fill_ptr_texture(t_cubed *cubed)
 
 	init_null(cubed);
 	cubed->imgs->ptr_east = mlx_xpm_file_to_image(cubed->mlx,
-			"textures/texture_east.xpm", &w, &h);
+			cubed->imgs->east_texture, &w, &h);
 	cubed->imgs->ptr_west = mlx_xpm_file_to_image(cubed->mlx,
-			"textures/texture_west.xpm", &w, &h);
+			cubed->imgs->west_texture, &w, &h);
 	cubed->imgs->ptr_north = mlx_xpm_file_to_image(cubed->mlx,
-			"textures/texture_north.xpm", &w, &h);
+			cubed->imgs->north_texture, &w, &h);
 	cubed->imgs->ptr_south = mlx_xpm_file_to_image(cubed->mlx,
-			"textures/texture_south.xpm", &w, &h);
+			cubed->imgs->south_texture, &w, &h);
 	if (!cubed->imgs->ptr_east || !cubed->imgs->ptr_west
 		|| !cubed->imgs->ptr_north || !cubed->imgs->ptr_south)
 	{
@@ -71,8 +67,7 @@ int	init_textures(t_cubed *cubed)
 	}
 	if (fill_ptr_texture(cubed) == EXIT_FAILURE)
 	{
-		free(cubed->imgs);
-		cubed->imgs = NULL;
+		free_imgs_error_pars(cubed);
 		return (ft_printf(2, "Error: failed to load textures\n"), EXIT_FAILURE);
 	}
 	cubed->imgs->east_texture = mlx_get_data_addr(cubed->imgs->ptr_east, &bpp,

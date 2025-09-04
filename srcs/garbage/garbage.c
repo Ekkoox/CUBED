@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:15:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 16:11:31 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/04 17:57:32 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_imgs(t_cubed *cubed)
 	if (cubed->imgs && cubed->mlx)
 	{
 		destroy_textures(cubed);
+		free_texture_names(cubed->imgs);
 		free(cubed->imgs);
 		cubed->imgs = NULL;
 	}
