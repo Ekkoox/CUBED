@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:43:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 17:29:23 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:46:42 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ int	stack_name_txt(t_cubed *cubed)
 {
 	if (stack_name_txt_north(cubed) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	printf("norht txt = %s\n", cubed->imgs->north_texture);
 	if (stack_name_txt_south(cubed) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (stack_name_txt_west(cubed) == EXIT_FAILURE)
