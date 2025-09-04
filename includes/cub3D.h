@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 17:36:25 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/04 16:16:31 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,6 @@ int							angle_correction(float angle);
 int							get_texture_pixel(char *texture, int tex_x,
 								int tex_y, int tex_width);
 char						*get_wall_texture(t_cubed *cube);
-void						put_texture(t_cubed *cube, char *texture,
-								int tex_x, double tex_pos);
+void						put_texture(t_cubed *cube, char *texture, int tex_x,
+								double tex_pos);
 #endif
