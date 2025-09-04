@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 18:39:54 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:03:05 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,14 @@ int	init_textures(t_cubed *cubed)
 	int	endian;
 
 	if (!cubed->imgs)
-	{
-		cubed->imgs = malloc(sizeof(t_imgs));
-		if (!cubed->imgs)
-			return (ft_printf(2, "Error: malloc imgs failed\n"), EXIT_FAILURE);
-	}
+        return (ft_printf(2, "Error: imgs not initialized\n"), EXIT_FAILURE);
 	if (fill_ptr_texture(cubed) == EXIT_FAILURE)
 	{
 		free_imgs_error_pars(cubed);
 		return (ft_printf(2, "Error: failed to load textures\n"), EXIT_FAILURE);
 	}
+	free_texture_names(cubed->imgs);
+	init_string_textures(cubed->imgs);
 	cubed->imgs->east_texture = mlx_get_data_addr(cubed->imgs->ptr_east, &bpp,
 			&size_line, &endian);
 	cubed->imgs->west_texture = mlx_get_data_addr(cubed->imgs->ptr_west, &bpp,
