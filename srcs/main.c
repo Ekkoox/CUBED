@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 16:18:38 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:03:06 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ static void	mlx(t_cubed cubed)
 	mlx_loop(cubed.mlx);
 }
 
+int print_map(char **map)
+{
+    int i = 0;
+
+    if (!map)
+        return (EXIT_FAILURE);
+
+    while (map[i])
+    {
+        printf("%s\n", map[i]);
+        i++;
+    }
+    return (EXIT_SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
 	int		i;
@@ -32,6 +47,7 @@ int	main(int ac, char **av)
 	cubed.map = split_map(av[1]);
 	if (!cubed.map)
 		return (EXIT_FAILURE);
+	// print_map(cubed.map);
 	if (error_parsing(&cubed) == EXIT_FAILURE)
 		return (ft_freetab(cubed.map), EXIT_FAILURE);
 	if (init_mlx(&cubed) == EXIT_FAILURE)
