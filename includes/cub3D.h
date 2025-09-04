@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 16:16:31 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:39:15 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,8 @@ int							key_release(int keycode, t_cubed *cubed);
 
 // Garbadge
 int							free_all(t_cubed *cubed);
+void						free_imgs_error_pars(t_cubed *cubed);
+void						free_imgs(t_cubed *cubed);
 void						free_textures(t_imgs *imgs);
 void						destroy_textures(t_cubed *cubed);
 void						free_texture_names(t_imgs *imgs);

@@ -50,7 +50,7 @@ CC = cc
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 #########ACTION######################################
 all: $(NAME)
@@ -76,7 +76,7 @@ $(NAME):
 # 	cc -nostartfiles -shared -o libft.so $(OBJ) -ldl
 
 clean:
-	@rm -f $(OBJ) 
+	rm -f $(OBJ) 
 	@echo "Deleted .o files."
 
 fclean: clean
