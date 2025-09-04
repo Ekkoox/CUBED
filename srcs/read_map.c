@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:05:25 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 18:39:57 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:57:02 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	check_empty_lines_map(char *content)
 		}
 		else if (map_started && is_line_empty(content, line_start, i))
 			return (EXIT_FAILURE);
-		if (content[i++] == '\n')
+		if (content[i] == '\n')
 			i++;
 	}
 	return (EXIT_SUCCESS);
