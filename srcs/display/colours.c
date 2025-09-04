@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:51 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 17:19:39 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/03 18:48:38 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	player_colour(int x, int y, t_cubed *cube)
 	walk_colour(x, y, cube);
 	cube->pixel_data->play_pix_x = x;
 	cube->pixel_data->play_pix_y = y;
-	cube->player->x_pos = (double)x;
-	cube->player->y_pos = (double)y;
+	cube->player->x_pos = (double)x + (BLOC_LEN / 2);
+	cube->player->y_pos = (double)y + (BLOC_LEN / 2);
 	init_orientation(cube, x, y);
 	ray_vision(cube);
 	while (player_size >= 0)

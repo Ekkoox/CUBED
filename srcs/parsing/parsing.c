@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/03 17:31:23 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:52:33 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,5 @@ int	error_parsing(t_cubed *cubed)
 	if (check_size_map(cubed) == EXIT_FAILURE)
 		return (free_texture_names(cubed->imgs), free(cubed->pixel_data),
 			EXIT_FAILURE);
-	free(cubed->pixel_data);
 	return (EXIT_SUCCESS);
 }
