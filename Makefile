@@ -59,5 +59,8 @@ fclean:	clean
 		rm -rf ${NAME}
 
 re:             fclean all
+	make re -C lib/mlx
+	make re -C lib/libft
+	make re -C lib/ft_printf
 
 .PHONY:         all clean fclean re
