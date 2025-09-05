@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
 /*   Updated: 2025/09/05 16:03:22 by enschnei         ###   ########.fr       */
