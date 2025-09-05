@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:45:19 by dsatge            #+#    #+#             */
-/*   Updated: 2025/09/02 17:56:34 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/05 15:15:30 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ int	is_whitespace(char c)
 		|| c == '\f')
 		return (true);
 	return (false);
+}
+
+int	is_line_empty(char *content, int start, int end)
+{
+	int	j;
+
+	j = start;
+	while (j < end)
+	{
+		if (content[j] != ' ' && content[j] != '\t')
+			return (0);
+		j++;
+	}
+	return (1);
 }
 
 int	is_map(t_cubed *cube, int i)
