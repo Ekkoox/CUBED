@@ -1,7 +1,7 @@
-NO ./textures/tonton/brassens.xpm
-SO ./textures/tonton/coluche.xpm
-WE ./textures/tonton/defunes.xpm
-EA ./textures/tonton/edithpiaf.xpm
+NO ./textures_deb_enzo/dark_texture.xpm
+SO ./textures_deb_enzo/mid_dark_texture.xpm
+WE ./textures_deb_enzo/mold_texture.xpm
+EA ./textures_deb_enzo/texture_east_old.xpm
 
 F 210,180,140
 C 0,0,0
