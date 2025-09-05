@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 14:59:48 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:13:53 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ int	parsing_textures(t_cubed *cubed)
 		return (ft_printf(2, "Error: missing texture\n"), EXIT_FAILURE);
 	}
 	if (check_double_txt(cubed->imgs) == EXIT_FAILURE)
-	{
-		free(cubed->imgs);
-		return (ft_printf(2, "Error: same texture\n"), EXIT_FAILURE);
-	}
+		return (free(cubed->imgs), ft_printf(2, "Error: same texture\n"),
+			EXIT_FAILURE);
 	if (check_format_texture(cubed->imgs) == EXIT_FAILURE)
 		return (free_texture_names(cubed->imgs), free(cubed->imgs),
 			EXIT_FAILURE);
