@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 15:16:05 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/05 15:08:42 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ int							parsing_ceiling_color(t_pixel_data *pixel_data,
 int							parse_rgb(char *line, int *r, int *g, int *b);
 int							copy_line(char **dest, char *src, int max_wid);
 void						start_map(t_cubed *cubed);
-void						init_colors(t_pixel_data *pixel_data);
+int							init_colors(t_cubed *cubed);
 int							check_size_map(t_cubed *cubed);
 
 // Display

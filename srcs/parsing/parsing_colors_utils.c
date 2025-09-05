@@ -6,16 +6,21 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 19:09:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/02 16:16:24 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:06:59 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_colors(t_pixel_data *pixel_data)
+int	init_colors(t_cubed *cubed)
 {
-	pixel_data->floor_color = 0;
-	pixel_data->ceiling_color = 0;
+	cubed->pixel_data = ft_calloc(1, sizeof(t_pixel_data));
+	if (!cubed->pixel_data)
+		return (ft_printf(2, "Error: malloc pixel_data failed\n"),
+			EXIT_FAILURE);
+	cubed->pixel_data->floor_color = 0;
+	cubed->pixel_data->ceiling_color = 0;
+	return (EXIT_SUCCESS);
 }
 
 int	validate_rgb_value(int value)

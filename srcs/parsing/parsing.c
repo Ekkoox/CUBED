@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 14:59:35 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:13:07 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,8 @@ static int	parsing_colors(t_cubed *cubed)
 	int	i;
 
 	i = 0;
-	cubed->pixel_data = ft_calloc(1, sizeof(t_pixel_data));
-	if (!cubed->pixel_data)
-		return (ft_printf(2, "Error: malloc pixel_data failed\n"),
-			EXIT_FAILURE);
-	init_colors(cubed->pixel_data);
+	if (init_colors(cubed) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	while (i < cubed->start_map)
 	{
 		if (ft_strncmp(cubed->map[i], "F ", 2) == 0)
