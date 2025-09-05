@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 19:03:05 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:50:16 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	fill_ptr_texture(t_cubed *cubed)
 	if (!cubed->imgs->ptr_east || !cubed->imgs->ptr_west
 		|| !cubed->imgs->ptr_north || !cubed->imgs->ptr_south)
 	{
+		free_texture_names(cubed->imgs);
 		cleanup_textures(cubed);
 		return (EXIT_FAILURE);
 	}
