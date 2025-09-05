@@ -22,7 +22,7 @@ static int	cpy_map(t_cubed *cubed)
 		i++;
 	cubed->cpy_map = ft_calloc(cubed->max_hei + 1, sizeof(char *));
 	if (!cubed->cpy_map)
-		return (ft_printf(2, "Error: malloc cpy_map failed\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nMalloc cpy_map failed\n"), EXIT_FAILURE);
 	y = 0;
 	while (cubed->map[i])
 	{
@@ -107,12 +107,12 @@ int	check_flood_fill(t_cubed *cubed)
 {
 	check_max(cubed->start_map, cubed);
 	if (cpy_map(cubed) == EXIT_FAILURE)
-		return (ft_printf(2, "Error: copy map failed\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nCopy map failed\n"), EXIT_FAILURE);
 	find_spawn_in_cpy(cubed);
 	if (flood_fill(cubed, cubed->spwn_x, cubed->spwn_y) == EXIT_FAILURE
 		|| check_unreachable_areas(cubed) == EXIT_FAILURE)
 	{
-		ft_printf(2, "Error: the map is not surrounded by a wall\n");
+		ft_printf(2, "Error\nThe map is not surrounded by a wall\n");
 		ft_freetab(cubed->cpy_map);
 		free_texture_names(cubed->imgs);
 		return (EXIT_FAILURE);

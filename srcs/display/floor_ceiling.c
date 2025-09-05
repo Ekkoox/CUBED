@@ -42,7 +42,7 @@ int	display_floor_ceiling(t_cubed cube)
 
 	cube.pixel_data->ptr_background = mlx_new_image(cube.mlx, WIDTH, HEIGHT);
 	if (cube.pixel_data->ptr_background == NULL)
-		return (printf("Error: mlx failure\n"), EXIT_FAILURE);
+		return (printf("Error\nMlx failure\n"), EXIT_FAILURE);
 	cube.pixel_data->background
 		= mlx_get_data_addr(cube.pixel_data->ptr_background,
 			&bpp, &width, &endian);
@@ -55,7 +55,7 @@ int	display_floor_ceiling(t_cubed cube)
 	cube.pixel_data->backgr_empty = malloc(HEIGHT
 			* cube.pixel_data->size_len_background);
 	if (!cube.pixel_data->backgr_empty)
-		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+		return (printf("Error\nMalloc failed\n"), EXIT_FAILURE);
 	ft_memcpy(cube.pixel_data->backgr_empty, cube.pixel_data->background, HEIGHT
 		* cube.pixel_data->size_len_background);
 	mlx_put_image_to_window(cube.mlx, cube.win, cube.pixel_data->ptr_background,

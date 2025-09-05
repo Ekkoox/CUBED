@@ -51,7 +51,7 @@ int	minimap(t_cubed *cube)
 	cube->pixel_data->ptr_minimap = mlx_new_image(cube->mlx, (cube->max_wid
 				* 10), (cube->max_hei * 10));
 	if (cube->pixel_data->ptr_minimap == NULL)
-		return (ft_printf(2, "Error: mlx failure\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nMlx failure\n"), EXIT_FAILURE);
 	minimap = mlx_get_data_addr(cube->pixel_data->ptr_minimap, &bpp, &size_line,
 			&endian);
 	cube->pixel_data->minimap = (unsigned char *)minimap;

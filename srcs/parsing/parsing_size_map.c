@@ -21,7 +21,7 @@ int	check_size_map(t_cubed *cubed)
 	if (line_length > 35)
 	{
 		free_texture_names(cubed->imgs);
-		return (ft_printf(2, "Error: map is too big\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nMap is too big\n"), EXIT_FAILURE);
 	}
 	i = cubed->start_map;
 	while (cubed->map[i])
@@ -29,7 +29,7 @@ int	check_size_map(t_cubed *cubed)
 		if (i > 35)
 		{
 			free_texture_names(cubed->imgs);
-			return (ft_printf(2, "Error: map is too big\n"), EXIT_FAILURE);
+			return (ft_printf(2, "Error\nMap is too big\n"), EXIT_FAILURE);
 		}
 		i++;
 	}

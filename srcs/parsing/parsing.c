@@ -33,10 +33,10 @@ static int	double_char(t_cubed *cubed)
 		i++;
 	}
 	if (player == 0)
-		return (ft_printf(2, "Error: no player character in map\n"),
+		return (ft_printf(2, "Error\nNo player character in map\n"),
 			EXIT_FAILURE);
 	if (player != 1)
-		return (ft_printf(2, "Error: multiple player characters in map\n"),
+		return (ft_printf(2, "Error\nMultiple player characters in map\n"),
 			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -57,7 +57,7 @@ static int	error_character(t_cubed *cubed)
 				&& cubed->map[i][y] != 'N' && cubed->map[i][y] != 'S'
 				&& cubed->map[i][y] != 'E' && cubed->map[i][y] != 'W'
 				&& cubed->map[i][y] != ' ')
-				return (ft_printf(2, "Error: invalid character in map\n"),
+				return (ft_printf(2, "Error\nInvalid character in map\n"),
 					EXIT_FAILURE);
 			y++;
 		}
@@ -84,13 +84,13 @@ static int	error_format(t_cubed *cubed)
 				|| ft_strncmp(cubed->map[i], "F ", 2) == 0
 				|| ft_strncmp(cubed->map[i], "C ", 2) == 0))
 		{
-			ft_printf(2, "Error: invalid format before map\n");
+			ft_printf(2, "Error\nInvalid format before map\n");
 			return (EXIT_FAILURE);
 		}
 		i++;
 	}
 	if (i != 6)
-		return (ft_printf(2, "Error: identifiers must appear exactly once\n"),
+		return (ft_printf(2, "Error\nIdentifiers must appear exactly once\n"),
 			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -130,7 +130,7 @@ int	error_parsing(t_cubed *cubed)
 	cubed->start_map = 0;
 	start_map(cubed);
 	if (cubed->start_map < 0)
-		return (ft_printf(2, "Error: no map found\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nNo map found\n"), EXIT_FAILURE);
 	if (error_character(cubed) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (double_char(cubed) == EXIT_FAILURE)

@@ -16,7 +16,7 @@ int	init_colors(t_cubed *cubed)
 {
 	cubed->pixel_data = ft_calloc(1, sizeof(t_pixel_data));
 	if (!cubed->pixel_data)
-		return (ft_printf(2, "Error: malloc pixel_data failed\n"),
+		return (ft_printf(2, "Error\nMalloc pixel_data failed\n"),
 			EXIT_FAILURE);
 	cubed->pixel_data->floor_color = 0;
 	cubed->pixel_data->ceiling_color = 0;

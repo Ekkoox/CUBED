@@ -57,10 +57,10 @@ int	parsing_floor_color(t_pixel_data *pixel_data, char *line)
 	int	blue;
 
 	if (check_looong(line) == 1)
-		return (ft_printf(2, "Error: RGB values too long\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nRGB values too long\n"), EXIT_FAILURE);
 	if (parse_rgb(line, &red, &green, &blue) == EXIT_FAILURE)
 	{
-		ft_printf(2, "Error: Invalid floor RGB values\n");
+		ft_printf(2, "Error\nInvalid floor RGB values\n");
 		return (EXIT_FAILURE);
 	}
 	pixel_data->floor_color = (red << 16) | (green << 8) | blue;
@@ -74,10 +74,10 @@ int	parsing_ceiling_color(t_pixel_data *pixel_data, char *line)
 	int	blue;
 
 	if (check_looong(line) == 1)
-		return (ft_printf(2, "Error: RGB values too long\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nRGB values too long\n"), EXIT_FAILURE);
 	if (parse_rgb(line, &red, &green, &blue) == EXIT_FAILURE)
 	{
-		ft_printf(2, "Error: Invalid floor RGB values\n");
+		ft_printf(2, "Error\nInvalid floor RGB values\n");
 		return (EXIT_FAILURE);
 	}
 	pixel_data->ceiling_color = (red << 16) | (green << 8) | blue;

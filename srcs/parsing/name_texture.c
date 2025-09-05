@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:43:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 16:07:48 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/05 16:24:31 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	stack_name_txt_west(t_cubed *cubed)
 			{
 				free(cubed->imgs->north_texture);
 				free(cubed->imgs->south_texture);
-				return (ft_printf(2, "Error: memory allocation failed\n"),
+				return (ft_printf(2, "Error\nMemory allocation failed\n"),
 					EXIT_FAILURE);
 			}
 		}
@@ -60,7 +60,7 @@ int	stack_name_txt_south(t_cubed *cubed)
 			if (!cubed->imgs->south_texture)
 			{
 				free(cubed->imgs->north_texture);
-				return (ft_printf(2, "Error: memory allocation failed\n"),
+				return (ft_printf(2, "Error\nMemory allocation failed\n"),
 					EXIT_FAILURE);
 			}
 		}
@@ -89,7 +89,7 @@ int	stack_name_txt_east(t_cubed *cubed)
 				return (free(cubed->imgs->west_texture),
 					free(cubed->imgs->south_texture),
 					free(cubed->imgs->north_texture), ft_printf(2,
-						"Error: memory allocation failed\n"), EXIT_FAILURE);
+						"Error\nMemory allocation failed\n"), EXIT_FAILURE);
 		}
 		i++;
 	}
@@ -113,7 +113,7 @@ int	stack_name_txt_north(t_cubed *cubed)
 				free(cubed->imgs->north_texture);
 			cubed->imgs->north_texture = ft_strdup(cubed->map[i] + y + 3);
 			if (!cubed->imgs->north_texture)
-				return (ft_printf(2, "Error: memory allocation failed\n"),
+				return (ft_printf(2, "Error\nMemory allocation failed\n"),
 					EXIT_FAILURE);
 		}
 		i++;
@@ -124,12 +124,12 @@ int	stack_name_txt_north(t_cubed *cubed)
 int	stack_name_txt(t_cubed *cubed)
 {
 	if (stack_name_txt_north(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (stack_name_txt_south(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (stack_name_txt_west(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (stack_name_txt_east(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

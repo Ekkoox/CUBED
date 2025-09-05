@@ -61,11 +61,11 @@ int	init_textures(t_cubed *cubed)
 	int	endian;
 
 	if (!cubed->imgs)
-		return (ft_printf(2, "Error: imgs not initialized\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nImgs not initialized\n"), EXIT_FAILURE);
 	if (fill_ptr_texture(cubed) == EXIT_FAILURE)
 	{
 		free_imgs_error_pars(cubed);
-		return (ft_printf(2, "Error: failed to load textures\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nFailed to load textures\n"), EXIT_FAILURE);
 	}
 	free_texture_names(cubed->imgs);
 	init_string_textures(cubed->imgs);
@@ -84,11 +84,11 @@ int	init_mlx(t_cubed *cubed)
 {
 	cubed->mlx = mlx_init();
 	if (!cubed->mlx)
-		return (ft_printf(2, "Error: mlx_init failed\n"), free(cubed->imgs),
+		return (ft_printf(2, "Error\nMlx_init failed\n"), free(cubed->imgs),
 			free(cubed->pixel_data), EXIT_FAILURE);
 	cubed->win = mlx_new_window(cubed->mlx, WIDTH, HEIGHT, "Cub3D");
 	if (!cubed->win)
-		return (ft_printf(2, "Error: mlx_new_window failed\n"),
+		return (ft_printf(2, "Error\nMlx_new_window failed\n"),
 			mlx_destroy_display(cubed->mlx), free(cubed->mlx), EXIT_FAILURE);
 	if (init_textures(cubed) == EXIT_FAILURE)
 	{
@@ -102,7 +102,7 @@ int	init_mlx(t_cubed *cubed)
 		mlx_destroy_window(cubed->mlx, cubed->win);
 		mlx_destroy_display(cubed->mlx);
 		free(cubed->mlx);
-		return (ft_printf(2, "Error: ray allocation failed\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nRay allocation failed\n"), EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

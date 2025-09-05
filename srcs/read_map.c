@@ -33,7 +33,7 @@ static char	*read_maps(char *path)
 	s = ft_calloc(10001, sizeof(char));
 	stack = ft_strdup("");
 	if (!s || fd == -1)
-		return (ft_printf(2, "Error: open map\n"), free(s), free(stack), NULL);
+		return (ft_printf(2, "Error\nOpen map\n"), free(s), free(stack), NULL);
 	while (i != 0)
 	{
 		i = read(fd, s, 10000);
@@ -90,19 +90,19 @@ char	**split_map(char *path)
 	char	*stack;
 
 	if (extension_invalid(path))
-		return (ft_printf(2, "Error: wrong format file\n"), NULL);
+		return (ft_printf(2, "Error\nWrong format file\n"), NULL);
 	stack = read_maps(path);
 	if (!stack)
 		return (NULL);
 	if (check_empty_lines_map(stack) == EXIT_FAILURE)
 	{
-		ft_printf(2, "Error: the map contains empty lines\n");
+		ft_printf(2, "Error\nThe map contains empty lines\n");
 		free(stack);
 		return (NULL);
 	}
 	split = ft_split(stack, '\n');
 	if (!split)
-		return (ft_printf(2, "Error: split map\n"), free(stack), NULL);
+		return (ft_printf(2, "Error\nSplit map\n"), free(stack), NULL);
 	free(stack);
 	return (split);
 }

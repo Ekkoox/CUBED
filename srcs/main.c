@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 
 	i = 0;
 	if (ac != 2)
-		return (ft_printf(2, "Error: number of arguments\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error\nNumber of arguments\n"), EXIT_FAILURE);
 	cubed.map = split_map(av[1]);
 	if (!cubed.map)
 		return (EXIT_FAILURE);
