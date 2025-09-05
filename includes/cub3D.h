@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:14:31 by enschnei          #+#    #+#             */
 /*   Updated: 2025/09/05 15:08:42 by enschnei         ###   ########.fr       */
@@ -248,7 +248,7 @@ int							is_valid_char(char c);
 int							is_whitespace(char c);
 int							is_map(t_cubed *cube, int i);
 int							is_white_line(char *str);
-
+int							is_line_empty(char *content, int start, int end);
 // Colors
 int							color_convert(int colour, int name_colour);
 void						wall_colour(int x, int y, t_cubed *cube);

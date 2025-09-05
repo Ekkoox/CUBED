@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:05:25 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 18:57:02 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:15:22 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,22 @@ static char	*read_maps(char *path)
 	return (free(s), stack);
 }
 
-static int	is_line_empty(char *content, int start, int end)
+static int	map_start_finder(int line_start, int i, char *content)
 {
 	int	j;
 
-	j = start;
-	while (j < end)
-	{
-		if (content[j] != ' ' && content[j] != '\t')
-			return (0);
+	j = line_start;
+	while (j < i && (content[j] == ' ' || content[j] == '\t'))
 		j++;
-	}
-	return (1);
+	if (j < i && (content[j] == '1' || content[j] == '0'
+			|| content[j] == ' '))
+		return (1);
+	return (0);
 }
 
 static int	check_empty_lines_map(char *content)
 {
 	int	i;
-	int	j;
 	int	map_started;
 	int	line_start;
 
@@ -77,14 +75,7 @@ static int	check_empty_lines_map(char *content)
 		while (content[i] && content[i] != '\n')
 			i++;
 		if (!map_started)
-		{
-			j = line_start;
-			while (j < i && (content[j] == ' ' || content[j] == '\t'))
-				j++;
-			if (j < i && (content[j] == '1' || content[j] == '0'
-					|| content[j] == ' '))
-				map_started = 1;
-		}
+			map_started = map_start_finder(line_start, i, content);
 		else if (map_started && is_line_empty(content, line_start, i))
 			return (EXIT_FAILURE);
 		if (content[i] == '\n')
