@@ -1,7 +1,7 @@
-EA texture_est.xpm
-WE texture_west.xpm
-NO texture_north.xpm
-SO texture_south.xpm
+EA ./textures_deb_enzo/texture_east.xpm
+WE ./textures_deb_enzo/texture_west.xpm
+NO ./textures_deb_enzo/texture_north.xpm
+SO ./textures_deb_enzo/texture_south.xpm
 
 C 255,100,100
 F 255,50,50
@@ -16,10 +16,6 @@ F 255,50,50
 1000000001
 1000000001
 1111111111
-
-
-
-
 
 
 
