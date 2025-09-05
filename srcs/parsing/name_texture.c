@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   name_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:43:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 13:22:27 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/05 14:59:59 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int stack_name_txt_west(t_cubed *cubed)
+int	stack_name_txt_west(t_cubed *cubed)
 {
-	int i;
-	int y;
+	int	i;
+	int	y;
 
 	i = 0;
-	while(cubed->map[i])
+	while (cubed->map[i])
 	{
 		y = 0;
-		while(is_whitespace(cubed->map[i][y]) == true)
+		while (is_whitespace(cubed->map[i][y]) == true)
 			y++;
 		if (ft_strncmp(cubed->map[i] + y, "WE", 2) == 0)
 		{
@@ -36,7 +36,7 @@ int stack_name_txt_west(t_cubed *cubed)
 		}
 		i++;
 	}
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	stack_name_txt_south(t_cubed *cubed)
@@ -48,7 +48,7 @@ int	stack_name_txt_south(t_cubed *cubed)
 	while (cubed->map[i])
 	{
 		y = 0;
-		while(is_whitespace(cubed->map[i][y]) == true)
+		while (is_whitespace(cubed->map[i][y]) == true)
 			y++;
 		if (ft_strncmp(cubed->map[i] + y, "SO", 2) == 0)
 		{
@@ -74,7 +74,7 @@ int	stack_name_txt_east(t_cubed *cubed)
 	while (cubed->map[i])
 	{
 		y = 0;
-		while(is_whitespace(cubed->map[i][y]) == true)
+		while (is_whitespace(cubed->map[i][y]) == true)
 			y++;
 		if (ft_strncmp(cubed->map[i] + y, "EA", 2) == 0)
 		{
@@ -99,7 +99,7 @@ int	stack_name_txt_north(t_cubed *cubed)
 	while (cubed->map[i])
 	{
 		y = 0;
-		while(is_whitespace(cubed->map[i][y]) == true)
+		while (is_whitespace(cubed->map[i][y]) == true)
 			y++;
 		if (ft_strncmp(cubed->map[i] + y, "NO", 2) == 0)
 		{

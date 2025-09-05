@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:42:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 13:03:09 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:00:12 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ void	free_imgs_error_pars(t_cubed *cubed)
 		cubed->imgs = NULL;
 	}
 }
-

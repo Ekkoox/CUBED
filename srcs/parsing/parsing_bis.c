@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:37:00 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 20:04:36 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/05 14:59:48 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ static int	check_format_texture(t_imgs *imgs)
 {
 	if (imgs->east_texture && !ends_with_xpm(imgs->east_texture))
 		return (ft_printf(2, "Error: east texture must be .xpm\n"),
-			 EXIT_FAILURE);
+			EXIT_FAILURE);
 	if (imgs->west_texture && !ends_with_xpm(imgs->west_texture))
 		return (ft_printf(2, "Error: west texture must be .xpm\n"),
-			 EXIT_FAILURE);
+			EXIT_FAILURE);
 	if (imgs->north_texture && !ends_with_xpm(imgs->north_texture))
 		return (ft_printf(2, "Error: north texture must be .xpm\n"),
-			 EXIT_FAILURE);
+			EXIT_FAILURE);
 	if (imgs->south_texture && !ends_with_xpm(imgs->south_texture))
 		return (ft_printf(2, "Error: south texture must be .xpm\n"),
-			 EXIT_FAILURE);
+			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -70,6 +70,7 @@ int	parsing_textures(t_cubed *cubed)
 		return (ft_printf(2, "Error: same texture\n"), EXIT_FAILURE);
 	}
 	if (check_format_texture(cubed->imgs) == EXIT_FAILURE)
-		return (free_texture_names(cubed->imgs), free(cubed->imgs), EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), free(cubed->imgs),
+			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

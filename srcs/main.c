@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:12:16 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 13:03:39 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:59:07 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ static void	mlx(t_cubed cubed)
 	mlx_loop_hook(cubed.mlx, loop_handler, &cubed);
 	mlx_hook(cubed.win, 33, 131072, free_all, &cubed);
 	mlx_loop(cubed.mlx);
-}
-
-int print_map(char **map)
-{
-    int i = 0;
-
-    if (!map)
-        return (EXIT_FAILURE);
-
-    while (map[i])
-    {
-        printf("%s\n", map[i]);
-        i++;
-    }
-    return (EXIT_SUCCESS);
 }
 
 int	main(int ac, char **av)

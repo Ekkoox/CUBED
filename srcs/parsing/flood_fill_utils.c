@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:44:38 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 16:13:54 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:59:28 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ int	copy_line(char **dest, char *src, int max_wid)
 	(*dest)[max_wid] = '\0';
 	return (0);
 }
-
