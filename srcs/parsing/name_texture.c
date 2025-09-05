@@ -6,7 +6,7 @@
 /*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:43:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 16:07:48 by dsatge           ###   ########.fr       */
+/*   Updated: 2025/09/05 16:24:31 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,12 @@ int	stack_name_txt_north(t_cubed *cubed)
 int	stack_name_txt(t_cubed *cubed)
 {
 	if (stack_name_txt_north(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (stack_name_txt_south(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (stack_name_txt_west(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	if (stack_name_txt_east(cubed) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_texture_names(cubed->imgs), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
