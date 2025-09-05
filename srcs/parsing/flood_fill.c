@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:00:13 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 13:52:51 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:37:06 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	check_flood_fill(t_cubed *cubed)
 	{
 		ft_printf(2, "Error: the map is not surrounded by a wall\n");
 		ft_freetab(cubed->cpy_map);
+		free_texture_names(cubed->imgs);
 		return (EXIT_FAILURE);
 	}
 	ft_freetab(cubed->cpy_map);

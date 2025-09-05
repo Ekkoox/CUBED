@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsatge <dsatge@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:27:28 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/04 18:39:47 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:31:57 by dsatge           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ static int	parsing_colors(t_cubed *cubed)
 		{
 			if (parsing_floor_color(cubed->pixel_data,
 					cubed->map[i]) == EXIT_FAILURE)
-				return (free(cubed->pixel_data), EXIT_FAILURE);
+				return (free(cubed->pixel_data), free_texture_names(cubed->imgs), EXIT_FAILURE);
 		}
 		else if (ft_strncmp(cubed->map[i], "C ", 2) == 0)
 		{
 			if (parsing_ceiling_color(cubed->pixel_data,
 					cubed->map[i]) == EXIT_FAILURE)
-				return (free(cubed->pixel_data), EXIT_FAILURE);
+				return (free(cubed->pixel_data), free_texture_names(cubed->imgs), EXIT_FAILURE);
 		}
 		i++;
 	}
