@@ -6,7 +6,7 @@
 /*   By: enschnei <enschnei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:37:46 by enschnei          #+#    #+#             */
-/*   Updated: 2025/09/05 14:58:15 by enschnei         ###   ########.fr       */
+/*   Updated: 2025/09/05 14:59:18 by enschnei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	init_textures(t_cubed *cubed)
 	int	endian;
 
 	if (!cubed->imgs)
-        return (ft_printf(2, "Error: imgs not initialized\n"), EXIT_FAILURE);
+		return (ft_printf(2, "Error: imgs not initialized\n"), EXIT_FAILURE);
 	if (fill_ptr_texture(cubed) == EXIT_FAILURE)
 	{
 		free_imgs_error_pars(cubed);
